@@ -1,36 +1,53 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+<div align="center">
+    <h1>✨ Vava Helper - Website ✨</h1>
+</div>
+Website oficial do projeto Vava Helper feito com o framework Next.js em Typescript. Utilize os passos abaixo para executar em seu ambiente local.
 
-## Getting Started
-
-First, run the development server:
+## 📥 Clonando o repositório
+Caso não possua o **GIT** instalado, clique **[aqui](https://git-scm.com/downloads)** para realizar o download, logo em seguida digite no console:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/VavaHelper/website
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Se um erro requisitando user.name e/ou user.email, utilize os comandos abaixo:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+git config user.name "nome-do-seu-git"
+git config user.email "seuemail@gmail.com"
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Tente executar o `git clone` novamente, um pop-up de autenticação do GIT deve aparecer requisitando que você realize a entrada pelo seu navegador. Pronto, você clonou o repositório em sua máquina!
 
-## Learn More
+## 📦 Baixando as dependências do projeto
+Recomendada a utilização do gerenciador de pacotes `pnpm` ao invés do padrão(`npm`). Caso não tenha esse gerenciador de pacotes, utilize o comando abaixo no console:
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+npm install --global pnpm
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+> ❗ **OBS.:** Você precisa já possuir o Node.js instalado em seu computador para executar esse comando, você encontrará o instalador **[aqui](https://nodejs.org/pt)**.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Após isso, utilize o comando abaixo para instalar todos os pacotes necessários para que seu projeto possa executar com sucesso:
 
-## Deploy on Vercel
+```bash
+pnpm install
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 💻 Executando o projeto em desenvolvimento
+Utilize o comando abaixo para iniciar o servidor local de desenvolvimento:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+pnpm dev
+```
+
+Aguarde a inicialização do projeto e abra [http://localhost:3000](http://localhost:3000) em seu navegador para visualizar o site.
+
+## 📚 Documentações importantes
+Caso esteja com dúvidas, verifique algumas das documentações abaixo, podem ser úteis:
+- [Conventional Commits](https://www.conventionalcommits.org/pt-br/v1.0.0/) - Saiba como padronizar seus commits do github, isso será muito importante para organizaçõ do projeto;
+- [React](https://react.dev/learn) - Aprenda sobre o react, o que são componentes, reatividde e outros aspectos;
+- [Next.js Documentation](https://nextjs.org/docs) - Descubra sobre as features do Next.js e sua API durante o seu desenvolvimento;
+- [Tailwind CSS](https://tailwindcss.com/docs/) - Aprenda sobre o CSS via classNames, aumentando a flexibilidade
+
+Se tiver dúvidas sobre como iniciar ou progredir, converse com o resto da equipe!
