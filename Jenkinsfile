@@ -16,7 +16,7 @@ pipeline {
                 script {
                     // Instalar dependências do Node.js
                     echo 'Instalando dependências...'
-                    sh 'npm install'
+                    bat 'npm install'
                 }
             }
         }
@@ -26,7 +26,7 @@ pipeline {
                 script {
                     // Rodar os testes do Node.js
                     echo 'Rodando os testes...'
-                    sh 'npm test'
+                    bat 'npm test'
                 }
             }
         }
@@ -36,7 +36,7 @@ pipeline {
                 script {
                     // Rodar o build do Node.js (se necessário)
                     echo 'Executando o build...'
-                    sh 'npm run build'
+                    bat 'npm run build'
                 }
             }
         }
