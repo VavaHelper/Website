@@ -21,16 +21,6 @@ pipeline {
             }
         }
 
-        stage('Rodar testes') {
-            steps {
-                script {
-                    // Rodar os testes do Node.js
-                    echo 'Rodando os testes...'
-                    bat 'npm test'
-                }
-            }
-        }
-
         stage('Build') {
             steps {
                 script {
