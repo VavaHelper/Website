@@ -11,7 +11,7 @@ const cards: Array<CardProps> = [
 export default function Home(){
     return (
         <main>
-            <Nav/>
+            <Nav/> 
             <SideBar/>
             <div className="absolute top-1/2 left-1/2 transform -translate-x-[50%] -translate-y-1/2 flex gap-20">
                 {cards.map((card) => (
