@@ -9,3 +9,7 @@ body {
   padding: 0;
   background-color: black;
 }
+
+h1,h2 {
+  color: white;
+}
