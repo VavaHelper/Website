@@ -35,7 +35,7 @@ export function Nav() {
     <nav className={styles.navbar}>
       <div className={styles.left}>
         <img src="/logo.png" alt=""/>
-        <h1>avaHelper</h1>
+        <h1 style={{ color: '#FF5252', fontWeight: 'bold' }}>avaHelper</h1>
       </div>
 
       <div className={styles.right}>
