@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import styles from './css/nav.module.css';
+import Image from 'next/image'
 
 export function Nav() {
   const [showLanguages, setShowLanguages] = useState(false);
@@ -34,8 +35,15 @@ export function Nav() {
   return (
     <nav className={styles.navbar}>
       <div className={styles.left}>
-        <img src="/logo.png" alt=""/>
-        <h1 style={{ color: '#FF5252', fontWeight: 'bold' }}>avaHelper</h1>
+        <Image 
+          src="/imgs/favicon.png" 
+          alt="Descrição da imagem"
+          width={10} // Largura da imagem em pixels
+          height={10} // Altura da imagem em pixels
+        />
+        <h1 style={{ color: '#FF5252', fontWeight: 'bold' }}>
+          avaHelper
+        </h1>
       </div>
 
       <div className={styles.right}>
