@@ -12,7 +12,10 @@
 .left {
   display: flex;
   align-items: center;
-  gap: 1rem;
+}
+
+.left img{
+  padding-bottom: 7px;
 }
 
 .right {

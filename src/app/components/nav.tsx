@@ -38,8 +38,8 @@ export function Nav() {
         <Image 
           src="/imgs/favicon.png" 
           alt="Descrição da imagem"
-          width={10} // Largura da imagem em pixels
-          height={10} // Altura da imagem em pixels
+          width={33} // Largura da imagem em pixels
+          height={21} // Altura da imagem em pixels
         />
         <h1 style={{ color: '#FF5252', fontWeight: 'bold' }}>
           avaHelper

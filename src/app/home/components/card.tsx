@@ -6,12 +6,11 @@ import { useState } from "react";
 export interface CardProps {
     imagePath: string;
     title: string;
-    information: string;
-    informationText: string;
+    informationText: string | React.ReactNode;
     width?: string;
 }
 
-export function Card({ imagePath, title, width, information, informationText}: CardProps) {
+export function Card({ imagePath, title, width, informationText }: CardProps) {
     const [hovering, setHovering] = useState(false);
 
     return (
@@ -29,24 +28,30 @@ export function Card({ imagePath, title, width, information, informationText}: C
         >
             {/* Card principal */}
             <motion.div
-                whileHover={{
-                    scale: 1.05
-                }}
+                whileHover={{ scale: 1.05 }}
                 transition={{ duration: 0.2 }}
-                className="flex justify-center items-center h-full"
-                style={{
-                    backgroundSize: "cover",
-                    backgroundRepeat: "no-repeat",
-                    backgroundImage: `url(${imagePath})`,
-                    backgroundPosition: "center",
-                    width: "300px",
-                }}
+                className="relative flex justify-center items-center h-full w-[300px]"
             >
+                {/* Background com filtro */}
+                <motion.div
+                    className="absolute top-0 left-0 w-full h-full"
+                    style={{
+                        backgroundSize: "cover",
+                        backgroundRepeat: "no-repeat",
+                        backgroundImage: `url(${imagePath})`,
+                        backgroundPosition: "center",
+                        filter: hovering ? "none" : "grayscale(100%) brightness(0.7)",
+                        transition: "filter 0.3s ease-in-out",
+                        zIndex: 0,
+                    }}
+                />
+
+                {/* Texto por cima da imagem */}
                 <p
-                    className="text-6xl text-[#FF5252] font-['Jersey_10']"
+                    className="text-6xl font-['Jersey_10'] z-10"
                     style={{
                         transition: "color 0.2s ease-in-out",
-                        color: hovering ? "#FF5252" : "white",
+                        color: hovering ? "white" : "#FF5252",
                     }}
                 >
                     {title}
@@ -72,11 +77,12 @@ export function Card({ imagePath, title, width, information, informationText}: C
                                 exit={{ opacity: 0, y: 10 }}
                                 transition={{ delay: 0.3, duration: 0.3 }}
                             >
-                                <h2 className="text-sm font-bold text-[#FF5252] mb-2">
-                                    {information}
-                                </h2>
                                 <p className="text-[#FFF] text-sm">
                                     {informationText}
+                                </p>
+                                <br/>
+                                <p className="text-[#FFF] text-sm">
+                                    Sejam Bem Vindos ao <span className="text-[#FF5252] font-bold">VavaHelper</span>!
                                 </p>
                             </motion.div>
                         </AnimatePresence>
