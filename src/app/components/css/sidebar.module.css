@@ -45,7 +45,7 @@
   }
   
   /* Responsivo: vira uma barra inferior */
-  @media (max-width: 768px) {
+  @media (max-width: 1669px) {
     .menu {
       top: auto;
       bottom: 0;
@@ -56,12 +56,15 @@
       flex-direction: row;
       justify-content: center;
       padding: 0.5rem 0;
+      justify-content: center;
     }
   
     .menu ul {
       flex-direction: row;
       gap: 1rem;
       margin-left: 0rem;
+      background-color: black;
+      border-radius: 50px;
     }
   }
   
