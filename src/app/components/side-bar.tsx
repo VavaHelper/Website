@@ -6,22 +6,42 @@ export function SideBar() {
       <ul>
         <li>
           <a href="/home">
-            <button><img src="/icons/home.png" alt="Home" /></button>
+            <button>
+              <i 
+              className="bx bx-home"
+              style={{ color: '#fff', fontSize: '21px', cursor: 'pointer' }}
+              ></i>
+            </button>
           </a>
         </li>
         <li>
           <a href="/movi">
-            <button><img src="/icons/movie.png" alt="Movie" /></button>
+            <button>
+              <i 
+              className="bx bx-run"
+              style={{ color: '#fff', fontSize: '21px', cursor: 'pointer' }}
+              ></i>
+            </button>
           </a>
         </li>
         <li>
           <a href="/pixel">
-            <button><img src="/icons/pixel.png" alt="Pixel" /></button>
+            <button>
+              <i 
+              className="bx bx-star"
+              style={{ color: '#fff', fontSize: '21px', cursor: 'pointer' }}
+              ></i>
+            </button>
           </a>
         </li>
         <li>
           <a href="/skills">
-            <button><img src="/icons/skills.png" alt="Skills" /></button>
+            <button>
+              <i 
+              className="bx bx-glasses-alt"
+              style={{ color: '#fff', fontSize: '21px', cursor: 'pointer' }}
+              ></i>
+            </button>
           </a>
         </li>
       </ul>
