@@ -1,6 +1,6 @@
 "use client";
 
-import { span } from "motion/react-client";
+import { motion } from "framer-motion";
 import { Nav } from "../components/nav";
 import { SideBar } from "../components/side-bar";
 import { CardProps, Card } from "./components/card";
