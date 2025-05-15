@@ -1,7 +1,12 @@
 /* Nav.module.css */
 
 .navbar {
-  background-color: transparent;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;       /* fica acima dos demais elementos */
+  background-color: black;
   color: white;
   padding: 1rem;
   display: flex;
@@ -14,7 +19,7 @@
   align-items: center;
 }
 
-.left img{
+.left img {
   padding-bottom: 7px;
 }
 
@@ -37,7 +42,6 @@
   color: black;
   font-weight: bold;
 }
-
 
 /* LANGUAGES */
 .languageSelector {

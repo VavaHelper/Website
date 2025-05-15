@@ -13,3 +13,13 @@ body {
 h1,h2 {
   color: white;
 }
+
+/* Responsividade*/
+@media (max-width: 768px) {
+  body{
+    padding-top: 70px;
+    padding-bottom: 130px;
+  }
+
+
+}
