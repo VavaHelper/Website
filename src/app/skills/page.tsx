@@ -1,4 +1,4 @@
-// TODO: Luna e Matheus -> Iniciar tela de Skills
+// TODO: Igão e Matheus -> Iniciar tela de Skills
 
 export default function Skills() {
     return (
