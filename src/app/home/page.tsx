@@ -6,14 +6,35 @@ import { CardProps, Card } from './components/card';
 import { useEffect, useState } from 'react';
 
 const cards: CardProps[] = [
-  { title: 'Agents', imagePath: 'https://placehold.co/600x400', informationText: 'Sejam Bem Vindos ao VavaHelper!' },
-  { title: 'Pixel', imagePath: '/imgs/molotov-lineup.png', informationText: 'Sejam Bem Vindos ao VavaHelper!' },
+  { 
+    title: 'Agents', 
+    imagePath: 'https://placehold.co/600x400', 
+    informationText: (
+      <>
+        Aqui você será capaz de aprender detalhadamente sobre todos os agentes! 
+      </>
+    ), 
+      
+  },
+  { 
+    title: 'Pixel', 
+    imagePath: '/imgs/molotov-lineup.png', 
+    informationText: (
+      <>
+        Aqui você se tornará pró player do personagem de sua preferência!
+        <br></br> 
+        Esteja preparado para aprender os melhores pixels para sua gameplay!
+      </>
+    ), 
+  },
   {
     title: 'Movi',
     imagePath: '/imgs/movi.gif',
     informationText: (
-      <>
-        Aqui você irá aprender tudo sobre como executar a movimentação perfeita de Valorant com cada agente, seja para jogar sozinho ou em equipe. Aprenderá também a realizar o famoso <span className="text-[#FF5252]">"</span>AD<span className="text-[#FF5252]">"</span> em seus adversários!
+      <> 
+        Aqui você irá aprender tudo sobre como executar a movimentação perfeita com cada agente, seja para jogar sozinho ou em equipe.
+        <br></br> 
+        Aprenderá também a realizar o famoso <span className="text-[#FF5252]">"</span>AD<span className="text-[#FF5252]">"</span> em seus adversários!
       </>
     ),
   },
