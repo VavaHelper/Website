@@ -45,7 +45,7 @@
   }
   
   /* Responsivo: vira uma barra inferior */
-  @media (max-width: 1599px) {
+  @media (max-width: 768px) {
     .menu {
       top: auto;
       bottom: 0;

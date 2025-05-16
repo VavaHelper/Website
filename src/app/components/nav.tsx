@@ -41,7 +41,7 @@ export function Nav() {
           width={33} // Largura da imagem em pixels
           height={21} // Altura da imagem em pixels
         />
-        <h1 style={{ color: '#FF5252', fontWeight: 'bold' }}>
+        <h1 style={{ color: '#FF5252', fontWeight: 'bold', fontSize:"20px"}}>
           avaHelper
         </h1>
       </div>
@@ -51,7 +51,7 @@ export function Nav() {
           <i 
             className="bx bx-globe"
             onClick={toggleLanguages}
-            style={{ color: '#ff5252', fontSize: '25px', cursor: 'pointer' }}
+            style={{ color: '#ff5252', fontSize: '22px', cursor: 'pointer' }}
           ></i>
 
           {showLanguages && (

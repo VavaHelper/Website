@@ -15,9 +15,9 @@ h1,h2 {
 }
 
 /* Responsividade*/
-@media (max-width: 768px) {
+@media (max-width: 1320px) {
   body{
-    padding-top: 70px;
+    padding-top: 90px;
     padding-bottom: 130px;
   }
 

@@ -32,7 +32,7 @@
 .loginButton {
   background-color: #FF5252;
   color: black;
-  padding: 0.5rem 1rem;
+  padding: 0.38rem 1rem;
   border: none;
   border-radius: 12px;
   cursor: pointer;
@@ -41,6 +41,7 @@
 .loginButton h1 {
   color: black;
   font-weight: bold;
+  font-size: 16px;
 }
 
 /* LANGUAGES */
