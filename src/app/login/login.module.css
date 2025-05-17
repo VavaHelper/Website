@@ -1,88 +1,37 @@
-    .global {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        background-color: black;
-        min-height: 100vh;
-        padding: 20px;
-        font-family: Arial, sans-serif;
-    }
-    
-    .screen1 {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        margin-bottom: 30px;
-    }
-    
-    .logoImg {
-        width: 50px;
-        height: 50px;
-    }
-    
-    .logoTitle {
-        font-size: 2rem;
-        color: #333;
-    }
-    
-    .screen2 {
-        background-color: white;
-        padding: 30px 40px;
-        border-radius: 10px;
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        width: 100%;
-        max-width: 400px;
-    }
-    
-    .title {
-        margin-bottom: 20px;
-        color: #2c3e50;
-        text-align: center;
-    }
-    
-    .form {
-        display: flex;
-        flex-direction: column;
-    }
-    
-    .label {
-        margin-bottom: 5px;
-        font-weight: bold;
-        color: #333;
-    }
-    
-    .input {
-        padding: 10px;
-        margin-bottom: 15px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-    }
-    
-    .submitButton {
-        background-color: #3498db;
-        color: white;
-        padding: 10px;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        font-weight: bold;
-        transition: background-color 0.3s ease;
-    }
-    
-    .submitButton:hover {
-        background-color: #2980b9;
-    }
-    
-    .forgotLink {
-        font-size: 0.9rem;
-        color: #3498db;
-        margin-bottom: 20px;
-        text-align: right;
-        text-decoration: underline;
-        cursor: pointer;
-    }
-    
-    .forgotLink:hover {
-        color: #2980b9;
-    }
-    
+html, body {
+    background-color: bisque;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+.global {
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+.screen1 {
+    background-color: #FF5252;
+    padding: 20px;
+    flex: 1;
+    height:100%;
+    overflow: auto;
+}
+.imagemContainer {
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+}
+.backgroundImg {
+    position: block;
+    top: 0; left: 0;
+    width: 800px; 
+    object-position: center;
+    max-width: 100%;
+}
+.screen2 {
+    background-color: #0E0E0E;
+    padding: 20px;
+    flex: 1;
+    height: 100%;
+    overflow: auto;
+}

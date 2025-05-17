@@ -7,7 +7,9 @@ export default function Login() {
             <div className={styles.screen1}>
                 <img src="logo" alt="Logo" className={styles.logoImg} />
                 <h1 className={styles.logoTitle}>avaHelper</h1>
-                <img src="" alt="" className={styles.logoImg} />
+                    <div className={styles.imagemContainer}>
+                        <img src="/imgs/login.png" alt="" className={styles.backgroundImg} />
+                    </div>
             </div>
             <div className={styles.screen2}>
                 <h2 className={styles.title}>Login</h2>
