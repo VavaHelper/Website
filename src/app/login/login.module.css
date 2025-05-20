@@ -1,4 +1,4 @@
-html, body {
+ html, body {
     background-color: bisque;
     margin: 0;
     padding: 0;
@@ -34,4 +34,74 @@ html, body {
     flex: 1;
     height: 100%;
     overflow: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.form {
+    display: flex;
+    flex-direction: column;
+}
+.label {
+    color: white;
+    padding-top: 20px;
+
+}
+.label:after {
+    content: "*";
+    color: #FF5252;
+}
+.input {
+    border: 1px solid;
+    border-radius: 7px;
+    background-color: #0E0E0E;
+    border-color:#FF5252;
+    color: white;
+    outline: none;  
+    height: 40px;
+    width: 350px;
+    
+}
+.forgotLink {
+    color: #FF5252;
+}
+.submitButton{
+    color: white;
+    height: 40px;
+    width: 350px;
+    background-color: #FF5252;
+    border-radius: 7px;
+}
+.rememberContainer {
+    align-items: center;
+    display: flex;
+    gap: 85px;
+}
+.rememberLabel {
+    color: white;
+}
+.rememberCheckbox {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  border: 2px solid #FF5252;
+  border-radius: 50%;
+  cursor: pointer;
+  outline: none;
+  position: relative;
+  display: inline-block;
+}
+.rememberCheckbox:checked::after {
+  content: "";
+  width: 6px;
+  height: 6px;
+  background-color: #FF5252;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }

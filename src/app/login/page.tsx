@@ -12,7 +12,7 @@ export default function Login() {
                     </div>
             </div>
             <div className={styles.screen2}>
-                <h2 className={styles.title}>Login</h2>
+                <h2 className={styles.title}>LOGIN</h2>
 
                 <form className={styles.form}>
                     <label htmlFor="email" className={styles.label}>E-mail:</label>
@@ -20,11 +20,15 @@ export default function Login() {
 
                     <label htmlFor="password" className={styles.label}>Senha:</label>
                     <input type="password" id="password" name="password" required className={styles.input} />
-
-                    <a href="#" className={styles.forgotLink}>Esqueceu a senha?</a>
-
-                    <input type="submit" value="Enviar" className={styles.submitButton} />
+                    <div className={styles.rememberContainer}>
+                        <label htmlFor="remember" className={styles.rememberLabel}>
+                            <input type="checkbox" id="remember" className={styles.rememberCheckbox} /> Lembrar de mim
+                        </label>
+                        <a href="#" className={styles.forgotLink}>Esqueceu a senha?</a>
+                    </div>
+                    <input type="submit" value="Entrar" className={styles.submitButton} /> 
                 </form>
+                 <h1>Não tem uma conta? <a className="text-[#FF5252] " href="">Inscreva-se</a></h1>
             </div>
         </div>
     );
