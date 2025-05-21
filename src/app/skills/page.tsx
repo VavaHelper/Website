@@ -1,8 +1,8 @@
 // TODO: Igão e Matheus -> Iniciar tela de Skills
 
 import styles from './skills.module.css'
-import { Nav } from '../components/nav';
-import { SideBar } from '../components/side-bar';
+import { Nav } from '@components/nav';
+import { SideBar } from '@components/side-bar';
 
 export default function Skills() {
     return (
@@ -28,9 +28,6 @@ export default function Skills() {
                     <button className={styles.button} type="button">Sentinels</button>
                 </div>
                 <div className={styles.box}>
-                    <div className={styles.block}>
-                        <div className={styles.centered}></div>
-                    </div>
                     <h1>Iso</h1>
                 </div>
             </div>
