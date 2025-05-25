@@ -27,9 +27,27 @@ export default function Skills() {
                     <button className={styles.button} type="button">Controllers</button>
                     <button className={styles.button} type="button">Sentinels</button>
                 </div>
-                <div className={styles.box}>
-                    <h1>Iso</h1>
+
+                {/* aqui: wrapper de grid */}
+                <div className={styles.boxGrid}>
+                    <div className={styles.card}>
+                        <div className={styles.box}/>
+                        <h1 className={styles.boxTitle}>Iso</h1>
+                    </div>
+                    <div className={styles.card}>
+                        <div className={styles.box}/>
+                        <h1 className={styles.boxTitle}>Jett</h1>
+                    </div>
+                    <div className={styles.card}>
+                        <div className={styles.box}/>
+                        <h1 className={styles.boxTitle}>Sova</h1>
+                    </div>
+                    <div className={styles.card}>
+                        <div className={styles.box}/>
+                        <h1 className={styles.boxTitle}>Reyna</h1>
+                    </div>
                 </div>
+                
             </div>
         </div>
     );

@@ -1,3 +1,7 @@
+.html, body {
+    overflow: hidden;
+}
+
 .containersearch {
     margin-top: 100px;
     margin-left: 200px;
@@ -43,11 +47,93 @@
     text-align: center;
 }
 
-.box{
+.boxGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 200px);
+    justify-content: start;
+    gap: 1rem;
+    margin-top: 2rem;
+    margin-right: 50px;
+    max-height: 550px;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #ff5252 black;
+}
+
+/* Chrome, Edge, Safari e outros WebKit-based (Scroolbar) */
+.boxGrid::-webkit-scrollbar {
+    width: 8px;
+    background-color: black;
+}
+.boxGrid::-webkit-scrollbar-track {
+    background-color: black;
+}
+.boxGrid::-webkit-scrollbar-thumb {
+    background-color: #ff5252;
+    border-radius: 9px;
+}
+.boxGrid::-webkit-scrollbar-thumb:hover {
+    background-color: #e04848;
+}
+
+
+.box {
     background-color: white;
     width: 200px;
     height: 200px;
     border-radius: 10px;
-    position: absolute;
-    margin-top: 1%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.box h1 {
+    margin: 0;
+    font-size: 1.25rem;
+    color: #333;
+}
+
+@media(max-width: 768px) {
+    
+    .containersearch {
+        max-width: 600px;
+        width: 90%;
+        margin: 10px auto 0;
+
+        padding: 0 1rem;
+    }
+
+    .filter {
+        gap: 0.1rem;
+    }
+    
+    .box{
+        width: 90px;
+        height: 90px;
+    }
+    
+    .boxGrid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, 90px);
+        justify-content: start;
+        gap: 1rem;
+        margin-top: 2rem;
+        margin-right: 0px;
+        max-height: 540px;
+    }
+    
+    .button{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        padding: 0.2rem 0.5rem;
+        margin: 2px;
+        background-color: black;
+        height: 30px;
+        border-radius: 8px;
+        text-align: center;
+        font-size: 11px;
+    }
+
 }
