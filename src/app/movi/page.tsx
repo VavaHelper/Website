@@ -1,8 +1,8 @@
 // TODO: Luninha -> Iniciar tela de Movi
 
 import styles from "./movi.module.css";
-import { Nav } from '../components/nav';
-import { SideBar } from '../components/side-bar';
+import { Nav } from '@components/nav';
+import { SideBar } from '@components/side-bar';
 
 export default function Movi() {
     return (

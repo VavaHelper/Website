@@ -1,5 +1,4 @@
  html, body {
-    background-color: bisque;
     margin: 0;
     padding: 0;
     height: 100%;
@@ -16,17 +15,28 @@
     height:100%;
     overflow: auto;
 }
+.logoTitle {
+    font-weight: bolder;
+}
+.logoWrapper {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
 .imagemContainer {
     display: flex;
-    justify-content: center; 
+    justify-content: center;
     align-items: center;
+    min-height: 91vh;
+    width: 100%;
+    overflow: hidden;
 }
 .backgroundImg {
-    position: block;
-    top: 0; left: 0;
-    width: 800px; 
+    width: 100%;
+    max-width: 320px;
+    height: auto;
+    object-fit: contain;
     object-position: center;
-    max-width: 100%;
 }
 .screen2 {
     background-color: #0E0E0E;
@@ -39,6 +49,21 @@
     align-items: center;
     justify-content: center;
 }
+.headerLogo {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+.headerTitle {
+  font-weight: bolder;
+}
+.title{
+    font-size: larger;
+    font-weight: bolder;
+}
 .form {
     display: flex;
     flex-direction: column;
@@ -46,11 +71,13 @@
 .label {
     color: white;
     padding-top: 20px;
+    font-size: 14px;
 
 }
 .label:after {
     content: "*";
     color: #FF5252;
+    padding-left: 7px;
 }
 .input {
     border: 1px solid;
@@ -61,10 +88,13 @@
     outline: none;  
     height: 40px;
     width: 350px;
+    text-align: left;
+    padding-left: 0.6rem;
     
 }
 .forgotLink {
     color: #FF5252;
+    font-size: small;
 }
 .submitButton{
     color: white;
@@ -76,32 +106,56 @@
 .rememberContainer {
     align-items: center;
     display: flex;
-    gap: 85px;
+    gap: 8pc;
+    padding-top: 6px;
+    padding-bottom: 6px;
 }
 .rememberLabel {
     color: white;
+    font-size: small;
+    text-align: center;
+    text-decoration: none !important;
+    outline: none;
 }
+
 .rememberCheckbox {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  width: 14px;
-  height: 14px;
-  border: 2px solid #FF5252;
-  border-radius: 50%;
-  cursor: pointer;
-  outline: none;
-  position: relative;
-  display: inline-block;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    width: 14px;
+    height: 14px;
+    border: 2px solid #FF5252;
+    border-radius: 50%;
+    cursor: pointer;
+    outline: none;
+    position: relative;
+    display: inline-block;
 }
 .rememberCheckbox:checked::after {
-  content: "";
-  width: 6px;
-  height: 6px;
-  background-color: #FF5252;
-  border-radius: 50%;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+    content: "";
+    width: 6px;
+    height: 6px;
+    background-color: #FF5252;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.register {
+    padding-top: 10px;
+    margin-right: 9.6pc;
+}
+
+
+.register h1 {
+    font-size: small;
+}
+
+
+@media(max-width: 778px) {
+    .screen1 {
+        display: none;
+    }
 }
