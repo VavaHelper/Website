@@ -11,12 +11,13 @@
 .screen1 {
     background-color: #FF5252;
     padding: 20px;
+    padding-right: 0%;
     flex: 1;
     height:100%;
-    overflow: auto;
+    overflow: hidden;
 }
 .logoTitle {
-    font-weight: bolder;
+    font-family: "Press Start 2P", "consolas", sans-serif;
 }
 .logoWrapper {
     display: flex;
@@ -25,15 +26,16 @@
 }
 .imagemContainer {
     display: flex;
-    justify-content: center;
-    align-items: center;
+    justify-content: right;
+    align-items: right;
+    padding-top: 33px;
     min-height: 91vh;
     width: 100%;
     overflow: hidden;
 }
 .backgroundImg {
     width: 100%;
-    max-width: 320px;
+    max-width: 49pc;
     height: auto;
     object-fit: contain;
     object-position: center;
@@ -58,9 +60,11 @@
     gap: 0.5rem;
 }
 .headerTitle {
-  font-weight: bolder;
+    font-family: "Press Start 2P", "consolas", sans-serif;
+
 }
 .title{
+    font-family: "Press Start 2P", "consolas", sans-serif;
     font-size: larger;
     font-weight: bolder;
 }
@@ -130,6 +134,8 @@
     outline: none;
     position: relative;
     display: inline-block;
+    font-size: 15px ;
+    font-family: "Press Start 2P", "sonolas", sans-serif;
 }
 .rememberCheckbox:checked::after {
     content: "";

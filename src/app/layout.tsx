@@ -15,6 +15,7 @@ export default function RootLayout({
     <html lang="pt-BR">
       <head>
         <link href="https://cdn.jsdelivr.net/npm/boxicons/css/boxicons.min.css" rel="stylesheet"/>
+        <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet"/>
       </head>
       <body>
         {children}
