@@ -4,6 +4,7 @@
   font-family: 'Press Start 2P', cursive;
 }
 
+/* Lado do formulário */
 .formSide {
   flex: 1;
   background-color: #0d0d0d;
@@ -29,12 +30,6 @@
   width: 100%;
   max-width: 320px;
   text-align: center;
-}
-
-.heading {
-  font-size: 20px;
-  margin-bottom: 16px;
-  color: white;
 }
 
 .pixelInput {
@@ -101,6 +96,7 @@
   font-weight: bold;
 }
 
+/* Lado da mensagem de boas-vindas */
 .welcomeSide {
   flex: 1;
   background: #ff4f4f;
@@ -123,8 +119,74 @@
   margin-bottom: -140px; /* puxa o texto para mais perto da imagem */
 }
 
-.title{
-    font-family: "Press Start 2P", "consolas", sans-serif;
-    font-size: larger;
-    font-weight: bolder;
+.title {
+  font-family: "Press Start 2P", "consolas", sans-serif;
+  font-size: larger;
+  font-weight: bolder;
+}
+
+/* ==== Responsividade ==== */
+@media (max-width: 900px) {
+  .container {
+    flex-direction: column;
+    height: auto; /* para não forçar 100vh no mobile */
+  }
+
+  .formSide {
+    flex: none;
+    width: 100%;
+    padding: 30px 20px 40px;
+    min-height: 70vh;
+    position: relative;
+  }
+
+  .logo {
+    position: relative;
+    top: auto;
+    left: auto;
+    margin-bottom: 20px;
+  }
+
+  .form {
+    max-width: 100%;
+  }
+
+  .welcomeSide {
+    flex: none;
+    width: 100%;
+    padding: 20px;
+    order: 2;
+    margin-top: 20px;
+  }
+
+  .icon {
+    width: 100%;
+    height: auto;
+    max-width: 300px;
+    margin-bottom: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .pixelInput,
+  .pixelButton {
+    font-size: 12px;
+    padding: 12px;
+  }
+
+  .checkbox,
+  .loginLink,
+  .error,
+  .checkbox span,
+  .loginLink a {
+    font-size: 12px;
+  }
+
+  .welcomeSide h2 {
+    font-size: 18px;
+  }
+
+  .welcomeSide p {
+    font-size: 14px;
+  }
 }
