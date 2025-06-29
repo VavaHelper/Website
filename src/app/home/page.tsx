@@ -1,8 +1,8 @@
 "use client";
 
 import { useLayoutEffect, useState } from 'react';
-import { Nav } from '../components/nav';
-import { SideBar } from '../components/side-bar';
+import { Nav } from '@components/nav';
+import { SideBar } from '@components/side-bar';
 import { Card, CardProps } from './components/card';
 
 // Função utilitária para checar largura
