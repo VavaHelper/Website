@@ -89,6 +89,18 @@ export async function resetPassword({ token, newPassword }) {
     body: JSON.stringify({ token, newPassword })
   });
 
-  if (!response.ok) throw new Error('Erro ao redefinir senha');
-  return response.json();
+  const text = await response.text();
+  let data;
+  try {
+    data = text ? JSON.parse(text) : {};
+  } catch {
+    data = { message: text };
+  }
+
+  if (!response.ok) {
+    throw new Error(data.message || 'Erro ao redefinir senha');
+  }
+
+  return data;
 }
+
