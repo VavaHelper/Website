@@ -1,6 +1,135 @@
-/* CSS REGISTER */
-
-.texto{
-    color: aquamarine;
-    font-size: large;
+.container {
+  display: flex;
+  height: 100vh;
+  font-family: 'Press Start 2P', cursive;
 }
+
+.formSide {
+  flex: 1;
+  background-color: #0d0d0d;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+  position: relative;
+}
+
+.logo {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+  max-width: 320px;
+  text-align: center;
+}
+
+.heading {
+  font-size: 20px;
+  margin-bottom: 16px;
+  color: white;
+}
+
+.pixelInput {
+  width: 100%;
+  padding: 12px;
+  background-color: #0d0d0d;
+  color: white;
+  border: 1.5px solid #ff4f4f;
+  border-radius: 6px;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 10px;
+  box-sizing: border-box;
+}
+
+.pixelInput::placeholder {
+  color: #cccccc;
+  font-size: 10px;
+}
+
+.pixelButton {
+  background: #ff4f4f;
+  color: white;
+  font-family: 'Press Start 2P', cursive;
+  border: none;
+  padding: 16px;
+  font-size: 10px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.pixelButton:hover {
+  background: darkred;
+}
+
+.checkbox {
+  display: flex;
+  align-items: center;
+  font-size: 10px;
+  justify-content: center;
+  gap: 4px;
+}
+
+.checkbox span {
+  color: white;
+}
+
+.checkbox a {
+  color: #ff4f4f;
+  text-decoration: underline;
+}
+
+.error {
+  color: #ff4f4f;
+  font-size: 10px;
+}
+
+.loginLink {
+  font-size: 10px;
+  text-align: center;
+}
+
+.loginLink a {
+  color: #ff4f4f;
+  font-weight: bold;
+}
+
+.welcomeSide {
+  flex: 1;
+  background: #ff4f4f;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 40px;
+  gap: 8px;
+}
+
+.icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 505px;
+  height: 505px;
+  margin-bottom: -140px; /* puxa o texto para mais perto da imagem */
+}
+
+/* .welcomeSide h2 {
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+.welcomeSide p {
+  margin-top: 0;
+  font-size: 10px;
+  line-height: 1.4;
+} */
