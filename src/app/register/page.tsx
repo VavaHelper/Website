@@ -64,7 +64,7 @@ export default function Register() {
         </div>
 
         <form className={styles.form} onSubmit={handleSubmit}>
-          <h2>REGISTER</h2>
+          <h2 className={styles.title}>REGISTER</h2>
 
           <input
             className={styles.pixelInput}
