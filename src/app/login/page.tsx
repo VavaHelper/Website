@@ -55,7 +55,7 @@ export default function Login() {
                         <label htmlFor="remember" className={styles.rememberLabel}>
                             <input type="checkbox" id="remember" className={styles.rememberCheckbox} />Lembrar de mim
                         </label>
-                        <a href="#" className={styles.forgotLink}>Esqueceu a senha?</a>
+                        <a href="/forgot-password" className={styles.forgotLink}>Esqueceu a senha?</a>
                     </div>
 
                     <input type="submit" value="Entrar" className={styles.submitButton} /> 
