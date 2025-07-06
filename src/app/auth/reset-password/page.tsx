@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
+import Link from 'next/link';
 
 export default function RedefinirSenha() {
   const [senha, setSenha] = useState('');
@@ -24,6 +25,23 @@ export default function RedefinirSenha() {
 
   return (
     <div className="flex min-h-screen">
+      {/* NAVBAR */}
+      <nav className="absolute top-0 left-0 w-full z-10 p-4">
+        <div className="flex items-center gap-3">
+          <Link href="/home">
+            <Image
+              src="/imgs/favicon.png"
+              alt="avaHelper"
+              width={33}
+              height={21}
+              className="filter brightness-0 invert"
+            />
+          </Link>
+          <Link href="/home">
+            <h1 className="text-white text-2xl font-bold">avaHelper</h1>
+          </Link>
+        </div>
+      </nav>
       <div className="hidden lg:flex w-1/2 bg-red-500 items-center justify-center p-10 relative">
         <Image
           src="/imgs/Security On-amico.svg"
