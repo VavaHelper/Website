@@ -27,14 +27,14 @@
 .imagemContainer {
     display: flex;
     justify-content: right;
-    align-items: right;
-    padding-top: 33px;
+    /* align-items: right; */
+    /* padding-top: 33px; */
     min-height: 91vh;
     width: 100%;
     overflow: hidden;
 }
 .backgroundImg {
-    width: 100%;
+    width: 500px;
     max-width: 49pc;
     height: auto;
     object-fit: contain;
