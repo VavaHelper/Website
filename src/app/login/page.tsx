@@ -78,8 +78,9 @@ export default function Login() {
                             type="email"
                             id="email"
                             name="email"
+                            placeholder="Digite seu e-mail"
                             required
-                            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            className="w-full px-4 py-2 bg-gray-900 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                         />
                     </div>
 
@@ -89,8 +90,9 @@ export default function Login() {
                             type="password"
                             id="password"
                             name="password"
+                            placeholder="Digite sua senha"
                             required
-                            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            className="w-full px-4 py-2 bg-gray-900 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                         />
                     </div>
 
@@ -103,12 +105,12 @@ export default function Login() {
                             />
                             Lembrar de mim
                         </label>
-                        <a href="/forgot-password" className="text-sm text-blue-600 hover:underline">Esqueceu a senha?</a>
+                        <a href="/forgot-password" className="text-sm text-red-500 hover:underline">Esqueceu a senha?</a>
                     </div>
 
                     <button
                         type="button"
-                        className="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition-colors"
+                        className="w-full text-white py-2 rounded-md bg-red-500 hover:bg-red-600 transition-colors"
                     >
                         Entrar
                     </button>
