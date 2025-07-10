@@ -1,70 +1,125 @@
-// TODO: Juliana Nadruz -> Finalizar tela de Login.
 import Link from "next/link";
-import styles from "./login.module.css";
 import Image from 'next/image';
 
 // Escrever temporariamente em pt-br
 export default function Login() {
     return (
-        <div className={styles.global}>
-            <div className={styles.screen1}>
-                <div className={styles.logoWrapper}>
-                    <Link href={'home'}>
+        <div className="flex min-h-screen bg-gray-100 font-sans">
+            {/* Screen 1: Left side with background image and logo */}
+            {/* <div className="hidden lg:flex lg:w-1/2 bg-cover bg-center relative" style={{ backgroundImage: "url('/imgs/login.png')" }}>
+                <div className="absolute top-8 left-8 flex items-center space-x-2">
+                    <Link href="/home">
                         <Image
+                            src="/imgs/favicon.png"
+                            alt="avaHelper"
+                            width={33}
+                            height={21}
+                            className="brightness-0 invert"
+                        />
+                    </Link>
+                    <Link href="/home">
+                        <h1 className="text-white text-2xl font-bold">avaHelper</h1>
+                    </Link>
+                </div>
+            </div> */}
+            <div className="hidden lg:flex w-1/2 bg-red-500 relative">
+                {/* Logo no canto superior esquerdo */}
+                <div className="absolute top-8 left-8 flex items-center space-x-2">
+                    <Link href="/home">
+                    <Image
                         src="/imgs/favicon.png"
                         alt="avaHelper"
                         width={33}
                         height={21}
-                        className="filter brightness-0 invert"
-                        />
+                        className="brightness-0 invert"
+                    />
                     </Link>
-                    <Link href={'home'}>
-                        <h1 className={styles.logoTitle}>avaHelper</h1>
+                    <Link href="/home">
+                        <h1 className="text-white text-2xl font-bold">avaHelper</h1>
                     </Link>
                 </div>
-                <div className={styles.imagemContainer}>
-                    <img src="/imgs/login.png" alt="" className={styles.backgroundImg} />
-                </div>
+
+                {/* Imagem no canto inferior direito */}
+                <Image
+                    src="/imgs/login_no_background.png"
+                    alt="login"
+                    width={550}
+                    height={400}
+                    className="absolute bottom-0 right-0 drop-shadow-lg"
+                />
             </div>
-            <div className={styles.screen2}>
-                <div className={styles.headerLogo}>
-                    <Link href={'home'}>
+
+
+            {/* Screen 2: Right side with login form */}
+            <div className="w-full lg:w-1/2 flex flex-col items-center justify-center p-8 bg-black">
+                {/* Header Logo for mobile */}
+                <div className="flex items-center space-x-2 mb-6 lg:hidden">
+                    <Link href="/home">
                         <Image
-                        src="/imgs/favicon.png"
-                        alt="avaHelper"
-                        width={33}
-                        height={21}
-                        className="filter brightness-0 invert"
+                            src="/imgs/favicon.png"
+                            alt="avaHelper"
+                            width={33}
+                            height={21}
+                            className="brightness-0 invert"
                         />
                     </Link>
-                    <Link href={'home'}>
-                        <h1 className={styles.headerTitle}>avaHelper</h1>
+                    <Link href="/home">
+                        <h1 className="text-white-900 text-2xl font-bold">avaHelper</h1>
                     </Link>
                 </div>
-                
-                <h2 className={styles.title}>LOGIN</h2>
 
-                <form className={styles.form}>
-                    <label htmlFor="email" className={styles.label}>E-mail</label>
-                    <input type="email" id="email" name="email" required className={styles.input} />
+                <h2 className="text-3xl font-semibold text-white-900 mb-8">LOGIN</h2>
 
-                    <label htmlFor="password" className={styles.label}>Senha</label>
-                    <input type="password" id="password" name="password" required className={styles.input} />
-                    
-                    <div className={styles.rememberContainer}>
-                        <label htmlFor="remember" className={styles.rememberLabel}>
-                            <input type="checkbox" id="remember" className={styles.rememberCheckbox} />Lembrar de mim
-                        </label>
-                        <a href="/forgot-password" className={styles.forgotLink}>Esqueceu a senha?</a>
+                {/* Form */}
+                <div className="w-full max-w-md space-y-6">
+                    <div>
+                        <label htmlFor="email" className="block text-sm font-medium text-white mb-1">E-mail</label>
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            required
+                            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        />
                     </div>
 
-                    <input type="submit" value="Entrar" className={styles.submitButton} /> 
-                </form>
+                    <div>
+                        <label htmlFor="email" className="block text-sm font-medium text-white mb-1">Senha</label>
+                        <input
+                            type="password"
+                            id="password"
+                            name="password"
+                            required
+                            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        />
+                    </div>
 
-                <div className={styles.register}>
-                    <h1>Não tem uma conta? <a className="text-[#FF5252] " href="/register">Inscreva-se</a></h1>
+                    <div className="flex justify-between items-center">
+                        <label htmlFor="email" className="block text-sm font-medium text-white mb-1">
+                            <input
+                                type="checkbox"
+                                id="remember"
+                                className="mr-2 h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+                            />
+                            Lembrar de mim
+                        </label>
+                        <a href="/forgot-password" className="text-sm text-blue-600 hover:underline">Esqueceu a senha?</a>
+                    </div>
+
+                    <button
+                        type="button"
+                        className="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition-colors"
+                    >
+                        Entrar
+                    </button>
                 </div>
 
+                <div className="mt-6 text-center">
+                    <h1 className="text-sm text-white-600">
+                        Não tem uma conta?{' '}
+                        <a href="/register" className="text-red-500 hover:underline">Inscreva-se</a>
+                    </h1>
+                </div>
             </div>
         </div>
     );
