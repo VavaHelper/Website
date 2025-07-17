@@ -47,6 +47,10 @@
     text-align: center;
 }
 
+.buttonActive {
+  background-color: #FF5252;     /* estado selecionado */
+}
+
 .boxGrid {
     display: grid;
     grid-template-columns: repeat(auto-fill, 200px);
@@ -56,6 +60,7 @@
     margin-right: 50px;
     max-height: 550px;
     overflow-y: auto;
+    padding-bottom: 310px;
     scrollbar-width: thin;
     scrollbar-color: #ff5252 black;
 }
