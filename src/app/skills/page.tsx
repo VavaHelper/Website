@@ -1,10 +1,57 @@
 // TODO: Igão e Matheus -> Iniciar tela de Skills
 
+'use client'
+
 import styles from './skills.module.css'
 import { Nav } from '@components/nav';
 import { SideBar } from '@components/side-bar';
+import { useEffect, useState } from 'react';
+import { getAllAgents } from '../services/agentService';
+import Image from 'next/image';
+
+interface Agent {
+  id: number;
+  name: string;
+  imgAgent: string;
+  function: string;
+  description: string;
+  ultPoints: number;
+  iconAgent: string;
+}
+
 
 export default function Skills() {
+
+  const [agents, setAgents] = useState<Agent[]>([]);
+  const [selectedFunction, setSelectedFunction] = useState<string>('All');
+
+  useEffect(() => {
+    async function fetchAgents() {
+      try {
+        const result = await getAllAgents();
+        setAgents(result);
+      } catch (e: unknown) {
+        if (e instanceof Error) {
+          console.error(e.message);
+        }
+      }
+    }
+
+    fetchAgents();
+  }, []);
+
+  const filteredAgents = selectedFunction === 'All'
+    ? agents
+    : agents.filter(agent => {
+        const map = {
+          Duelists: 'Duelista',
+          Initiators: 'Iniciador',
+          Controllers: 'Controlador',
+          Sentinels: 'Sentinela',
+        };
+        return agent.function === map[selectedFunction as keyof typeof map];
+      });
+
     return (
         <div className={styles.global}>
             <Nav/>
@@ -21,31 +68,43 @@ export default function Skills() {
                 </p>
 
                 <div className={styles.filter}>
-                    <button className={styles.button} type="button">All</button>
-                    <button className={styles.button} type="button">Duelists</button>
-                    <button className={styles.button} type="button">Initiators</button>
-                    <button className={styles.button} type="button">Controllers</button>
-                    <button className={styles.button} type="button">Sentinels</button>
+                  
+                  {['All', 'Duelists', 'Initiators', 'Controllers', 'Sentinels'].map((role) => (
+                    <button
+                      key={role}
+                      onClick={() => setSelectedFunction(role)}
+                      className={`${styles.button} ${
+                        selectedFunction === role ? styles.buttonActive : ''
+                      }`}
+
+                    >
+                      {role}
+                    </button>
+                  ))}
                 </div>
 
                 {/* aqui: wrapper de grid */}
                 <div className={styles.boxGrid}>
-                    <div className={styles.card}>
-                        <div className={styles.box}/>
-                        <h1 className={styles.boxTitle}>Iso</h1>
-                    </div>
-                    <div className={styles.card}>
-                        <div className={styles.box}/>
-                        <h1 className={styles.boxTitle}>Jett</h1>
-                    </div>
-                    <div className={styles.card}>
-                        <div className={styles.box}/>
-                        <h1 className={styles.boxTitle}>Sova</h1>
-                    </div>
-                    <div className={styles.card}>
-                        <div className={styles.box}/>
-                        <h1 className={styles.boxTitle}>Reyna</h1>
-                    </div>
+                   {filteredAgents.map((agent) => (
+                      <div key={agent.id}>
+                        <div className={styles.card}>
+                            <div className={styles.box}>
+                              {agent.imgAgent && agent.imgAgent.trim() !== '' ? (
+                                <Image
+                                  src={agent.imgAgent}
+                                  alt={agent.name}
+                                  width={200}
+                                  height={200}
+                                  className="rounded-[10px] object-cover object-center"
+                                />
+                              ) : (
+                                <div className="text-gray-500 text-center">Sem imagem</div>
+                              )}
+                            </div>
+                            <h1 className={styles.boxTitle}>{agent.name}</h1>
+                        </div>
+                      </div>
+                  ))}
                 </div>
                 
             </div>
