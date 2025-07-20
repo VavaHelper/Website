@@ -1,0 +1,22 @@
+{
+  "Skills":{
+    "title": "Agentes",
+    "description": "Explore habilidades, lineups e estratégias dos agentes",
+    "all": "Todos",
+    "duelists": "Duelistas",
+    "initiators": "Iniciadores",
+    "controllers": "Controladores",
+    "sentinels": "Sentinelas",
+    "placeholder": "Sem imagem"
+  },
+
+  "forgot":{
+    "title1": "Informe seu e-mail de cadastrado",
+    "title2": "Envio de recuperação de senha por e-mail",
+    "label": "Informe seu e-mail",
+    "placeholder-email": "Digite seu e-mail",
+    "text-button": "Enviar E-mail",
+    "login": "Voltar ao login",
+    "forgot-password": "Lembrou da senha?"
+  }
+}

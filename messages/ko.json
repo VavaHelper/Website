@@ -1,0 +1,21 @@
+{
+  "Skills": {
+    "title": "요원",
+    "description": "요원의 능력, 라인업 및 전략을 탐색하세요",
+    "all": "전체",
+    "duelists": "결투자",
+    "initiators": "개시자",
+    "controllers": "조정자",
+    "sentinels": "파수꾼",
+    "placeholder": "이미지 없음"
+  },
+  "forgot": {
+    "title1": "등록된 이메일을 입력하세요",
+    "title2": "이메일로 비밀번호 복구 전송",
+    "label": "이메일을 입력하세요",
+    "placeholder-email": "이메일을 입력하세요",
+    "text-button": "이메일 보내기",
+    "login": "로그인으로 돌아가기",
+    "forgot-password": "비밀번호가 기억나셨나요?"
+  }
+}

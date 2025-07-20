@@ -1,0 +1,21 @@
+{
+  "Skills": {
+    "title": "Agenten",
+    "description": "Erkunde Fähigkeiten, Lineups und Strategien der Agenten",
+    "all": "Alle",
+    "duelists": "Duellanten",
+    "initiators": "Initiatoren",
+    "controllers": "Controller",
+    "sentinels": "Wächter",
+    "placeholder": "Kein Bild"
+  },
+  "forgot": {
+    "title1": "Geben Sie Ihre registrierte E-Mail-Adresse ein",
+    "title2": "Passwort-Wiederherstellung per E-Mail senden",
+    "label": "E-Mail eingeben",
+    "placeholder-email": "Geben Sie Ihre E-Mail ein",
+    "text-button": "E-Mail senden",
+    "login": "Zurück zum Login",
+    "forgot-password": "Passwort wieder eingefallen?"
+  }
+}

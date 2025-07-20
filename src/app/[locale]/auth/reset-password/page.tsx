@@ -1,26 +1,53 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
+import { resetPassword } from '../../../services/authService';
 
 export default function RedefinirSenha() {
   const [senha, setSenha] = useState('');
-  const [isMounted, setIsMounted] = useState(false);
+  const [error, setError] = useState('');
+  const [token, setToken] = useState('');
   const router = useRouter();
+  const searchParams = useSearchParams();
 
   useEffect(() => {
-    setIsMounted(true);
-  }, []);
+    const urlToken = searchParams.get('token');
+    if (urlToken) {
+      console.log(urlToken);
+      setToken(urlToken);
+    } else {
+      setError('Token não encontrado na URL. Verifique o link.');
+    }
+  }, [searchParams]);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!isMounted) return;
+    if (!token) {
+      setError('Token não disponível. Por favor, use o link enviado por e-mail.');
+      return;
+    }
 
-    alert('Senha redefinida com sucesso!');
-    router.push('/login');
+    try {
+      console.log('Enviando token:', token, 'e senha:', senha); // Log para depuração
+      await resetPassword({ token, newPassword: senha });
+      alert('Senha redefinida com sucesso!');
+      router.push('/login');
+    } catch (err: unknown) {
+      let errorMessage = 'Erro ao redefinir a senha. Tente novamente.';
+      if (err instanceof Error) {
+        errorMessage = err.message;
+      } else if (typeof err === 'string') {
+        errorMessage = err;
+      } else if (err && typeof err === 'object' && 'message' in err) {
+        errorMessage = (err as { message: string }).message;
+      }
+      console.error('Erro capturado:', err); // Log do erro completo
+      setError(errorMessage);
+    }
   };
 
   return (
@@ -76,6 +103,8 @@ export default function RedefinirSenha() {
                 className="w-full p-3 rounded bg-gray-900 text-white border border-gray-600 focus:outline-none focus:ring-2 focus:ring-red-400"
               />
             </div>
+
+            {error && <p className="text-red-400 text-sm text-center">{error}</p>}
 
             <button
               type="submit"

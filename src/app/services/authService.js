@@ -69,9 +69,8 @@ export async function forgotPassword(email) {
   }
 
   if (!response.ok) {
-
     if (response.status === 403) {
-    throw new Error('Já foi enviado um link de redefinição. Verifique seu e-mail.');
+    throw new Error('Não foi possível processar o pedido. Verifique se o e-mail está cadastrado ou se um link já foi enviado.');
     }
     
     throw new Error(data.message || `Erro ${response.status}: ao solicitar redefinição de senha`);

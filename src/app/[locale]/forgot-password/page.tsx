@@ -2,8 +2,11 @@
 
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
-import Link from 'next/link';
-import { forgotPassword } from '../services/authService';
+// import Link from 'next/link';
+import { useTranslations } from 'next-intl';
+import { forgotPassword } from '../../services/authService';
+import { Nav } from '@/app/components/nav-bg-dividido';
+
 
 export default function RedefinirSenha() {
   const [email, setEmail] = useState('');
@@ -34,10 +37,14 @@ export default function RedefinirSenha() {
     }
   };
 
+  const t = useTranslations('forgot');
+
   return (
     <div className="min-h-screen flex flex-col">
+      <Nav />
+
       {/* NAVBAR */}
-      <nav className="absolute top-0 left-0 w-full z-10 p-4">
+      {/* <nav className="absolute top-0 left-0 w-full z-10 p-4">
         <div className="flex items-center gap-3">
           <Link href="/home">
             <Image
@@ -52,7 +59,7 @@ export default function RedefinirSenha() {
             <h1 className="text-white text-2xl font-bold">avaHelper</h1>
           </Link>
         </div>
-      </nav>
+      </nav> */}
 
       {/* CONTEÚDO PRINCIPAL */}
       <div className="flex flex-1">
@@ -65,7 +72,7 @@ export default function RedefinirSenha() {
             className="max-w-md w-full drop-shadow-lg"
             />
             <h2 className="text-white text-2xl font-bold absolute bottom-10 text-center">
-                Envio de recuperação de senha por e-mail
+                {t('title2')}
             </h2>
 
         </div>
@@ -73,18 +80,18 @@ export default function RedefinirSenha() {
         <div className="w-full lg:w-1/2 bg-black flex items-center justify-center p-8">
           <div className="w-full max-w-md">
             <h1 className="text-2xl font-bold text-white mb-6 font-[Jersey_10] text-center ">
-              Informe seu e-mail de cadastrado
+              {t('title1')}
             </h1>
 
             <form onSubmit={handleSubmit} className="space-y-6 ">
               <div>
                 <label className="block text-xl text-white mb-1 " htmlFor="email">
-                  Informe seu e-mail
+                  {t('label')}
                 </label>
                 <input
                   id="email"
                   type="email"
-                  placeholder="Digite seu e-mail"
+                  placeholder={t('placeholder-email')}
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
@@ -96,7 +103,7 @@ export default function RedefinirSenha() {
                 type="submit"
                 className="w-full bg-red-500 hover:bg-red-600 text-white py-3 rounded font-bold transition duration-300"
               >
-                Enviar E-mail
+                {t('text-button')}
               </button>
 
               {result && (
@@ -108,8 +115,8 @@ export default function RedefinirSenha() {
             </form>
 
             <div className="text-center text-sm text-gray-400 mt-6">
-              Lembrou da senha?{' '}
-              <a href="/login" className="text-red-400 hover:underline">Voltar ao login</a>
+              {t('forgot-password')}{' '}
+              <a href="/login" className="text-red-400 hover:underline">{t('login')}</a>
             </div>
           </div>
         </div>

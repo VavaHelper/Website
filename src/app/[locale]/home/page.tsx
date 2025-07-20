@@ -1,8 +1,8 @@
 "use client";
 
 import { useLayoutEffect, useState } from 'react';
-import { Nav } from '@components/nav';
-import { SideBar } from '@components/side-bar';
+import { Nav } from '@/app/components/nav';
+import { SideBar } from '@/app/components/side-bar';
 import { Card, CardProps } from './components/card';
 
 // Função utilitária para checar largura
@@ -47,7 +47,7 @@ export default function Home() {
           informationText: (
             <>
               Aqui você irá aprender tudo sobre como executar a movimentação perfeita com cada agente, seja para jogar sozinho ou em equipe.<br />
-              Aprenderá também a realizar o famoso <span className="text-[#FF5252]">"</span>AD<span className="text-[#FF5252]">"</span> em seus adversários!
+              Aprenderá também a realizar o famoso <span className="text-[#FF5252]"></span>AD<span className="text-[#FF5252]"></span> em seus adversários!
             </>
           ),
         },

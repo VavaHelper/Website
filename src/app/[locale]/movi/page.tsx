@@ -1,8 +1,8 @@
 // TODO: Luninha -> Iniciar tela de Movi
 
 import styles from "./movi.module.css";
-import { Nav } from '@components/nav';
-import { SideBar } from '@components/side-bar';
+import { Nav } from '@/app/components/nav';
+import { SideBar } from '@/app/components/side-bar';
 
 export default function Movi() {
     return (
@@ -20,7 +20,7 @@ export default function Movi() {
                         </div>
                     <div className={styles.card}>
                         <h2>AD AD (A DEAD)</h2>
-                        <p>Movimentação Lateral "Para um lado e para o outro" para dificultar o tiro do inimigo.</p>
+                        <p>Movimentação Lateral Para um lado e para o outro para dificultar o tiro do inimigo.</p>
                         </div>
                         <div className={styles.card}>
                             <h2>STRAFING</h2>

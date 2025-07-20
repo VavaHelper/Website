@@ -1,0 +1,1 @@
+export const language = ['pt', 'en', 'es', 'fr', 'de', 'it', 'zh', 'ja', 'ko'];

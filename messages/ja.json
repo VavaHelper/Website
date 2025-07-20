@@ -1,0 +1,21 @@
+{
+  "Skills": {
+    "title": "エージェント",
+    "description": "エージェントのスキル、ラインアップ、戦略を探る",
+    "all": "すべて",
+    "duelists": "デュエリスト",
+    "initiators": "イニシエーター",
+    "controllers": "コントローラー",
+    "sentinels": "センチネル",
+    "placeholder": "画像なし"
+  },
+  "forgot": {
+    "title1": "登録済みのメールアドレスを入力してください",
+    "title2": "メールでパスワード回復を送信",
+    "label": "メールアドレスを入力",
+    "placeholder-email": "メールアドレスを入力してください",
+    "text-button": "メールを送信",
+    "login": "ログインに戻る",
+    "forgot-password": "パスワードを思い出しましたか？"
+  }
+}

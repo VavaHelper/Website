@@ -1,10 +1,29 @@
 // TODO: Juliana Nadruz -> Finalizar tela de Login.
+// 'use client';
 import Link from "next/link";
 import styles from "./login.module.css";
 import Image from 'next/image';
 
+// import { useState } from 'react';
+// import { useSearchParams } from 'next/navigation';
+// import {login} from '../services/authService';
+
 // Escrever temporariamente em pt-br
 export default function Login() {
+
+//   const [result, setResult] = useState(null);
+//   const searchParams = useSearchParams();
+  
+//   async function handleLogin() {
+//     try {
+//       const token = await login('admin', '123');
+//       setResult(token);
+//     } catch (e) {
+//       setResult(e.message);
+//     }
+//   }
+
+
     return (
         <div className={styles.global}>
             <div className={styles.screen1}>

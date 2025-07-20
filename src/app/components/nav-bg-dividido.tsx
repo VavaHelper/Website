@@ -53,31 +53,34 @@ export function Nav() {
   };
 
   const supportedLocales = language;
+  
+    const changeLocale = (locale: string) => {
+      
+      const segments = pathname.split('/').filter(Boolean);
+      
+      // Garante que a primeira parte é um locale suportado e remove
+      const isLocale = supportedLocales.includes(segments[0]);
+      const restOfPath = isLocale ? segments.slice(1) : segments;
+      
+      // Cria nova URL corretamente
+      const newPath = `/${locale}/${restOfPath.join('/')}`;
+      
+      router.replace(newPath); 
+    };
 
-  const changeLocale = (locale: string) => {
-    
-    const segments = pathname.split('/').filter(Boolean);
-    
-    // Garante que a primeira parte é um locale suportado e remove
-    const isLocale = supportedLocales.includes(segments[0]);
-    const restOfPath = isLocale ? segments.slice(1) : segments;
-    
-    // Cria nova URL corretamente
-    const newPath = `/${locale}/${restOfPath.join('/')}`;
-    
-    router.replace(newPath); 
-  }; 
+
 
   return (
-    <nav className={styles.navbar}>
+    <nav className={styles.navbarNovo}>
       <div className={styles.left}>
         <Image
-          src="/imgs/favicon.png"
+          src="/imgs/variante-de-contorno-triangular.png"
           alt="avaHelper"
           width={33}
           height={21}
+          style={{ color: '#ffff'}}
         />
-        <h1 style={{ color: '#FF5252', fontWeight: 'bold', fontSize: '20px' }}>
+        <h1 style={{ color: '#ffff', fontWeight: 'bold', fontSize: '20px' }}>
           avaHelper
         </h1>
       </div>

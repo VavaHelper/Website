@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { register } from '../services/authService';
+import { register } from '../../services/authService';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';

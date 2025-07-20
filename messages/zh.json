@@ -1,0 +1,21 @@
+{
+  "Skills": {
+    "title": "特工",
+    "description": "探索特工的技能、站位和策略",
+    "all": "全部",
+    "duelists": "决斗者",
+    "initiators": "先锋",
+    "controllers": "控制者",
+    "sentinels": "哨兵",
+    "placeholder": "无图片"
+  },
+  "forgot": {
+    "title1": "请输入您注册的邮箱",
+    "title2": "通过电子邮件发送密码恢复",
+    "label": "请输入您的邮箱",
+    "placeholder-email": "输入您的邮箱",
+    "text-button": "发送电子邮件",
+    "login": "返回登录",
+    "forgot-password": "记起密码了？"
+  }
+}

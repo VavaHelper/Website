@@ -11,8 +11,10 @@
   "dependencies": {
     "framer-motion": "^12.10.4",
     "next": "^15.1.7",
+    "next-intl": "^4.3.4",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "react-icons": "^5.5.0",
     "vava-web": "file:"
   },
   "devDependencies": {
@@ -25,5 +27,9 @@
     "postcss": "^8",
     "tailwindcss": "^3.4.1",
     "typescript": "^5"
-  }
+  },
+  "description": "<div align=\"center\">\r     <h1>✨ Vava Helper - Website ✨</h1>\r </div>\r Website oficial do projeto Vava Helper feito com o framework Next.js em Typescript. Utilize os passos abaixo para executar em seu ambiente local.",
+  "main": "next.config.js",
+  "author": "",
+  "license": "ISC"
 }
