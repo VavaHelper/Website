@@ -1,5 +1,5 @@
 // TODO: Juliana Nadruz -> Finalizar tela de Login.
-// 'use client';
+'use client';
 import Link from "next/link";
 import styles from "./login.module.css";
 import Image from 'next/image';
@@ -84,7 +84,7 @@ export default function Login() {
                         <a href="/forgot-password" className={styles.forgotLink}>Esqueceu a senha?</a>
                     </div>
 
-                    <input type="submit" value="Entrar" className={styles.submitButton} /> 
+                    <input type="submit" value="★ Entrar" className={styles.submitButton} /> 
                 </form>
 
                 <div className={styles.register}>

@@ -4,6 +4,7 @@ import { useLayoutEffect, useState } from 'react';
 import { Nav } from '@/app/components/nav';
 import { SideBar } from '@/app/components/side-bar';
 import { Card, CardProps } from './components/card';
+import styles from './home.module.css';
 
 // Função utilitária para checar largura
 const getIsNarrow = () =>
@@ -62,25 +63,27 @@ export default function Home() {
       <Nav />
       <div className="flex flex-1">
         <SideBar />
-        <div className="flex-1 flex flex-col justify-center items-center p-4">
-          <div
-            className={
-              isNarrow
-                ? 'flex flex-col items-center gap-8'
-                : 'flex flex-wrap justify-center gap-6'
-            }
-          >
-            {(loading ? Array(3).fill({}) : cards).map((card, idx) => (
-              <Card
-                key={card.title ?? idx}
-                title={card.title ?? '...'}
-                imagePath={card.imagePath ?? 'background'}
-                placeholderPath="/imgs/background.png"
-                informationText={card.informationText}
-                loading={loading}
-                disableAnim={isNarrow}
-              />
-            ))}
+          <div className="flex-1 flex flex-col justify-center items-center p-4">
+            <div
+              className={
+                isNarrow
+                  ? 'flex flex-col items-center gap-8'
+                  : 'flex flex-wrap justify-center gap-6'
+              }
+            >
+            <div className={styles.body}>
+              {(loading ? Array(3).fill({}) : cards).map((card, idx) => (
+                <Card
+                  key={card.title ?? idx}
+                  title={card.title ?? '...'}
+                  imagePath={card.imagePath ?? 'background'}
+                  placeholderPath="/imgs/background.png"
+                  informationText={card.informationText}
+                  loading={loading}
+                  disableAnim={isNarrow}
+                />
+              ))}
+            </div>
           </div>
         </div>
       </div>

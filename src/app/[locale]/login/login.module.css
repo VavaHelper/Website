@@ -41,7 +41,7 @@
     object-position: center;
 }
 .screen2 {
-    background-color: #0E0E0E;
+    background-color: #000;
     padding: 20px;
     flex: 1;
     height: 100%;
@@ -86,7 +86,7 @@
 .input {
     border: 1px solid;
     border-radius: 7px;
-    background-color: #0E0E0E;
+    background-color: #000;
     border-color:#FF5252;
     color: white;
     outline: none;  

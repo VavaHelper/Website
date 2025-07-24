@@ -3,8 +3,10 @@
 import { useState } from 'react';
 import { register } from '../../services/authService';
 import { useRouter } from 'next/navigation';
+import styles from "./register.module.css";
 import Image from 'next/image';
 import Link from 'next/link';
+import { HiCheck } from 'react-icons/hi';
 
 export default function Register() {
   const router = useRouter();
@@ -57,88 +59,124 @@ export default function Register() {
   };
 
   return (
-    <div className="flex min-h-screen">
-      <div className="w-full lg:w-1/2 bg-black flex flex-col items-center justify-center p-8 relative">
-        <div className="absolute top-4 left-4">
-          <Image src="/imgs/logoVavaHelper.svg" alt="Logo Vava Helper" width={180} height={50} />
-        </div>
-        <form onSubmit={handleSubmit} className="w-full max-w-md space-y-6 mt-10">
-          <h2 className="text-2xl font-bold text-white text-center">REGISTER</h2>
-
-          <input
-            type="text"
-            name="login"
-            placeholder="Username"
-            value={form.login}
-            onChange={handleChange}
-            required
-            className="w-full p-3 rounded bg-gray-900 text-white border border-gray-600 focus:outline-none focus:ring-2 focus:ring-red-400"
-          />
-
-          <input
-            type="password"
-            name="password"
-            placeholder="Senha"
-            value={form.password}
-            onChange={handleChange}
-            required
-            className="w-full p-3 rounded bg-gray-900 text-white border border-gray-600 focus:outline-none focus:ring-2 focus:ring-red-400"
-          />
-
-          <input
-            type="password"
-            name="confirmPassword"
-            placeholder="Repetir senha"
-            value={form.confirmPassword}
-            onChange={handleChange}
-            required
-            className="w-full p-3 rounded bg-gray-900 text-white border border-gray-600 focus:outline-none focus:ring-2 focus:ring-red-400"
-          />
-
-          <label className="flex items-center text-white text-sm">
-            <input
-              type="checkbox"
-              name="agree"
-              checked={form.agree}
-              onChange={handleChange}
-              className="mr-2"
-            />
-            <span>
-              Concordo com as{' '}
-              <a href="#" className="text-red-400 underline">regras da comunidade</a>.
-            </span>
-          </label>
-
-          {error && <p className="text-red-400 text-sm text-center">{error}</p>}
-
-          <button
-            type="submit"
-            className="w-full bg-red-500 hover:bg-red-600 text-white py-3 rounded font-bold transition duration-300 disabled:opacity-50"
-            disabled={loading}
+    <div className={styles.body}>
+      <div className="flex min-h-screen">
+        <div className="w-full lg:w-1/2 bg-black flex flex-col items-center justify-center p-8 relative">
+          <div className="absolute top-4 left-4">
+            <Image src="/imgs/logoVavaHelper.svg" alt="Logo Vava Helper" width={180} height={50} />
+          </div>
+          <form
+            onSubmit={handleSubmit}
+            className="w-full max-w-md mx-auto mt-10 bg-black bg-opacity-80 p-6 rounded-lg space-y-5"
           >
-            ⭐ Criar
-          </button>
+            <h2 className="text-1xl font-bold text-white text-center">REGISTER</h2>
 
-          <p className="text-center text-sm text-gray-400">
-            Já tem uma conta?{' '}
-            <Link href="/login" className="text-red-400 hover:underline">Login</Link>
-          </p>
-        </form>
-      </div>
+            {/* E‑mail */}
+            <div className="space-y-1">
+              <label htmlFor="login" className="block text-white text-sm">
+                E‑mail <span className="text-red-500">*</span>
+              </label>
+              <input
+                id="login"
+                type="email"
+                name="login"
+                placeholder=""
+                value={form.login}
+                onChange={handleChange}
+                required
+                className="w-full p-2 bg-transparent placeholder-gray-500 text-white border border-red-500 rounded focus:ring-0 focus:outline-none"
+              />
+            </div>
 
-      {/* Lado com imagem e texto */}
-      <div className="hidden lg:flex w-1/2 bg-red-500 items-center justify-center text-white text-center p-6">
-        <div className="flex flex-col items-center text-center gap-2">
-          <Image
-            src="/imgs/logoLateralRegistro2.svg"
-            alt="Logo lateral Vava Helper"
-            width={250}
-            height={250}
-          />
-          <h2 className="text-2xl font-bold mt-[-10px]">Welcome back!</h2>
-          <p className="text-sm max-w-sm">
-            Log in to access your personalized Valorant strategies, lineups, and community content.
-          </p>
+            {/* Senha */}
+            <div className="space-y-1">
+              <label htmlFor="password" className="block text-white text-sm">
+                Senha <span className="text-red-500">*</span>
+              </label>
+              <input
+                id="password"
+                type="password"
+                name="password"
+                placeholder=""
+                value={form.password}
+                onChange={handleChange}
+                required
+                className="w-full p-2 bg-transparent placeholder-gray-500 text-white border border-red-500 rounded focus:ring-0 focus:outline-none"
+              />
+            </div>
+
+            {/* Confirmar senha */}
+            <div className="space-y-1 relative">
+              <label htmlFor="confirmPassword" className="block text-white text-sm">
+                Repetir senha <span className="text-red-500">*</span>
+              </label>
+              <input
+                id="confirmPassword"
+                type="password"
+                name="confirmPassword"
+                placeholder=""
+                value={form.confirmPassword}
+                onChange={handleChange}
+                required
+                className="w-full p-2 bg-transparent placeholder-gray-500 text-white border border-red-500 rounded focus:ring-0 focus:outline-none"
+              />
+              {form.confirmPassword && form.password === form.confirmPassword && (
+                <span className="absolute right-3 top-1/2 transform -translate-y-1/2 bg-red-500 rounded-full p-1">
+                  <HiCheck className="h-4 w-4 text-white" />
+                </span>
+              )}
+            </div>
+
+            {/* Remember + Forgot */}
+            <div className="flex items-center justify-between">
+              <label className="flex items-center text-white text-sm">
+                  <input
+                    type="checkbox"
+                    name="agree"
+                    checked={form.agree}
+                    onChange={handleChange}
+                    className="custom-checkbox mr-1"
+                  />
+                Concordo com as{' '}<a className="text-red-500 text-sm hover:underline"> regras da comunidade.</a>
+              </label>
+              
+            </div>
+
+            {error && (
+              <p className="text-red-500 text-sm text-center">{error}</p>
+            )}
+
+            <button
+              type="submit"
+              className="w-full bg-red-500 hover:bg-red-600 text-white py-2 rounded-md transition duration-200 disabled:opacity-50"
+              disabled={loading}
+            >
+              ★ Criar
+            </button>
+
+            <p className="text-left text-sm text-white">
+              Já tem uma conta?{' '}
+              <Link href="/login" className="text-red-500 hover:underline ">
+                Login
+              </Link>
+            </p>
+          </form>
+        </div>
+
+        {/* Lado com imagem e texto */}
+        <div className="hidden lg:flex w-1/2 bg-red-500 items-center justify-center text-white text-center p-6">
+          <div className="flex flex-col items-center text-center gap-2">
+            <Image
+              src="/imgs/logoLateralRegistro2.svg"
+              alt="Logo lateral Vava Helper"
+              width={250}
+              height={250}
+            />
+            <h2 className="text-2xl font-bold mt-[-10px]">Welcome back!</h2>
+            <p className="text-sm max-w-sm">
+              Log in to access your personalized Valorant strategies, lineups, and community content.
+            </p>
+          </div>
         </div>
       </div>
     </div>
