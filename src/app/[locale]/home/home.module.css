@@ -1,6 +1,11 @@
+html, body {
+  overflow: visible;
+}
+
 @media (max-width: 1320px) {
   .body{
     padding-top: 90px;
     padding-bottom: 130px;
+  
   }
 }

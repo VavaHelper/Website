@@ -74,7 +74,7 @@ export function Nav() {
         <Image
           src="/imgs/favicon.png"
           alt="avaHelper"
-          width={33}
+          width={56}
           height={21}
         />
         <h1 style={{ color: '#FF5252', fontWeight: 'bold', fontSize: '20px' }}>

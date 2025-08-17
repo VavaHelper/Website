@@ -13,7 +13,7 @@ const getIsNarrow = () =>
 export default function Home() {
   const [cards, setCards] = useState<CardProps[]>([]);
   const [loading, setLoading] = useState(true);
-  const [isNarrow, setIsNarrow] = useState<boolean>(getIsNarrow);
+  const [isNarrow, setIsNarrow] = useState<boolean>(false);
 
   // Usa layout effect para já definir antes do paint
   useLayoutEffect(() => {
@@ -29,8 +29,9 @@ export default function Home() {
       setCards([
         {
           title: 'Agents',
-          imagePath: 'https://placehold.co/600x400',
+          imagePath: '/imgs/agents.gif',
           informationText: <>Aqui você será capaz de aprender detalhadamente sobre todos os agentes!</>,
+          href: '/skills',
         },
         {
           title: 'Pixel',
@@ -41,6 +42,7 @@ export default function Home() {
               Esteja preparado para aprender os melhores pixels para sua gameplay!
             </>
           ),
+          href: '/pixel',
         },
         {
           title: 'Movi',
@@ -51,6 +53,7 @@ export default function Home() {
               Aprenderá também a realizar o famoso <span className="text-[#FF5252]"></span>AD<span className="text-[#FF5252]"></span> em seus adversários!
             </>
           ),
+          href: '/movi',
         },
       ]);
       setLoading(false);
@@ -71,7 +74,7 @@ export default function Home() {
                   : 'flex flex-wrap justify-center gap-6'
               }
             >
-            <div className={styles.body}>
+            
               {(loading ? Array(3).fill({}) : cards).map((card, idx) => (
                 <Card
                   key={card.title ?? idx}
@@ -81,9 +84,9 @@ export default function Home() {
                   informationText={card.informationText}
                   loading={loading}
                   disableAnim={isNarrow}
+                  href={card.href ?? ""}
                 />
               ))}
-            </div>
           </div>
         </div>
       </div>

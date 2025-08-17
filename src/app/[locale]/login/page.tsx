@@ -1,4 +1,3 @@
-// TODO: Juliana Nadruz -> Finalizar tela de Login.
 'use client';
 import Link from "next/link";
 import styles from "./login.module.css";
