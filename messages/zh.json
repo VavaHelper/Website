@@ -17,5 +17,9 @@
     "text-button": "发送电子邮件",
     "login": "返回登录",
     "forgot-password": "记起密码了？"
+  },
+  "login": {
+    "title1":"登入",
+    "email":"電子郵件"
   }
 }

@@ -1,6 +1,7 @@
 'use client';
 import Link from "next/link";
 import styles from "./login.module.css";
+import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 
 // import { useState } from 'react';
@@ -21,7 +22,7 @@ export default function Login() {
 //       setResult(e.message);
 //     }
 //   }
-
+const t = useTranslations('login');
 
     return (
         <div className={styles.global}>
@@ -67,10 +68,10 @@ export default function Login() {
                     </Link>
                 </div>
                 
-                <h2 className={styles.title}>LOGIN</h2>
+                <h2 className={styles.title}>{t('title1')}</h2>
 
                 <form className={styles.form}>
-                    <label htmlFor="email" className={styles.label}>E-mail</label>
+                    <label htmlFor="email" className={styles.label}>{t('email')}</label>
                     <input type="email" id="email" name="email" required className={styles.input} />
 
                     <label htmlFor="password" className={styles.label}>Senha</label>
