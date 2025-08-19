@@ -1,5 +1,3 @@
-// TODO: Luninha -> Iniciar tela de Movi
-
 import styles from "./movi.module.css";
 import { Nav } from '@/app/components/nav';
 import { SideBar } from '@/app/components/side-bar';
@@ -17,11 +15,14 @@ export default function Movi() {
         <section className={styles.layout}>
           <aside className={styles.leftCard}>
             <div className={styles.thumbWrap}>
-              {/* coloque a miniatura em /public/images/thumb.png */}
-              <img
-                src="/imgs/thumb_movi.jpg"
-                alt="miniatura do guia"
-                className={styles.thumbImage}
+              <iframe
+                className={styles.thumbIframe}
+                src="https://www.youtube.com/embed/8KxkzngOGJY?si=vCYqzooc5h-bcN8U" //Colocar URL aqui
+                title="YouTube video player"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerPolicy="strict-origin-when-cross-origin"
+                allowFullScreen
               />
             </div>
 
@@ -55,18 +56,35 @@ export default function Movi() {
         </section>
 
         <section className={styles.cardGrid}>
-          <div className={styles.card}>
-            <h2>POP SWING</h2>
-            <p>Pop Swing, você continua se movimentando para tirar a precisão de mira do seu oponente.</p>
-          </div>
-          <div className={styles.card}>
-            <h2>AD AD (A DEAD)</h2>
-            <p>Movimentação Lateral Para um lado e para o outro para dificultar o tiro do inimigo.</p>
-          </div>
-          <div className={styles.card}>
-            <h2>STRAFING</h2>
-            <p>Se mover lateralmente, mantendo um ritmo e precisão em seus movimentos.</p>
-          </div>
+          <article className={styles.card} tabIndex={0} role="article" aria-labelledby="pop-swing">
+            <div className={styles.cardHead}>
+              <svg className={styles.iconCard } viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M12 2L15 8l6 .5-4.5 4 1.5 6L12 16l-6 3 1.5-6L3 8.5 9 8 12 2z" fill="currentColor"/>
+              </svg>
+              <h3 id="pop-swing" className={styles.cardTitle}>POP SWING</h3>
+            </div>
+            <p className={styles.cardDesc}>Pop Swing — você continua se movimentando para tirar a precisão de mira do seu oponente.</p>
+          </article>
+
+          <article className={styles.card} tabIndex={0} role="article" aria-labelledby="ad-ad">
+            <div className={styles.cardHead}>
+              <svg className={styles.iconCard } viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M3 12h18M12 3v18" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+              </svg>
+              <h3 id="ad-ad" className={styles.cardTitle}>AD AD (A DEAD)</h3>
+            </div>
+            <p className={styles.cardDesc}>Movimentação lateral para um lado e para o outro para dificultar o tiro do inimigo.</p>
+          </article>
+
+          <article className={styles.card} tabIndex={0} role="article" aria-labelledby="strafing">
+            <div className={styles.cardHead}>
+              <svg className={styles.iconCard } viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M4 12h16M8 8l-4 4 4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+              <h3 id="strafing" className={styles.cardTitle}>STRAFING</h3>
+            </div>
+            <p className={styles.cardDesc}>Se mover lateralmente, mantendo um ritmo e precisão em seus movimentos.</p>
+          </article>
         </section>
       </main>
     </div>
