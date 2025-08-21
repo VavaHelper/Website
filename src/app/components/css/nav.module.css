@@ -19,7 +19,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 16px 32px;
-  background: linear-gradient(to right, #EF4444  50%, #000000 50%);
+  background: linear-gradient(to right, #000  50%, #000000 50%);
   color: white;
   position: relative;
   z-index: 10;

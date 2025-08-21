@@ -11,10 +11,10 @@ import {
 
 export function SideBar() {
   const items = [
-    { href: '/home', icon: <BiHome size={21} color="#fff" /> },
-    { href: '/movi', icon: <BiRun size={21} color="#fff" /> },
-    { href: '/pixel', icon: <BiStar size={21} color="#fff" /> },
-    { href: '/skills', icon: <BiGlasses size={21} color="#fff" /> }
+    { href: '/home', icon: <BiHome size={24} color="#FF5252" /> },
+    { href: '/movi', icon: <BiRun size={24} color="#FF5252" /> },
+    { href: '/pixel', icon: <BiStar size={24} color="#FF5252" /> },
+    { href: '/skills', icon: <BiGlasses size={24} color="#FF5252" /> }
   ];
 
   return (

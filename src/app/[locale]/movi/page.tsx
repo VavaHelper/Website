@@ -14,6 +14,10 @@ export default function Movi() {
         {/* layout: esquerda (card) + direita (imagem grande) */}
         <section className={styles.layout}>
           <aside className={styles.leftCard}>
+            <img src="/imgs/movi-nuvem.png" 
+                alt="nuvem"
+                className={styles.nuvemImage2}
+              />
             <div className={styles.thumbWrap}>
               <iframe
                 className={styles.thumbIframe}
@@ -25,7 +29,6 @@ export default function Movi() {
                 allowFullScreen
               />
             </div>
-
             <div className={styles.meta}>
               <h2 className={styles.title}>GUIA COMPLETO MOVIMENTAÇÃO</h2>
               <p className={styles.description}>
@@ -47,6 +50,10 @@ export default function Movi() {
           </aside>
 
           <div className={styles.heroWrap}>
+            <img src="/imgs/movi-nuvem.png" 
+                alt="nuvem"
+                className={styles.nuvemImage}
+            />
             <img
               src="/imgs/jett_movi.png"
               alt="personagem grande"

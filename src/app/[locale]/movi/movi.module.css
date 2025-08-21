@@ -31,7 +31,7 @@ html h2{
 }
 
 .leftCard {
-  background: linear-gradient(180deg, rgba(20,20,20,0.85), rgba(26,26,26,0.75));
+  position: relative;
   border-radius: 12px;
   padding: 2rem;
   box-shadow: 0 8px 30px rgba(0,0,0,0.45);
@@ -46,6 +46,17 @@ html h2{
   border-radius: 8px;
   overflow: hidden;
   background: #000;
+}
+
+.nuvemImage2 {
+  position: absolute;
+  width: 80%; /* ou ajuste conforme o tamanho da nuvem */
+  top: -8.6pc;
+  left: 15pc;
+  height: auto;
+  z-index: -1;
+  pointer-events: none;
+  user-select: none;
 }
 
 .thumbIframe {
@@ -96,6 +107,7 @@ html h2{
 
 /* wrapper da imagem grande */
 .heroWrap {
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -107,13 +119,24 @@ html h2{
 
 /* imagem grande: tamanho fixo, não reduz automaticamente */
 .heroImage {
-    width: 600px;        /* largura fixa — não usa % nem max-width */
-    height: auto;
+    width: 100%;        /* largura fixa — não usa % nem max-width */
     object-fit: contain;
     user-select: none;
     pointer-events: none;
     transform: scaleX(-1);
     display: block;
+}
+
+.nuvemImage {
+  position: absolute;
+  top: 7pc;
+  left: 100px;
+  width: 70%; /* ou ajuste conforme o tamanho da nuvem */
+  height: auto;
+  z-index: 0;
+  pointer-events: none;
+  user-select: none;
+  transform: rotate(-36deg);
 }
 
 /* GRID */
@@ -248,6 +271,14 @@ html h2{
     .cardGrid {
         display: grid;
         grid-template-columns: 1fr;
+    }
+
+    .nuvemImage2 {
+      display: none ;
+    }
+
+    .container {
+      margin-top: 20px;
     }
 }
 

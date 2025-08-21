@@ -32,7 +32,7 @@ const t = useTranslations('login');
                         <Image
                         src="/imgs/favicon.png"
                         alt="avaHelper"
-                        width={33}
+                        width={50}
                         height={21}
                         className="filter brightness-0 invert"
                         />
@@ -58,13 +58,10 @@ const t = useTranslations('login');
                         <Image
                         src="/imgs/favicon.png"
                         alt="avaHelper"
-                        width={33}
+                        width={50}
                         height={21}
                         className="filter brightness-0 invert"
                         />
-                    </Link>
-                    <Link href={'home'}>
-                        <h1 className={styles.headerTitle}>avaHelper</h1>
                     </Link>
                 </div>
                 
