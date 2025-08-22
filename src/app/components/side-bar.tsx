@@ -12,9 +12,9 @@ import {
 export function SideBar() {
   const items = [
     { href: '/home', icon: <BiHome size={24} color="#FF5252" /> },
+    { href: '/skills', icon: <BiGlasses size={24} color="#FF5252" /> },
     { href: '/movi', icon: <BiRun size={24} color="#FF5252" /> },
     { href: '/pixel', icon: <BiStar size={24} color="#FF5252" /> },
-    { href: '/skills', icon: <BiGlasses size={24} color="#FF5252" /> }
   ];
 
   return (

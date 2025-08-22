@@ -85,7 +85,7 @@ const t = useTranslations('login');
                 </form>
 
                 <div className={styles.register}>
-                    <h1>Não tem uma conta? <a className="text-[#FF5252] " href="/register">Inscreva-se</a></h1>
+                    <h1>Não tem uma conta? <a className="text-[#FF5252] " href="/register">registre-se</a></h1>
                 </div>
 
             </div>

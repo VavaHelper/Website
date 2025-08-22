@@ -1,16 +1,28 @@
 "use client";
 
-import { useLayoutEffect, useState } from 'react';
+import { useEffect, useLayoutEffect, useState } from 'react';
 import { Nav } from '@/app/components/nav';
 import { SideBar } from '@/app/components/side-bar';
 import { Card, CardProps } from './components/card';
 import styles from './home.module.css';
+import { Footer } from '@/app/components/footer';
+
+
 
 // Função utilitária para checar largura
 const getIsNarrow = () =>
   typeof window !== 'undefined' && window.innerWidth <= 1320;
 
 export default function Home() {
+    useEffect(() => {
+    // Isso roda só no cliente, então document existe
+    document.documentElement.style.overflowY = 'visible';
+
+    // Opcional: limpar o estilo quando o componente desmontar
+    return () => {
+      document.documentElement.style.overflowY = '';
+    };
+  }, []);
   const [cards, setCards] = useState<CardProps[]>([]);
   const [loading, setLoading] = useState(true);
   const [isNarrow, setIsNarrow] = useState<boolean>(false);
@@ -34,17 +46,6 @@ export default function Home() {
           href: '/skills',
         },
         {
-          title: 'Pixel',
-          imagePath: '/imgs/molotov-lineup.png',
-          informationText: (
-            <>
-              Aqui você se tornará pró player do personagem de sua preferência!<br />
-              Esteja preparado para aprender os melhores pixels para sua gameplay!
-            </>
-          ),
-          href: '/pixel',
-        },
-        {
           title: 'Movi',
           imagePath: '/imgs/movi.gif',
           informationText: (
@@ -54,6 +55,17 @@ export default function Home() {
             </>
           ),
           href: '/movi',
+        },
+        {
+          title: 'Pixel',
+          imagePath: '/imgs/molotov-lineup.png',
+          informationText: (
+            <>
+              Aqui você se tornará pró player do personagem de sua preferência!<br />
+              Esteja preparado para aprender os melhores pixels para sua gameplay!
+            </>
+          ),
+          href: '/pixel',
         },
       ]);
       setLoading(false);
@@ -70,8 +82,8 @@ export default function Home() {
             <div
               className={
                 isNarrow
-                  ? 'flex flex-col items-center gap-8'
-                  : 'flex flex-wrap justify-center gap-6'
+                  ? 'flex flex-col items-center gap-8 mt-18'
+                  : 'flex flex-wrap justify-center gap-6 mt-18'
               }
             >
             
@@ -90,6 +102,7 @@ export default function Home() {
           </div>
         </div>
       </div>
+      <Footer/>
     </main>
   );
 }

@@ -1,11 +1,10 @@
 .container {
-  margin-left: 300px; /* espaço pro sidebar */
-  margin-top: 80px; /* espaço pro navbar */
+  margin-left: 300px; /* espaço sidebar */
+  margin-top: 60px;   /* menos espaço em cima */
   padding: 2rem;
   display: flex;
   flex-direction: column;
-  gap: 2rem;
-  min-height: calc(100vh - 100px);
+  min-height: calc(100vh - 60px);
 }
 
 html {
@@ -22,12 +21,15 @@ html h2{
   letter-spacing: 0.5px;
 }
 
+/* layout base */
 .layout {
   display: grid;
-  grid-template-columns: minmax(420px, 1fr) 520px;
+  grid-template-columns: 1fr minmax(300px, 40%);
   gap: 2rem;
-  align-items: center;
+  align-items: stretch; /* ocupa vertical */
   width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
 }
 
 .leftCard {
@@ -40,12 +42,6 @@ html h2{
   flex-direction: column;
   gap: 1rem;
   z-index: 0;
-}
-
-.thumbWrap {
-  border-radius: 8px;
-  overflow: hidden;
-  background: #000;
 }
 
 .nuvemImage2 {
@@ -107,24 +103,22 @@ html h2{
 
 /* wrapper da imagem grande */
 .heroWrap {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    pointer-events: none;
-    width: 600px;        /* mesma largura fixa da coluna direita */
-    flex-shrink: 0;      /* garante que o wrapper NÃO encolha */
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 550px;
+  flex-shrink: 1;
 }
 
-/* imagem grande: tamanho fixo, não reduz automaticamente */
+/* imagem grande */
 .heroImage {
-    width: 100%;        /* largura fixa — não usa % nem max-width */
-    object-fit: contain;
-    user-select: none;
-    pointer-events: none;
-    transform: scaleX(-1);
-    display: block;
+  width: auto;
+  max-width: 100%;
+  max-height: 80vh;
+  object-fit: contain;
+  transform: scaleX(-1);
 }
 
 .nuvemImage {
@@ -141,12 +135,11 @@ html h2{
 
 /* GRID */
 .cardGrid {
-  display: none;
-  grid-template-columns: repeat(3, 1fr); /* desktop: 3 colunas */
-  gap: 1rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.25rem;
   width: 100%;
-  margin-top: 0.75rem;
-  align-items: stretch;
+  margin-top: 1.5rem;
 }
 
 /* CARD */
@@ -248,15 +241,51 @@ html h2{
   .card { min-height: auto; display: grid;}
 }
 
-/* ajustes para telas muito grandes (opcional): aumenta a imagem fixa se quiser */
-@media (min-width: 1600px) {
-    .layout {
-        grid-template-columns: minmax(420px, 1fr) 640px; /* imagem maior em telas muito largas */
+/* seu breakpoint menor */
+@media (max-width: 768px) {
+    .container {
+      margin-top: 0px !important;
+      padding: 1rem;
+      margin-left: 0px !important;
     }
-    .heroWrap, .heroImage {
-        width: 640px;
+
+    .layout {
+      grid-template-columns: 1fr; /* tudo em 1 coluna */
+      gap: 1rem;
+    }
+
+    /* reforça que a imagem direita não aparece em telas pequenas */
+    .heroWrap {
+        display: none;
+    }
+
+    .thumbIframe {
+      height: 200px; /* vídeo menor em celular */
+    }
+
+    /* cardGrid continua visível (1 coluna) */
+    .cardGrid {
+      display: grid;
+      grid-template-columns: 1fr; /* cards 1 por linha */
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+    .card {
+      min-height: auto;
+      padding: 1rem;
     }
 }
+
+@media (max-height: 800px) {
+  .container {
+    margin-top: 40px;
+    padding: 1rem;
+  }
+  .heroImage {
+    max-height: 70vh;
+  }
+}
+
 
 /* quando a viewport ficar pequena, escondemos a imagem pra evitar sobreposição */
 @media (max-width: 1000px) {
@@ -289,7 +318,11 @@ html h2{
     }
 
     .layout {
-        grid-template-columns: 1fr; /* coluna única */
+      grid-template-columns: 1fr;
+    }
+
+    .heroWrap {
+      display: none;
     }
 
     .leftCard {
@@ -303,30 +336,21 @@ html h2{
     }
 
     .heroWrap {
-        display: none; /* remove a imagem grande quando fica desproporcional */
+      display: none;
     }
 
     .container {
-        margin-left: 120px; /* espaço pro sidebar */
-        margin-top: 80px; /* espaço pro navbar */
+      margin-left: 120px; /* sidebar */
+      margin-top: 80px;
     }
 }
 
-/* seu breakpoint menor */
-@media (max-width: 768px) {
-    .container {
-        margin-left: 0;
-        margin-top: 60px;
-        padding: 1rem;
+/* ajustes para telas muito grandes (opcional): aumenta a imagem fixa se quiser */
+@media (min-width: 1600px) {
+    .layout {
+        grid-template-columns: minmax(420px, 1fr) 640px; /* imagem maior em telas muito largas */
     }
-
-    /* reforça que a imagem direita não aparece em telas pequenas */
-    .heroWrap {
-        display: none;
-    }
-
-    /* cardGrid continua visível (1 coluna) */
-    .cardGrid {
-        grid-template-columns: 1fr;
+    .heroWrap, .heroImage {
+        width: 640px;
     }
 }

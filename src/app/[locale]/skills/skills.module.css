@@ -2,6 +2,10 @@ html {
     overflow-y: hidden ;
 }
 
+html.home {
+  overflow-y: visible !important;
+}
+
 .containersearch {
     margin-top: 100px;
     margin-left: 200px;

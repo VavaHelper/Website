@@ -8,6 +8,8 @@ import { getAllAgents } from '../../services/agentService';
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 
+document.documentElement.style.overflowY = 'hidden';
+
 interface Agent {
   id: number;
   name: string;
