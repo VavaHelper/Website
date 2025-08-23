@@ -71,7 +71,7 @@ const t = useTranslations('login');
                     <label htmlFor="email" className={styles.label}>{t('email')}</label>
                     <input type="email" id="email" name="email" required className={styles.input} />
 
-                    <label htmlFor="password" className={styles.label}>Senha</label>
+                    <label htmlFor="password" className={styles.label}>{t('senha')}</label>
                     <input type="password" id="password" name="password" required className={styles.input} />
                     
                     <div className={styles.rememberContainer}>

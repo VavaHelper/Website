@@ -17,5 +17,10 @@
     "text-button": "Envoyer un e-mail",
     "login": "Retour à la connexion",
     "forgot-password": "Vous vous souvenez du mot de passe ?"
+  },
+  "login": {
+    "title1":"connexion",
+    "email":"Courriel",
+    "senha":"Mot de passe"
   }
 }

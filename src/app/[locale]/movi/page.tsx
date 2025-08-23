@@ -1,8 +1,12 @@
 import styles from "./movi.module.css";
 import { Nav } from '@/app/components/nav';
 import { SideBar } from '@/app/components/side-bar';
+import { useTranslations } from "next-intl";
 
 export default function Movi() {
+
+  const t = useTranslations('movi');
+  
   return (
     <div className="global">
       <Nav />
