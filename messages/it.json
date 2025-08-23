@@ -17,5 +17,29 @@
     "text-button": "Invia e-mail",
     "login": "Torna al login",
     "forgot-password": "Hai ricordato la password?"
+  },
+    "login": {
+    "title1":"Schermata di accesso",
+    "email":"Email",
+    "senha":"Password",
+    "remenber" : "Ricordami",
+    "forgotPassword" :"Hai dimenticato la password?",
+    "register" : "Non hai un account? ",
+    "registerLink" : "registrati"
+  },
+  "movi":{
+    "title1": "Guida completa al movimento",
+    "subTitle1" : "esercizi e consigli per migliorare il tuo movimento.",
+    "popSwing": "continui a muoverti per sbilanciare la mira del tuo avversario.",
+    "adText": "Movimento laterale da un lato all'altro per rendere più difficile il colpo del nemico.",
+    "strafingText": "Muoverti lateralmente, mantenendo un ritmo e una precisione nei tuoi movimenti."
+  },
+  "home":{
+    "agentsTitle":"Qui potrai imparare nel dettaglio tutto sugli agenti!",
+    "moviTitle1": "Qui imparerai tutto su come eseguire il movimento perfetto con ogni agente, sia che tu giochi da solo o in squadra.",
+    "moviTitle2" : "Imparerai anche a eseguire il famoso",
+    "moviTitle3" : "sui tuoi avversari!",
+    "pixelsTitle1": "Qui diventerai un giocatore professionista del tuo personaggio preferito!",
+    "pixelsTitle2" : "Preparati a imparare i migliori pixel per il tuo gameplay!"
   }
 }

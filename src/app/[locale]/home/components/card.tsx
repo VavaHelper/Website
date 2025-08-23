@@ -25,7 +25,9 @@ export function Card({
   href
 }: CardProps) {
   const [hovering, setHovering] = useState(false);
+
   const t = useTranslations('home');
+
   // Variante sem animação (modo skeleton)
   if (disableAnim) {
     const imgSrc = loading && placeholderPath ? placeholderPath : imagePath;

@@ -17,5 +17,30 @@
     "text-button": "Send Email",
     "login": "Back to login",
     "forgot-password": "Remembered your password?"
+  },
+    "login": {
+    "title1":"Login Screen",
+    "email":"Email",
+    "senha":"Password",
+    "remenber" : "Remember me",
+    "forgotPassword" :"Forgot your password?",
+    "register" : "Don't have an account?",
+    "registerLink" : "sign up"
+  },
+  "movi":{
+    "title1": "Complete Movement Guide",
+    "subTitle1" : "exercises and tips to improve your movement.",
+    "popSwing": "you keep moving to throw off your opponent's aiming precision.",
+    "adText": "Lateral movement from side to side to make it harder for the enemy to shoot.",
+    "strafingText": "Move sideways, maintaining a rhythm and precision in your movements."
+  },
+  "home":{
+    "agentsTitle":"Here you will be able to learn in detail about all the agents!",
+    "moviTitle1": "Here you will learn everything about how to execute the perfect movement with each agent, whether to play alone or as a team.",
+    "moviTitle2" : "You will also learn how to perform the famous",
+    "moviTitle3" : "on your opponents!",
+    "pixelsTitle1": "Here you will become a pro player of your favorite character!",
+    "pixelsTitle2" : "Be prepared to learn the best pixels for your gameplay!",
+    "bemvindo": "bemvindo"
   }
 }
