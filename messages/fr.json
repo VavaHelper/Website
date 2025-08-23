@@ -33,7 +33,8 @@
     "moviTitle2" : "Vous apprendrez également à réaliser le célèbre",
     "moviTitle3" : "sur vos adversaires !",
     "pixelsTitle1": "Ici, vous deviendrez un joueur pro du personnage de votre choix !",
-    "pixelsTitle2" : "Soyez prêt à apprendre les meilleurs pixels pour votre gameplay !"
+    "pixelsTitle2" : "Soyez prêt à apprendre les meilleurs pixels pour votre gameplay !",
+    "sejabem":""
   },
 
   "homeCard": {
@@ -47,6 +48,4 @@
     "adText" : "Mouvement latéral d'un côté à l'autre pour rendre difficile le tir de l'ennemi.",
     "strafingText" : "Déplacez-vous latéralement en gardant le rythme et la précision dans vos mouvements."
   }
-
-
 }
