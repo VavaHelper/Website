@@ -3,6 +3,7 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { useState } from 'react';
 import { CardSkeleton } from './cardSkeleton';
+import { useTranslations } from 'next-intl';
 
 
 export interface CardProps {
@@ -26,6 +27,8 @@ export function Card({
 }: CardProps) {
   const [hovering, setHovering] = useState(false);
 
+  const t = useTranslations('home');
+
   // Variante sem animação (modo skeleton)
   if (disableAnim) {
     const imgSrc = loading && placeholderPath ? placeholderPath : imagePath;
@@ -42,7 +45,7 @@ export function Card({
           <h2 className="text-xl font-semibold mb-2">{title}</h2>
           {loading ? <CardSkeleton /> : <div className="text-white">{informationText}</div>}
           <p className="text-white mt-2">
-            Sejam Bem Vindos ao <span className="text-[#FF5252] font-bold">VavaHelper</span>!
+            Sejam Bem Vindos ao {t('bemvindo')}<span className="text-[#FF5252] font-bold">VavaHelper</span>!
           </p>
         </div>
       </div>
