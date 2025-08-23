@@ -96,7 +96,7 @@ export function Footer() {
             </div>
 
             {/* Title under icons */}
-            <h2 className="text-sm font-medium mt-2 text-neutral-300">Contribuidores</h2>
+            <h2 className="text-sm font-medium mt-2 text-neutral-300">Desenvolvedores</h2>
 
             {/* Mobile hint */}
             <div className="mt-3 w-full md:hidden">
