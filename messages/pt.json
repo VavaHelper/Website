@@ -18,6 +18,9 @@
     "text-button": "Enviar E-mail",
     "login": "Voltar ao login",
     "forgot-password": "Lembrou da senha?"
+  },
+  
+  "movi":{
+    "title1": "GUIDE DE MOUVEMENT COMPLET"
   }
-
 }

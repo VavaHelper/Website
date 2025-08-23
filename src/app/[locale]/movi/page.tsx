@@ -1,10 +1,13 @@
+"use client";
+
 import styles from "./movi.module.css";
 import { Nav } from '@/app/components/nav';
 import { SideBar } from '@/app/components/side-bar';
-import { useTranslations } from "next-intl";
+import { useTranslations } from 'next-intl';
+
 
 export default function Movi() {
-
+  
   const t = useTranslations('movi');
   
   return (
@@ -34,7 +37,7 @@ export default function Movi() {
               />
             </div>
             <div className={styles.meta}>
-              <h2 className={styles.title}>GUIA COMPLETO MOVIMENTAÇÃO</h2>
+              <h2 className={styles.title}>{t("title1")}</h2>
               <p className={styles.description}>
                 Pop Swing, AD AD e Strafing — exercícios e dicas para melhorar sua movimentação.
               </p>

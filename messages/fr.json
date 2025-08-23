@@ -22,5 +22,8 @@
     "title1":"connexion",
     "email":"Courriel",
     "senha":"Mot de passe"
+  },
+  "movi":{
+    "title1": "GUIDE DE MOUVEMENT COMPLET"
   }
 }
