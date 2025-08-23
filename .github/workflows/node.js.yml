@@ -2,9 +2,9 @@ name: Node.js Building CI
 
 on:
   push:
-    branches: [ development ]
+    branches: [development]
   pull_request:
-    branches: [ development ]
+    branches: [development]
 
 jobs:
   build:
@@ -29,13 +29,8 @@ jobs:
           node-version: ${{ matrix.node-version }}
           cache: 'pnpm'
 
-      # opcional: se sua app está em um subdiretório, defina working-directory nas etapas abaixo
-      # exemplo: working-directory: ./apps/web
-
       - name: 📚 Install dependencies
-        run: |
-          pnpm install --no-frozen-lockfile
-        # garante que devDependencies serão instaladas (se você tem NODE_ENV definido em outro lugar)
+        run: pnpm install --no-frozen-lockfile
         env:
           NODE_ENV: development
 
@@ -46,9 +41,7 @@ jobs:
           echo "Listando node_modules/.bin (se existir):"
           ls -la node_modules/.bin || true
           echo "package.json scripts:"
-          cat package.json | jq '.scripts' || true
+          cat package.json || true
 
       - name: 🏗️ Run build
         run: pnpm build
-        # se o seu app está em subpasta:
-        # run: pnpm --filter ./path/to/app build
