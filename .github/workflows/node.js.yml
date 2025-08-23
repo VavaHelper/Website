@@ -30,9 +30,7 @@ jobs:
           cache: 'pnpm'
 
       - name: 📚 Install dependencies
-        run: pnpm install --no-frozen-lockfile
-        env:
-          NODE_ENV: development
+        run: pnpm install
 
       - name: 🧾 Debug mostrar versões e bins
         run: |
@@ -42,6 +40,8 @@ jobs:
           ls -la node_modules/.bin || true
           echo "package.json scripts:"
           cat package.json || true
+          echo "Checando se o Next foi instalado:"
+          pnpm list next || true
 
       - name: 🏗️ Run build
         run: pnpm build
