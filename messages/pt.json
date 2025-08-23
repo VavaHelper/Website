@@ -19,8 +19,30 @@
     "login": "Voltar ao login",
     "forgot-password": "Lembrou da senha?"
   },
+  "login": {
+    "title1":"Tela de login",
+    "email":"Email",
+    "senha":"Senha",
+    "remenber" : "Lembre de mim",
+    "forgotPassword" :"Esqueceu a senha?",
+    "register" : "Não tem uma conta? ",
+    "registerLink" : "  registre-se"
+  },
   
   "movi":{
-    "title1": "GUIDE DE MOUVEMENT COMPLET"
+    "title1": "Guia completo de movimentação",
+    "subTitle1" : "exercícios e dicas para melhorar sua movimentação.",
+    "popSwing": "você continua se movimentando para tirar a precisão de mira do seu oponente.",
+    "adText": "Movimentação lateral para um lado e para o outro para dificultar o tiro do inimigo.",
+    "strafingText": "Se mover lateralmente, mantendo um ritmo e precisão em seus movimentos."
+  },
+  "home":{
+    "agentsTitle":"Aqui você será capaz de aprender detalhadamente sobre todos os agentes!",
+    "moviTitle1": " Aqui você irá aprender tudo sobre como executar a movimentação perfeita com cada agente, seja para jogar sozinho ou em equipe.",
+    "moviTitle2" : "Aprenderá também a realizar o famoso",
+    "moviTitle3" : "em seus adversários!",
+    "pixelsTitle1": "Aqui você se tornará um pró player do personagem de sua preferência!",
+    "pixelsTitle2" : "Esteja preparado para aprender os melhores pixels para sua gameplay!"
+    
   }
 }

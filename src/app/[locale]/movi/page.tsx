@@ -39,7 +39,7 @@ export default function Movi() {
             <div className={styles.meta}>
               <h2 className={styles.title}>{t("title1")}</h2>
               <p className={styles.description}>
-                Pop Swing, AD AD e Strafing — exercícios e dicas para melhorar sua movimentação.
+                Pop Swing, AD AD e Strafing — {t("subTitle1")}
               </p>
 
               <div className={styles.socialIcons} aria-label="Redes sociais">
@@ -77,7 +77,7 @@ export default function Movi() {
               </svg>
               <h3 id="pop-swing" className={styles.cardTitle}>POP SWING</h3>
             </div>
-            <p className={styles.cardDesc}>Pop Swing — você continua se movimentando para tirar a precisão de mira do seu oponente.</p>
+            <p className={styles.cardDesc}>Pop Swing — {t("popSwing")}</p>
           </article>
 
           <article className={styles.card} tabIndex={0} role="article" aria-labelledby="ad-ad">
@@ -87,7 +87,7 @@ export default function Movi() {
               </svg>
               <h3 id="ad-ad" className={styles.cardTitle}>AD AD (A DEAD)</h3>
             </div>
-            <p className={styles.cardDesc}>Movimentação lateral para um lado e para o outro para dificultar o tiro do inimigo.</p>
+            <p className={styles.cardDesc}>{t("adText")}</p>
           </article>
 
           <article className={styles.card} tabIndex={0} role="article" aria-labelledby="strafing">
@@ -97,7 +97,7 @@ export default function Movi() {
               </svg>
               <h3 id="strafing" className={styles.cardTitle}>STRAFING</h3>
             </div>
-            <p className={styles.cardDesc}>Se mover lateralmente, mantendo um ritmo e precisão em seus movimentos.</p>
+            <p className={styles.cardDesc}>{t("strafingText")}</p>
           </article>
         </section>
       </main>

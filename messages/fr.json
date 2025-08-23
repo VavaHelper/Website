@@ -21,9 +21,32 @@
   "login": {
     "title1":"connexion",
     "email":"Courriel",
-    "senha":"Mot de passe"
+    "senha":"Mot de passe",
+    "remenber" : " Souviens-toi de moi",
+    "forgotPassword": "Mot de passe oublié?",
+    "register" : "Vous n'avez pas de compte ?",
+    "registerLink" : "  registre"
+  },
+  "home":{
+    "agentsTitle":"Ici, vous pourrez en apprendre davantage sur tous les agents !",
+    "moviTitle1": "Ici, vous apprendrez tout ce que vous devez savoir pour exécuter le mouvement parfait avec chaque agent, que vous jouiez en solo ou en équipe.",
+    "moviTitle2" : "Vous apprendrez également à réaliser le célèbre",
+    "moviTitle3" : "sur vos adversaires !",
+    "pixelsTitle1": "Ici, vous deviendrez un joueur pro du personnage de votre choix !",
+    "pixelsTitle2" : "Soyez prêt à apprendre les meilleurs pixels pour votre gameplay !"
+  },
+
+  "homeCard": {
+    "cardMassege": "Bienvenue à"
+
   },
   "movi":{
-    "title1": "GUIDE DE MOUVEMENT COMPLET"
+    "title1": "GUIDE DE MOUVEMENT COMPLET",
+    "subTitle1": "Exercices et conseils pour améliorer vos mouvements.",
+    "popSwing": "Vous continuez à bouger pour obtenir la précision de la caméra de votre adversaire.",
+    "adText" : "Mouvement latéral d'un côté à l'autre pour rendre difficile le tir de l'ennemi.",
+    "strafingText" : "Déplacez-vous latéralement en gardant le rythme et la précision dans vos mouvements."
   }
+
+
 }

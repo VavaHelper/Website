@@ -76,16 +76,16 @@ const t = useTranslations('login');
                     
                     <div className={styles.rememberContainer}>
                         <label htmlFor="remember" className={styles.rememberLabel}>
-                            <input type="checkbox" id="remember" className={styles.rememberCheckbox} />Lembrar de mim
+                            <input type="checkbox" id="remember" className={styles.rememberCheckbox} />{t("remenber")}
                         </label>
-                        <a href="/forgot-password" className={styles.forgotLink}>Esqueceu a senha?</a>
+                        <a href="/forgot-password" className={styles.forgotLink}>{t("forgotPassword")}</a>
                     </div>
 
                     <input type="submit" value="★ Entrar" className={styles.submitButton} /> 
                 </form>
 
                 <div className={styles.register}>
-                    <h1>Não tem uma conta? <a className="text-[#FF5252] " href="/register">registre-se</a></h1>
+                    <h1>{t("register")}<a className="text-[#FF5252] " href="/register">{t("registerLink")}</a></h1>
                 </div>
 
             </div>

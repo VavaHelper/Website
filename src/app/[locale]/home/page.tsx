@@ -6,6 +6,7 @@ import { SideBar } from '@/app/components/side-bar';
 import { Card, CardProps } from './components/card';
 import styles from './home.module.css';
 import { Footer } from '@/app/components/footer';
+import { useTranslations } from 'next-intl';
 
 
 
@@ -14,6 +15,8 @@ const getIsNarrow = () =>
   typeof window !== 'undefined' && window.innerWidth <= 1320;
 
 export default function Home() {
+
+    const t = useTranslations('home')
     useEffect(() => {
     // Isso roda só no cliente, então document existe
     document.documentElement.style.overflowY = 'visible';
@@ -26,6 +29,7 @@ export default function Home() {
   const [cards, setCards] = useState<CardProps[]>([]);
   const [loading, setLoading] = useState(true);
   const [isNarrow, setIsNarrow] = useState<boolean>(false);
+  
 
   // Usa layout effect para já definir antes do paint
   useLayoutEffect(() => {
@@ -42,7 +46,7 @@ export default function Home() {
         {
           title: 'Agents',
           imagePath: '/imgs/agents.gif',
-          informationText: <>Aqui você será capaz de aprender detalhadamente sobre todos os agentes!</>,
+          informationText: <>{t('agentsTitle')}</>,
           href: '/skills',
         },
         {
@@ -50,8 +54,8 @@ export default function Home() {
           imagePath: '/imgs/movi.gif',
           informationText: (
             <>
-              Aqui você irá aprender tudo sobre como executar a movimentação perfeita com cada agente, seja para jogar sozinho ou em equipe.<br />
-              Aprenderá também a realizar o famoso <span className="text-[#FF5252]"></span>AD<span className="text-[#FF5252]"></span> em seus adversários!
+              {t('moviTitle1')}<br />
+              {t('moviTitle2')} <span className="text-[#FF5252]"></span>AD<span className="text-[#FF5252]"></span> {t('moviTitle3')}
             </>
           ),
           href: '/movi',
@@ -61,8 +65,8 @@ export default function Home() {
           imagePath: '/imgs/molotov-lineup.png',
           informationText: (
             <>
-              Aqui você se tornará pró player do personagem de sua preferência!<br />
-              Esteja preparado para aprender os melhores pixels para sua gameplay!
+              {t("pixelsTitle1")}<br />
+              {t("pixelsTitle2")}
             </>
           ),
           href: '/pixel',

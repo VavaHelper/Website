@@ -17,5 +17,35 @@
     "text-button": "E-Mail senden",
     "login": "Zurück zum Login",
     "forgot-password": "Passwort wieder eingefallen?"
+  },
+
+  "login": {
+    "title1":"Verbindung",
+    "email":"E-Mail",
+    "senha":"Mot de passe",
+    "remenber" : " Erinnere dich an mich",
+    "forgotPassword": "Passwort vergessen?",
+    "register" : "Sie haben noch kein Konto?",
+    "registerLink" : " registrieren"
+  },
+  "home":{
+    "agentsTitle":"Hier erfahren Sie mehr über alle Agenten!",
+    "moviTitle1": "Hier erfahren Sie alles, was Sie wissen müssen, um mit jedem Agenten den perfekten Zug auszuführen, egal ob Sie alleine oder im Team spielen.",
+    "moviTitle2" : "Sie werden auch lernen, wie man die berühmten",
+    "moviTitle3" : "auf deine Gegner!",
+    "pixelsTitle1": "Hier werden Sie zum Profispieler des Charakters Ihrer Wahl!",
+    "pixelsTitle2" : "Machen Sie sich bereit, die besten Pixel für Ihr Gameplay zu lernen!"
+  },
+
+  "homeCard": {
+    "cardMassege": "Bienvenue à"
+
+  },
+  "movi":{
+    "title1": "VOLLSTÄNDIGER BEWEGUNGSLEITFADEN",
+    "subTitle1": "Übungen und Tipps zur Verbesserung Ihrer Bewegungen.",
+    "popSwing": "Sie bewegen sich weiter, um die Genauigkeit der Kamera Ihres Gegners zu erreichen.",
+    "adText" : "Seitliche Bewegung von einer Seite zur anderen, um dem Feind das Schießen zu erschweren.",
+    "strafingText" : "Bewegen Sie sich seitwärts und achten Sie dabei auf Rhythmus und Präzision in Ihren Bewegungen."
   }
 }
