@@ -1,5 +1,7 @@
 'use client'
 
+import { useTranslations } from "next-intl";
+
 const contributors = [
   {
     name: 'André Felipe',
@@ -49,6 +51,9 @@ const contributors = [
 ];
 
 export function Footer() {
+
+  const f = useTranslations('footer');
+  
   return (
     <footer className="bg-transparent text-white border-t border-neutral-950">
       <div className="container mx-auto px-4 md:px-10 md:pl-[150px] py-6">
@@ -56,18 +61,15 @@ export function Footer() {
           {/* Left: text block */}
           <div className="w-full md:w-2/3 max-w-2xl">
             <p className="text-sm text-neutral-400">
-              Contato:{' '}
-              <a href="mailto:vavahelper@gmail.com" className="text-red-400 hover:underline">vavahelper@gmail.com</a>
+              {f("contato")}{' '}
+              <a href="mailto:vavahelper@gmail.com" className="text-red-400 hover:underline">{f("email")}</a>
             </p>
 
             <p className="mt-4 text-xs text-neutral-500">
-              Este é um projeto feito por fãs para a comunidade de Valorant. Todas as marcas
-              registradas, nomes de personagens, imagens e outros elementos relacionados ao jogo
-              são de propriedade da Riot Games, Inc. Este site não é afiliado, endossado ou
-              patrocinado pela Riot Games de nenhuma forma.
+              {f("title")}
             </p>
 
-            <p className="mt-4 text-xs text-neutral-500">© {new Date().getFullYear()} VavaHelper. Todos os direitos reservados.</p>
+            <p className="mt-4 text-xs text-neutral-500">© {new Date().getFullYear()} {f("direitos")}</p>
           </div>
 
           {/* Right: contributors - avatars first, title below */}
@@ -96,11 +98,11 @@ export function Footer() {
             </div>
 
             {/* Title under icons */}
-            <h2 className="text-sm font-medium mt-2 text-neutral-300">Desenvolvedores</h2>
+            <h2 className="text-sm font-medium mt-2 text-neutral-300">{f("devs")}</h2>
 
             {/* Mobile hint */}
             <div className="mt-3 w-full md:hidden">
-              <p className="text-[10px] text-neutral-500">Toque/pausar em um avatar para ver o nome.</p>
+              <p className="text-[10px] text-neutral-500">{f("info")}</p>
             </div>
           </div>
         </div>

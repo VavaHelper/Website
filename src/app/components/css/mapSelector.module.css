@@ -1,0 +1,80 @@
+/* container */
+.container {
+  display: flex;
+  gap: 12px;
+  padding: 8px 6px;
+  align-items: center;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255,255,255,0.08) transparent;
+}
+
+.container::-webkit-scrollbar { height: 8px; }
+.container::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.06);
+  border-radius: 999px;
+}
+
+/* individual tile - compact version */
+.tile {
+  flex: 0 0 auto;
+  min-width: 50px;      /* largura mínima menor */
+  height: 36px;         /* altura bem menor */
+  border-radius: 6px;
+  border: 0.5px solid rgba(255,255,255,0.08);
+  background: #000;
+  color: #e5e7eb;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+  cursor: pointer;
+  transition: all 120ms ease;
+  font-size: 11px;      /* fonte menor */
+  line-height: 1;
+  white-space: nowrap;
+}
+
+/* label inside */
+.label {
+  font-size: 12px;      /* menor fonte pra caber */
+  line-height: 1;
+  pointer-events: none;
+  padding: 0 4px;
+}
+
+/* hover */
+.tile:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 18px rgba(0,0,0,0.55);
+  border-color: rgba(239,68,68,0.12);
+}
+
+/* selected state */
+.selected {
+  background: linear-gradient(90deg, #ef4444 0%, #dc2626 100%);
+  color: #ffffff;
+  border-color: transparent;
+  box-shadow: 0 10px 30px rgba(239,68,68,0.22);
+  transform: translateY(-1px) scale(1.02);
+}
+
+/* focus (keyboard) */
+.tile:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(239,68,68,0.12), 0 8px 22px rgba(0,0,0,0.55);
+}
+
+/* responsive tweaks (phones) */
+@media (max-width: 420px) {
+  .tile {
+    min-width: 58px;
+    height: 48px;
+    border-radius: 8px;
+  }
+  .label {
+    font-size: 11px;
+  }
+}

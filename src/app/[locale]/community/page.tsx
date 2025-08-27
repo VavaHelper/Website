@@ -8,6 +8,7 @@ import { useRouter, usePathname } from "next/navigation";
 import { language } from "../../../../constants/language"
 import { LanguageSelector } from "@/app/components/languageSelector"
 import Image from 'next/image';
+import MapSelector from "@/app/components/mapSelector"
 
 export default function DashboardPage() {
     const [agentsExpanded, setAgentsExpanded] = useState(true)
@@ -15,6 +16,10 @@ export default function DashboardPage() {
     const [sidebarOpen, setSidebarOpen] = useState(true)
     const [showLanguages, setShowLanguages] = useState(false)
     const [mobileSearchOpen, setMobileSearchOpen] = useState(false)
+
+    // new states for "Show all"
+    const [agentsShowingAll, setAgentsShowingAll] = useState(false)
+    const [mapsShowingAll, setMapsShowingAll] = useState(false)
 
     const inputRef = useRef<HTMLInputElement>(null)
 
@@ -24,8 +29,13 @@ export default function DashboardPage() {
         }
     }, [mobileSearchOpen])
 
-    const agents = ["Duan", "Neon", "Cline", "Fade"]
-    const maps = ["Lotus", "Sunset", "Haven", "Breeze"]
+    // show a short list by default
+    const agents = ["Duan", "Neon"]
+    // full lists (for "Show all")
+    const allAgents = ["Duan", "Neon", "Cline", "Fade", "Omen", "Viper", "Sova", "Jett"]
+
+    const maps = ["Lotus", "Sunset"]
+    const allMaps = ["Lotus", "Sunset", "Haven", "Breeze", "Ascent", "Split", "Bind", "Icebox"]
 
     const contentCards = [
         { title: "Omen - Bombsite A - Breeze", views: "2.5k views", date: "2024", videoId: "dQw4w9WgXcQ" },
@@ -167,15 +177,26 @@ export default function DashboardPage() {
                     </button>
                     {agentsExpanded && (
                     <div className="ml-6 space-y-1">
-                        {agents.map((agent) => (
+                        {(agentsShowingAll ? allAgents : agents).map((agent) => (
                         <button key={agent} className={styles.navButton}>
                             <div className="w-3 h-3 bg-gray-600 rounded-full mr-3"></div>
                             {agent}
                         </button>
                         ))}
-                        <button className={`${styles.navButton} ${styles.navButtonSecondary}`}>
-                        <ChevronDown className="h-3 w-3 mr-3" />
-                        Show all
+                        <button
+                          type="button"
+                          className={`${styles.navButton} ${styles.navButtonSecondary}`}
+                          onClick={() => setAgentsShowingAll(!agentsShowingAll)}
+                        >
+                          <ChevronDown
+                            className="h-3 w-3 mr-3"
+                            // rotate visually to indicate toggle; inline style works without Tailwind
+                            style={{
+                              transform: agentsShowingAll ? "rotate(180deg)" : "none",
+                              transition: "transform 0.18s ease",
+                            }}
+                          />
+                          {agentsShowingAll ? "Show less" : "Show all"}
                         </button>
                     </div>
                     )}
@@ -191,15 +212,25 @@ export default function DashboardPage() {
                     </button>
                     {mapsExpanded && (
                     <div className="ml-6 space-y-1">
-                        {maps.map((map) => (
+                        {(mapsShowingAll ? allMaps : maps).map((map) => (
                         <button key={map} className={styles.navButton}>
                             <div className="w-3 h-3 bg-gray-600 rounded-full mr-3"></div>
                             {map}
                         </button>
                         ))}
-                        <button className={`${styles.navButton} ${styles.navButtonSecondary}`}>
-                        <ChevronDown className="h-3 w-3 mr-3" />
-                        Show all
+                        <button
+                          type="button"
+                          className={`${styles.navButton} ${styles.navButtonSecondary}`}
+                          onClick={() => setMapsShowingAll(!mapsShowingAll)}
+                        >
+                          <ChevronDown
+                            className="h-3 w-3 mr-3"
+                            style={{
+                              transform: mapsShowingAll ? "rotate(180deg)" : "none",
+                              transition: "transform 0.18s ease",
+                            }}
+                          />
+                          {mapsShowingAll ? "Show less" : "Show all"}
                         </button>
                     </div>
                     )}
@@ -209,6 +240,7 @@ export default function DashboardPage() {
             </aside>
 
             <main className={styles.main}>
+            <MapSelector/>
             <div className={`${styles.grid} ${sidebarOpen ? "" : styles.gridExpanded}`}>
                 {contentCards.map((card, index) => (
                 <div key={index} className={styles.card}>

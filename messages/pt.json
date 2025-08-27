@@ -9,7 +9,6 @@
     "sentinels": "Sentinelas",
     "placeholder": "Sem imagem"
   },
-
   "forgot":{
     "title1": "Informe seu e-mail de cadastrado",
     "title2": "Envio de recuperação de senha por e-mail",
@@ -28,7 +27,6 @@
     "register" : "Não tem uma conta? ",
     "registerLink" : "  registre-se"
   },
-  
   "movi":{
     "title1": "Guia completo de movimentação",
     "subTitle1" : "exercícios e dicas para melhorar sua movimentação.",
@@ -44,5 +42,13 @@
     "pixelsTitle1": "Aqui você se tornará um pró player do personagem de sua preferência!",
     "pixelsTitle2" : "Esteja preparado para aprender os melhores pixels para sua gameplay!",
     "sejabem": "Sejam Bem Vindos ao"    
+  },
+  "footer":{
+    "contato":"Contato:",
+    "email":"vavahelper@gmail.com",
+    "title":"Este é um projeto feito por fãs para a comunidade de Valorant. Todas as marcas registradas, nomes de personagens, imagens e outros elementos relacionados ao jogo são de propriedade da Riot Games, Inc. Este site não é afiliado, endossado ou patrocinado pela Riot Games de nenhuma forma.",
+    "direitos":"VavaHelper. Todos os direitos reservados.",
+    "devs":"Desenvolvedores",
+    "info":"Toque/pausar em um avatar para ver o nome."
   }
 }
