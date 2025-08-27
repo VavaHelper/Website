@@ -1,5 +1,5 @@
 "use client"
-
+ 
 import type React from "react"
 import { useState, useRef, useEffect } from "react"
 import { Menu, Search, User, Home, Star, Bell, ChevronDown, ChevronRight } from "lucide-react"
