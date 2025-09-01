@@ -19,7 +19,7 @@
     "forgot-password": "Lembrou da senha?"
   },
   "login": {
-    "title1":"Tela de login",
+    "title1":"Login",
     "email":"Email",
     "senha":"Senha",
     "remenber" : "Lembre de mim",
@@ -50,5 +50,36 @@
     "direitos":"VavaHelper. Todos os direitos reservados.",
     "devs":"Desenvolvedores",
     "info":"Toque/pausar em um avatar para ver o nome."
+  },
+  "agents": {
+    "names": {
+      "1": "Sova",
+      "2": "Deadlock",
+      "3": "Reyna",
+      "4": "Chamber",
+      "5": "Raze",
+      "6": "Tejo",
+      "7": "Gekko",
+      "8": "Fade",
+      "9": "KAY/0",
+      "10": "Skye",
+      "11": "Breach",
+      "12": "WayLay",
+      "13": "Neon",
+      "14": "Iso",
+      "15": "Phoenix",
+      "16": "Jett",
+      "17": "Yoru",
+      "18": "Brimstone",
+      "19": "Astra",
+      "20": "Harbor",
+      "21": "Omen",
+      "22": "Viper",
+      "23": "KillJoy",
+      "24": "Sage",
+      "25": "Chyper",
+      "26": "Vyse",
+      "27": "Clove"
+    }
   }
 }

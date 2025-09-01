@@ -47,7 +47,7 @@ export default function Home() {
           title: 'Agents',
           imagePath: '/imgs/agents.gif',
           informationText: <>{t('agentsTitle')}</>,
-          href: '/skills',
+          href: '/agents',
         },
         {
           title: 'Movi',

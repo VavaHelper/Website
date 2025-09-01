@@ -22,6 +22,16 @@ export default function DashboardPage() {
     const [mapsShowingAll, setMapsShowingAll] = useState(false)
 
     const inputRef = useRef<HTMLInputElement>(null)
+    
+    const route3 = useRouter();
+
+    useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+        route3.replace("/login"); // <-- aqui usa route3
+    }
+    }, [route3]);
+
 
     useEffect(() => {
         if (mobileSearchOpen && inputRef.current) {
@@ -71,6 +81,8 @@ export default function DashboardPage() {
         setMobileSearchOpen(false)
     }
 
+    const router2 = useRouter();
+
     return (
         <div className={styles.container}>
         <header className={styles.header}>
@@ -78,7 +90,7 @@ export default function DashboardPage() {
             <button className={styles.button} onClick={() => setSidebarOpen(!sidebarOpen)}>
                 <Menu className="h-5 w-5" />
             </button>
-            <div className={styles.logo}>
+            <div onClick={() => router2.push("/community")} className={styles.logo} style={{ cursor: "pointer" }}>
                 <div className={styles.logoIcon}>
                 <Image
                     src="/imgs/favicon.png"
@@ -149,7 +161,7 @@ export default function DashboardPage() {
             <aside className={`${styles.sidebar} ${sidebarOpen ? styles.sidebarOpen : styles.sidebarClosed}`}>
             <div className={styles.sidebarContent}>
                 <nav className={styles.nav}>
-                <button className={styles.navButton}>
+                <button onClick={() => router2.push("/community")} className={styles.navButton}>
                     <Home className={styles.navIcon} />
                     Home
                 </button>
@@ -243,29 +255,29 @@ export default function DashboardPage() {
             <MapSelector/>
             <div className={`${styles.grid} ${sidebarOpen ? "" : styles.gridExpanded}`}>
                 {contentCards.map((card, index) => (
-                <div key={index} className={styles.card}>
-                    <div className={styles.aspectVideo}>
-                    <iframe
-                        src={`https://www.youtube.com/embed/${card.videoId}`}
-                        title={card.title}
-                        className="w-full h-full"
-                        frameBorder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowFullScreen
-                    />
-                    </div>
-                    <div className={styles.cardContent}>
-                    <div className={styles.cardHeader}>
-                        <div className={styles.avatar}>
-                            <span className="text-white text-xs font-bold">D</span>
+                    <div key={index} className={styles.card} onClick={() => router.push(`/video/${card.videoId}`)}>
+                        <div className={styles.aspectVideo}>
+                            <img
+                            src={`https://img.youtube.com/vi/${card.videoId}/hqdefault.jpg`}
+                            alt={card.title}
+                            className="w-full h-full object-cover rounded-lg cursor-pointer"
+                            />
+                            <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+  <span className="text-white text-4xl">▶</span>
+</div>
                         </div>
-                        <div className={`${styles.flex1} ${styles.minW0}`}>
-                        <h3 className={styles.cardTitle}>{card.title}</h3>
-                        <p className={styles.cardMeta}>
-                            {card.views} • {card.date}
-                        </p>
+                        <div className={styles.cardContent}>
+                            <div className={styles.cardHeader}>
+                            <div className={styles.avatar}>
+                                <span className="text-white text-xs font-bold">D</span>
+                            </div>
+                            <div className={`${styles.flex1} ${styles.minW0}`}>
+                                <h3 className={styles.cardTitle}>{card.title}</h3>
+                                <p className={styles.cardMeta}>
+                                {card.views} • {card.date}
+                                </p>
+                            </div>
                         </div>
-                    </div>
                     </div>
                 </div>
                 ))}

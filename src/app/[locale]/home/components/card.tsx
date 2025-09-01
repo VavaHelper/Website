@@ -94,7 +94,7 @@ export function Card({
               initial={{ x: '-100%', opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
               transition={{ duration: 0.2 }}
-              className="h-full w-[250px] bg-[#2F2F2F] rounded-r shadow-lg p-4 flex flex-col justify-center"
+              className="h-full w-[250px] bg-[#2F2F2F1A] rounded-r shadow-lg p-4 flex flex-col justify-center"
             >
               <motion.div
                 key="panel-content"

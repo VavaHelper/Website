@@ -58,7 +58,7 @@ export default function Login() {
     <div className={styles.global}>
       <div className={styles.screen1}>
         <div className={styles.logoWrapper}>
-          <Link href={'/community'}>
+          <Link href={'/home'}>
             <Image
               src="/imgs/favicon.png"
               alt="avaHelper"
@@ -67,7 +67,7 @@ export default function Login() {
               className="filter brightness-0 invert"
             />
           </Link>
-          <Link href={'/community'}>
+          <Link href={'/home'}>
             <h1 className={styles.logoTitle}>avaHelper</h1>
           </Link>
         </div>
@@ -84,7 +84,7 @@ export default function Login() {
 
       <div className={styles.screen2}>
         <div className={styles.headerLogo}>
-          <Link href={'/community'}>
+          <Link href={'/home'}>
             <Image
               src="/imgs/favicon.png"
               alt="avaHelper"
@@ -118,7 +118,7 @@ export default function Login() {
         </form>
 
         {result && (
-          <p style={{ marginTop: "10px", color: result.startsWith("Erro") ? "red" : "green" }}>
+          <p className={`${styles.result} ${result.startsWith("Erro") ? 'error' : ''}`} role="alert" aria-live="polite">
             {result}
           </p>
         )}

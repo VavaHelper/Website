@@ -47,5 +47,36 @@
     "popSwing": "Sie bewegen sich weiter, um die Genauigkeit der Kamera Ihres Gegners zu erreichen.",
     "adText" : "Seitliche Bewegung von einer Seite zur anderen, um dem Feind das Schießen zu erschweren.",
     "strafingText" : "Bewegen Sie sich seitwärts und achten Sie dabei auf Rhythmus und Präzision in Ihren Bewegungen."
+  },
+  "agents": {
+    "names": {
+      "1": "Sova",
+      "2": "Deadlock",
+      "3": "Reyna",
+      "4": "Chamber",
+      "5": "Raze",
+      "6": "Tejo",
+      "7": "Gekko",
+      "8": "Fade",
+      "9": "KAY/O",
+      "10": "Skye",
+      "11": "Breach",
+      "12": "WayLay",
+      "13": "Neon",
+      "14": "Iso",
+      "15": "Phoenix",
+      "16": "Jett",
+      "17": "Yoru",
+      "18": "Brimstone",
+      "19": "Astra",
+      "20": "Harbor",
+      "21": "Omen",
+      "22": "Viper",
+      "23": "Killjoy",
+      "24": "Sage",
+      "25": "Cypher",
+      "26": "Vyse",
+      "27": "Clove"
+    }
   }
 }

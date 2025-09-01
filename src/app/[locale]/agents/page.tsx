@@ -1,5 +1,7 @@
 'use client';
 
+// File: app/skills/page.tsx (ou Skills.tsx)
+
 import styles from './skills.module.css';
 import { Nav } from '@/app/components/nav';
 import { SideBar } from '@/app/components/side-bar';
@@ -8,7 +10,10 @@ import { getAllAgents } from '../../services/agentService';
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 
-document.documentElement.style.overflowY = 'hidden';
+// OBS: Cuidado ao usar document.* no React — aqui mantive sua linha original.
+if (typeof document !== 'undefined') {
+  document.documentElement.style.overflowY = 'hidden';
+}
 
 interface Agent {
   id: number;
@@ -24,7 +29,10 @@ export default function Skills() {
   const [agents, setAgents] = useState<Agent[]>([]);
   const [selectedFunction, setSelectedFunction] = useState<string>('all');
 
+  // Traduções do layout da página (title, labels, etc.)
   const t = useTranslations('Skills');
+  // Namespace separado para nomes dos agentes
+  const agentsT = useTranslations('agents');
 
   useEffect(() => {
     async function fetchAgents() {
@@ -41,6 +49,7 @@ export default function Skills() {
     fetchAgents();
   }, []);
 
+  // Map local para comparar as funções (mantive seu roleMap)
   const roleMap: { [key: string]: string } = {
     duelists: 'Duelista',
     initiators: 'Iniciador',
@@ -60,6 +69,10 @@ export default function Skills() {
     { key: 'controllers', label: t('controllers') },
     { key: 'sentinels', label: t('sentinels') },
   ];
+
+  // Pegamos o objeto de nomes dos agents a partir das mensagens (agents.names)
+  // Observação: next-intl t.raw pode retornar any — aqui fazemos um cast seguro.
+  const names = agentsT.raw('names') as Record<string, string> | undefined;
 
   return (
     <div className={styles.global}>
@@ -90,7 +103,7 @@ export default function Skills() {
 
         <div className={styles.boxGrid}>
           {agents.length === 0 ? (
-            <p className="text-gray-400">Carregando agentes...</p>
+            <p className="text-gray-400">{t('loading') || 'Carregando agentes...'}</p>
           ) : (
             filteredAgents.map((agent) => (
               <div key={agent.id}>
@@ -108,7 +121,11 @@ export default function Skills() {
                       <div className="text-gray-500 text-center">{t('placeholder')}</div>
                     )}
                   </div>
-                  <h1 className={styles.boxTitle}>{agent.name}</h1>
+
+                  {/* Aqui usamos o arquivo de tradução 'agents' --> names[agent.id] */}
+                  <h1 className={styles.boxTitle}>
+                    {names?.[String(agent.id)] ?? agent.name}
+                  </h1>
                 </div>
               </div>
             ))
