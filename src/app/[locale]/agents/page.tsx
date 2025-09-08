@@ -1,7 +1,5 @@
 'use client';
 
-// File: app/skills/page.tsx (ou Skills.tsx)
-
 import styles from './skills.module.css';
 import { Nav } from '@/app/components/nav';
 import { SideBar } from '@/app/components/side-bar';
@@ -10,10 +8,8 @@ import { getAllAgents } from '../../services/agentService';
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 
-// OBS: Cuidado ao usar document.* no React — aqui mantive sua linha original.
-if (typeof document !== 'undefined') {
-  document.documentElement.style.overflowY = 'hidden';
-}
+import AgentModal from './modal'; 
+import { getAgentWithSkills } from '../../services/agentService';
 
 interface Agent {
   id: number;
@@ -29,9 +25,12 @@ export default function Skills() {
   const [agents, setAgents] = useState<Agent[]>([]);
   const [selectedFunction, setSelectedFunction] = useState<string>('all');
 
-  // Traduções do layout da página (title, labels, etc.)
+  // Modal control
+  const [modalOpen, setModalOpen] = useState(false);
+  const [modalAgentName, setModalAgentName] = useState<string | null>(null);
+  const [pageOverflowBackup, setPageOverflowBackup] = useState<string | null>(null);
+
   const t = useTranslations('Skills');
-  // Namespace separado para nomes dos agentes
   const agentsT = useTranslations('agents');
 
   useEffect(() => {
@@ -40,16 +39,27 @@ export default function Skills() {
         const result = await getAllAgents();
         setAgents(result);
       } catch (e: unknown) {
-        if (e instanceof Error) {
-          console.error(e.message);
-        }
+        if (e instanceof Error) console.error(e.message);
       }
     }
-
     fetchAgents();
   }, []);
 
-  // Map local para comparar as funções (mantive seu roleMap)
+  // controlar overflow apenas quando modal abrir
+  useEffect(() => {
+    if (typeof document === 'undefined') return;
+    if (modalOpen) {
+      // salvar estado anterior e esconder scroll vertical
+      setPageOverflowBackup(document.documentElement.style.overflowY || '');
+      document.documentElement.style.overflowY = 'hidden';
+    } else {
+      // restaurar
+      document.documentElement.style.overflowY = pageOverflowBackup ?? '';
+      setPageOverflowBackup(null);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [modalOpen]);
+
   const roleMap: { [key: string]: string } = {
     duelists: 'Duelista',
     initiators: 'Iniciador',
@@ -70,9 +80,18 @@ export default function Skills() {
     { key: 'sentinels', label: t('sentinels') },
   ];
 
-  // Pegamos o objeto de nomes dos agents a partir das mensagens (agents.names)
-  // Observação: next-intl t.raw pode retornar any — aqui fazemos um cast seguro.
   const names = agentsT.raw('names') as Record<string, string> | undefined;
+
+  // abrir modal passando o nome do agent (como sua API espera)
+  function openAgentModal(agentName: string) {
+    setModalAgentName(agentName);
+    setModalOpen(true);
+  }
+
+  function closeAgentModal() {
+    setModalOpen(false);
+    setModalAgentName(null);
+  }
 
   return (
     <div className={styles.global}>
@@ -107,7 +126,14 @@ export default function Skills() {
           ) : (
             filteredAgents.map((agent) => (
               <div key={agent.id}>
-                <div className={styles.card}>
+                <div
+                  className={styles.card}
+                  // abrindo modal ao clicar no card (pode trocar para um botão específico se preferir)
+                  onClick={() => openAgentModal(agent.name)}
+                  role="button"
+                  tabIndex={0}
+                  onKeyDown={(e) => e.key === 'Enter' && openAgentModal(agent.name)}
+                >
                   <div className={styles.box}>
                     {agent.imgAgent?.trim() ? (
                       <Image
@@ -122,7 +148,6 @@ export default function Skills() {
                     )}
                   </div>
 
-                  {/* Aqui usamos o arquivo de tradução 'agents' --> names[agent.id] */}
                   <h1 className={styles.boxTitle}>
                     {names?.[String(agent.id)] ?? agent.name}
                   </h1>
@@ -132,6 +157,14 @@ export default function Skills() {
           )}
         </div>
       </div>
+
+      {/* AgentModal: passe o nome e o service getAgentWithSkills */}
+      <AgentModal
+        name={modalAgentName ?? undefined}
+        isOpen={modalOpen}
+        onClose={closeAgentModal}
+        getAgentWithSkills={getAgentWithSkills}
+      />
     </div>
   );
 }
