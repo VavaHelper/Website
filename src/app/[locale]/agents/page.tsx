@@ -164,6 +164,8 @@ export default function Skills() {
         isOpen={modalOpen}
         onClose={closeAgentModal}
         getAgentWithSkills={getAgentWithSkills}
+        headerHeight="72px"
+        sidebarWidth="120px"
       />
     </div>
   );

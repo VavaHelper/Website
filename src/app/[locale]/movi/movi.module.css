@@ -1,6 +1,6 @@
 .container {
   margin-left: 300px; /* espaço sidebar */
-  margin-top: 60px;   /* menos espaço em cima */
+  margin-top: 60px; /* menos espaço em cima */
   padding: 2rem;
   display: flex;
   flex-direction: column;
@@ -8,11 +8,11 @@
 }
 
 html {
-    overflow: hidden;
+  overflow: hidden;
 }
 
-html h2{
-    color: #ff5252;
+html h2 {
+  color: #ff5252;
 }
 
 .header h1 {
@@ -36,12 +36,24 @@ html h2{
   position: relative;
   border-radius: 12px;
   padding: 2rem;
-  box-shadow: 0 8px 30px rgba(0,0,0,0.45);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.45);
   color: #fff;
   display: flex;
   flex-direction: column;
   gap: 1rem;
   z-index: 0;
+}
+
+@keyframes windFloat {
+  0%   { transform: translateX(0) translateY(0) rotate(-36deg); }
+  50%  { transform: translateX(12px) translateY(-4px) rotate(-38deg); }
+  100% { transform: translateX(0) translateY(0) rotate(-36deg); }
+}
+
+@keyframes windFloat2 {
+  0%   { transform: translateX(0) translateY(0); }
+  50%  { transform: translateX(-10px) translateY(6px); }
+  100% { transform: translateX(0) translateY(0); }
 }
 
 .nuvemImage2 {
@@ -53,6 +65,7 @@ html h2{
   z-index: -1;
   pointer-events: none;
   user-select: none;
+  animation: windFloat2 7s ease-in-out infinite;
 }
 
 .thumbIframe {
@@ -84,21 +97,22 @@ html h2{
   display: flex;
   gap: 0.6rem;
   margin-top: 0.25rem;
+  align-items: center;
 }
 .icon {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 36px;
-    height: 36px;
-    border-radius: 8px;
-    background: rgba(255,255,255,0.06);
-    text-decoration: none;
-    transition: transform 0.12s ease, background 0.12s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.06);
+  text-decoration: none;
+  transition: transform 0.12s ease, background 0.12s ease;
 }
 .icon:hover {
-    transform: translateY(-3px);
-    background: rgba(255,255,255,0.09);
+  transform: translateY(-3px);
+  background: rgba(255, 255, 255, 0.09);
 }
 
 /* wrapper da imagem grande */
@@ -131,6 +145,7 @@ html h2{
   pointer-events: none;
   user-select: none;
   transform: rotate(-36deg);
+  animation: windFloat 6s ease-in-out infinite;
 }
 
 /* GRID */
@@ -150,7 +165,8 @@ html h2{
   color: #ff5252;
   box-shadow: var(--shadow);
   border-left: 4px solid transparent;
-  transition: transform .16s cubic-bezier(.2,.9,.2,1), box-shadow .16s, border-left-color .16s;
+  transition: transform 0.16s cubic-bezier(0.2, 0.9, 0.2, 1), box-shadow 0.16s,
+    border-left-color 0.16s;
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
@@ -161,11 +177,27 @@ html h2{
   outline: none; /* foco gerenciado por :focus-visible */
 }
 
+@keyframes particles {
+  from { transform: translateX(0) translateY(0); opacity: 0; }
+  20% { opacity: 0.4; }
+  80% { opacity: 0.4; }
+  to { transform: translateX(200px) translateY(-50px); opacity: 0; }
+}
+
+.particle {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background: rgba(255,255,255,0.6);
+  border-radius: 50%;
+  animation: particles 6s linear infinite;
+}
+
 /* hover / focus */
 .card:hover,
 .card:focus-visible {
   transform: translateY(-6px);
-  box-shadow: 0 18px 40px rgba(0,0,0,0.6);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.6);
   border-left-color: var(--accent);
 }
 
@@ -175,11 +207,17 @@ html h2{
   position: absolute;
   inset: 0;
   pointer-events: none;
-  background: linear-gradient(120deg, rgba(255,255,255,0.02), transparent 30%);
+  background: linear-gradient(
+    120deg,
+    rgba(255, 255, 255, 0.02),
+    transparent 30%
+  );
   opacity: 0;
-  transition: opacity .2s;
+  transition: opacity 0.2s;
 }
-.card:hover::after { opacity: 1; }
+.card:hover::after {
+  opacity: 1;
+}
 
 /* cabeçalho do card */
 .cardHead {
@@ -213,67 +251,83 @@ html h2{
 .cardDesc {
   margin: 0;
   font-size: 0.95rem;
-  color: rgba(255,255,255,0.9);
+  color: rgba(255, 255, 255, 0.9);
   line-height: 1.35;
 }
 
 /* a11y: foco por teclado */
 .card:focus-visible {
-  box-shadow: 0 0 0 3px rgba(255,82,82,0.12), 0 18px 40px rgba(0,0,0,0.6);
+  box-shadow: 0 0 0 3px rgba(255, 82, 82, 0.12), 0 18px 40px rgba(0, 0, 0, 0.6);
   border-left-color: var(--accent);
 }
 
 /* animação de entrada (staggered) */
 @keyframes fadeUp {
-  from { opacity: 0; transform: translateY(10px); }
-  to   { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 .card {
-  animation: fadeUp .42s ease both;
+  animation: fadeUp 0.42s ease both;
 }
-.card:nth-child(1){ animation-delay: 0s; }
-.card:nth-child(2){ animation-delay: .06s; }
-.card:nth-child(3){ animation-delay: .12s; }
-
+.card:nth-child(1) {
+  animation-delay: 0s;
+}
+.card:nth-child(2) {
+  animation-delay: 0.06s;
+}
+.card:nth-child(3) {
+  animation-delay: 0.12s;
+}
 
 @media (max-width: 768px) {
-  .cardGrid { grid-template-columns: 1fr; }
-  .card { min-height: auto; display: grid;}
+  .cardGrid {
+    grid-template-columns: 1fr;
+  }
+  .card {
+    min-height: auto;
+    display: grid;
+  }
 }
 
 /* seu breakpoint menor */
 @media (max-width: 768px) {
-    .container {
-      margin-top: 0px !important;
-      padding: 1rem;
-      margin-left: 0px !important;
-    }
+  .container {
+    margin-top: 0px !important;
+    padding: 1rem;
+    margin-left: 0px !important;
+  }
 
-    .layout {
-      grid-template-columns: 1fr; /* tudo em 1 coluna */
-      gap: 1rem;
-    }
+  .layout {
+    grid-template-columns: 1fr; /* tudo em 1 coluna */
+    gap: 1rem;
+  }
 
-    /* reforça que a imagem direita não aparece em telas pequenas */
-    .heroWrap {
-        display: none;
-    }
+  /* reforça que a imagem direita não aparece em telas pequenas */
+  .heroWrap {
+    display: none;
+  }
 
-    .thumbIframe {
-      height: 200px; /* vídeo menor em celular */
-    }
+  .thumbIframe {
+    height: 200px; /* vídeo menor em celular */
+  }
 
-    /* cardGrid continua visível (1 coluna) */
-    .cardGrid {
-      display: grid;
-      grid-template-columns: 1fr; /* cards 1 por linha */
-      gap: 1rem;
-      margin-top: 1rem;
-    }
-    .card {
-      min-height: auto;
-      padding: 1rem;
-    }
+  /* cardGrid continua visível (1 coluna) */
+  .cardGrid {
+    display: grid;
+    grid-template-columns: 1fr; /* cards 1 por linha */
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+  .card {
+    min-height: auto;
+    padding: 1rem;
+  }
 }
 
 @media (max-height: 800px) {
@@ -286,71 +340,73 @@ html h2{
   }
 }
 
-
 /* quando a viewport ficar pequena, escondemos a imagem pra evitar sobreposição */
 @media (max-width: 1000px) {
-    .layout {
-        grid-template-columns: 1fr; /* empilha em 1 coluna */
-    }
-    .heroWrap {
-        display: none;  /* oculta a imagem fixa em telas pequenas */
-    }
+  .layout {
+    grid-template-columns: 1fr; /* empilha em 1 coluna */
+  }
+  .heroWrap {
+    display: none; /* oculta a imagem fixa em telas pequenas */
+  }
 
-    /* cards aparecem */
-    .cardGrid {
-        display: grid;
-        grid-template-columns: 1fr;
-    }
+  /* cards aparecem */
+  .cardGrid {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
 
-    .nuvemImage2 {
-      display: none ;
-    }
+  .nuvemImage2 {
+    display: none;
+  }
 
-    .container {
-      margin-top: 20px;
-    }
+  .container {
+    margin-top: 20px;
+  }
 }
 
 /* responsivo: empilha tudo e remove a imagem grande quando a viewport fica pequena */
 @media (max-width: 1100px) {
+  html {
+    overflow: visible;
+  }
+
+  .layout {
+    grid-template-columns: 1fr;
+  }
+
+  .heroWrap {
+    display: none;
+  }
+
+  .leftCard {
+    order: 1;
+  }
+
+  .cardGrid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
     html {
-        overflow: visible;
+      overflow: visible;
     }
+  }
 
-    .layout {
-      grid-template-columns: 1fr;
-    }
+  .heroWrap {
+    display: none;
+  }
 
-    .heroWrap {
-      display: none;
-    }
-
-    .leftCard {
-        order: 1;
-    }
-
-    .cardGrid {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr); 
-        html { overflow: visible;}
-    }
-
-    .heroWrap {
-      display: none;
-    }
-
-    .container {
-      margin-left: 120px; /* sidebar */
-      margin-top: 80px;
-    }
+  .container {
+    margin-left: 120px; /* sidebar */
+    margin-top: 80px;
+  }
 }
 
 /* ajustes para telas muito grandes (opcional): aumenta a imagem fixa se quiser */
 @media (min-width: 1600px) {
-    .layout {
-        grid-template-columns: minmax(420px, 1fr) 640px; /* imagem maior em telas muito largas */
-    }
-    .heroWrap, .heroImage {
-        width: 640px;
-    }
+  .layout {
+    grid-template-columns: minmax(420px, 1fr) 640px; /* imagem maior em telas muito largas */
+  }
+  .heroWrap,
+  .heroImage {
+    width: 640px;
+  }
 }
