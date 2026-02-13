@@ -29,9 +29,9 @@ const contributors = [
     avatar: 'https://github.com/matheus-rmds.png',
   },
   {
-    name: 'Bitwise Star',
-    github: 'https://github.com/bitwise-star',
-    avatar: 'https://github.com/bitwise-star.png',
+    name: 'Alice Dev',
+    github: 'https://github.com/star-alice',
+    avatar: 'https://github.com/star-alice.png',
   },
   {
     name: 'Erik Devel',
@@ -40,8 +40,8 @@ const contributors = [
   },
   {
     name: 'Igor Araujo',
-    github: 'https://github.com/IGR-cK',
-    avatar: 'https://github.com/IGR-cK.png',
+    github: 'https://github.com/igoraraujocunha',
+    avatar: 'https://github.com/igoraraujocunha.png',
   },
   {
     name: 'Rafael Gomes',

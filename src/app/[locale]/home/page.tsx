@@ -1,112 +1,90 @@
 "use client";
 
-import { useEffect, useLayoutEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { Nav } from '@/app/components/nav';
 import { SideBar } from '@/app/components/side-bar';
 import { Card, CardProps } from './components/card';
 import styles from './home.module.css';
 import { Footer } from '@/app/components/footer';
 import { useTranslations } from 'next-intl';
-
-
-
-// Função utilitária para checar largura
-const getIsNarrow = () =>
-  typeof window !== 'undefined' && window.innerWidth <= 1320;
+import { Link } from '@/i18n/navigation';
 
 export default function Home() {
+  const t = useTranslations('home');
 
-    const t = useTranslations('home')
-    useEffect(() => {
-    // Isso roda só no cliente, então document existe
-    document.documentElement.style.overflowY = 'visible';
-
-    // Opcional: limpar o estilo quando o componente desmontar
-    return () => {
-      document.documentElement.style.overflowY = '';
-    };
-  }, []);
   const [cards, setCards] = useState<CardProps[]>([]);
   const [loading, setLoading] = useState(true);
-  const [isNarrow, setIsNarrow] = useState<boolean>(false);
-  
 
-  // Usa layout effect para já definir antes do paint
-  useLayoutEffect(() => {
-    const checkWidth = () => setIsNarrow(getIsNarrow());
-    checkWidth();
-    window.addEventListener('resize', checkWidth);
-    return () => window.removeEventListener('resize', checkWidth);
-  }, []);
+  const mappedCards = useMemo<CardProps[]>(
+    () => [
+      {
+        title: 'Agents',
+        imagePath: '/imgs/agents.gif',
+        informationText: t('agentsTitle'),
+        href: '/agents',
+      },
+      {
+        title: 'Movi',
+        imagePath: '/imgs/movi.gif',
+        informationText: `${t('moviTitle1')} ${t('moviTitle2')} AD AD ${t('moviTitle3')}`,
+        href: '/movi',
+      },
+      {
+        title: 'Pixel',
+        imagePath: '/imgs/molotov-lineup.png',
+        informationText: `${t('pixelsTitle1')} ${t('pixelsTitle2')}`,
+        href: '/pixel',
+      },
+    ],
+    [t]
+  );
 
-  // Simula fetch de API
-  useLayoutEffect(() => {
+  useEffect(() => {
     const timer = setTimeout(() => {
-      setCards([
-        {
-          title: 'Agents',
-          imagePath: '/imgs/agents.gif',
-          informationText: <>{t('agentsTitle')}</>,
-          href: '/agents',
-        },
-        {
-          title: 'Movi',
-          imagePath: '/imgs/movi.gif',
-          informationText: (
-            <>
-              {t('moviTitle1')}<br />
-              {t('moviTitle2')} <span className="text-[#FF5252]"></span>AD<span className="text-[#FF5252]"></span> {t('moviTitle3')}
-            </>
-          ),
-          href: '/movi',
-        },
-        {
-          title: 'Pixel',
-          imagePath: '/imgs/molotov-lineup.png',
-          informationText: (
-            <>
-              {t("pixelsTitle1")}<br />
-              {t("pixelsTitle2")}
-            </>
-          ),
-          href: '/pixel',
-        },
-      ]);
+      setCards(mappedCards);
       setLoading(false);
-    }, 1500);
+    }, 650);
     return () => clearTimeout(timer);
-  }, []);
+  }, [mappedCards]);
 
   return (
-    <main className="relative min-h-screen flex flex-col">
+    <main>
       <Nav />
-      <div className="flex flex-1">
+      <div className="page-content with-sidebar">
         <SideBar />
-          <div className="flex-1 flex flex-col justify-center items-center p-4">
-            <div
-              className={
-                isNarrow
-                  ? 'flex flex-col items-center gap-8 mt-18'
-                  : 'flex flex-wrap justify-center gap-6 mt-18'
-              }
-            >
-            
-              {(loading ? Array(3).fill({}) : cards).map((card, idx) => (
-                <Card
-                  key={card.title ?? idx}
-                  title={card.title ?? '...'}
-                  imagePath={card.imagePath ?? 'background'}
-                  placeholderPath="/imgs/background.png"
-                  informationText={card.informationText}
-                  loading={loading}
-                  disableAnim={isNarrow}
-                  href={card.href ?? ""}
-                />
-              ))}
+
+        <section className={styles.hero}>
+          <div>
+            <p className={styles.kicker}>Guia completo de Valorant</p>
+            <h1 className={styles.title}>Aprenda, aplique e evolua sua gameplay.</h1>
+            <p className={styles.subtitle}>
+              Explore agentes, movimentação e pixels com uma experiência pensada
+              para o cliente final — rápida, limpa e totalmente responsiva.
+            </p>
           </div>
-        </div>
+          <Link className={styles.cta} href="/community">Ir para a Community</Link>
+        </section>
+
+        <section className={styles.gridSection}>
+          {(loading ? Array(3).fill({}) : cards).map((card, idx) => (
+            <Card
+              key={card.title ?? idx}
+              title={card.title ?? '...'}
+              imagePath={card.imagePath ?? '/imgs/background.png'}
+              placeholderPath="/imgs/background.png"
+              informationText={card.informationText}
+              loading={loading}
+              href={card.href ?? '/community'}
+            />
+          ))}
+        </section>
+
+        <section className={styles.adSlot} aria-label="Anúncio">
+          <span>Espaço de anúncio estratégico (728x90) — sem bloquear conteúdo.</span>
+        </section>
       </div>
-      <Footer/>
+
+      <Footer />
     </main>
   );
 }

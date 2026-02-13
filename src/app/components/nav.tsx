@@ -1,89 +1,99 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import styles from "./css/nav.module.css";
 import Image from "next/image";
-import {
-  getCurrentUser,
-  logout as serviceLogout,
-  User,
-} from "../services/auth";
-import { useRouter } from "next/navigation";
-import { FaUserCircle, FaSignOutAlt } from "react-icons/fa";
+import { usePathname, useRouter } from "next/navigation";
 import { LanguageSelector } from "./languageSelector";
+import { logout as serviceLogout } from "../services/auth";
+import { FaUserCircle, FaSignOutAlt } from "react-icons/fa";
+import { HiMenu, HiX } from "react-icons/hi";
+import { language } from "../../../constants/language";
 
-function parseJwt(token?: string): Record<string, any> | null {
+interface AuthUser {
+  id?: string;
+  name: string;
+  email?: string;
+}
+
+// Sem links na navbar (navegação ficará só na sidebar)
+const NAV_LINKS: { href: string; label: string }[] = [];
+
+function parseJwt(token?: string | null): Record<string, unknown> | null {
   if (!token) return null;
   try {
     const parts = token.split(".");
     if (parts.length < 2) return null;
-    const base64Url = parts[1];
-    const base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
-    const jsonPayload = decodeURIComponent(
-      atob(base64)
-        .split("")
-        .map((c) => "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2))
-        .join("")
-    );
-    return JSON.parse(jsonPayload);
-  } catch (e) {
-    console.warn("parseJwt falhou", e);
+    const payload = parts[1].replace(/-/g, "+").replace(/_/g, "/");
+    const decoded = atob(payload);
+    return JSON.parse(decoded);
+  } catch {
     return null;
   }
 }
 
 export function Nav() {
+  const [user, setUser] = useState<AuthUser | null>(null);
   const [showUserMenu, setShowUserMenu] = useState(false);
-  const [user, setUser] = useState<User | null>(null);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement | null>(null);
 
+  const pathname = usePathname();
   const router = useRouter();
 
-  const toggleUserMenu = () => setShowUserMenu((prev) => !prev);
+  const currentLocale = useMemo(() => {
+    const first = pathname?.split("/").filter(Boolean)[0];
+    return language.includes(first) ? first : "pt";
+  }, [pathname]);
+
+  const withLocale = (path: string) => {
+    const clean = path.startsWith("/") ? path : `/${path}`;
+    return `/${currentLocale}${clean}`;
+  };
 
   useEffect(() => {
-    let mounted = true;
-
-    const loadUser = async () => {
-      if (!mounted) return;
+    const syncUser = () => {
+      if (typeof window === "undefined") return;
       const token =
-        typeof window !== "undefined" &&
-        (localStorage.getItem("token") || sessionStorage.getItem("token"));
+        localStorage.getItem("token") || sessionStorage.getItem("token");
+
       if (!token) {
         setUser(null);
         return;
       }
 
-      try {
-        const u = await getCurrentUser();
-        if (u) {
-          if (!mounted) return;
-          setUser(u);
-          return;
-        }
-      } catch (e) {
-        console.debug("Nav: getCurrentUser erro, vai usar decode", e);
-      }
+      const jwt = parseJwt(token);
+      const name =
+        (jwt?.name as string) ||
+        (jwt?.username as string) ||
+        (jwt?.login as string) ||
+        (jwt?.email as string) ||
+        (jwt?.sub as string) ||
+        "Usuário";
 
-      const payload = parseJwt(token);
-      if (payload) {
-        const nameFromToken =
-          payload.name ||
-          payload.username ||
-          payload.email ||
-          payload.sub ||
-          "Usuário";
-        if (!mounted) return;
-        setUser({ id: String(payload.sub ?? "me"), name: nameFromToken });
-      } else {
-        if (!mounted) return;
-        setUser({ id: "me", name: "Usuário" });
-      }
+      setUser({
+        id: (jwt?.sub as string) || "me",
+        name,
+        email: (jwt?.email as string) || undefined,
+      });
     };
 
-    loadUser();
+    syncUser();
 
-    const handleClickOutside = (event: MouseEvent) => {
+    const onStorage = () => syncUser();
+    const onAuthChanged = () => syncUser();
+
+    window.addEventListener("storage", onStorage);
+    window.addEventListener("authChanged", onAuthChanged as EventListener);
+
+    return () => {
+      window.removeEventListener("storage", onStorage);
+      window.removeEventListener("authChanged", onAuthChanged as EventListener);
+    };
+  }, []);
+
+  useEffect(() => {
+    const onClickOutside = (event: MouseEvent) => {
       if (
         dropdownRef.current &&
         !dropdownRef.current.contains(event.target as Node)
@@ -92,134 +102,152 @@ export function Nav() {
       }
     };
 
-    const handleStorageEvent = () => loadUser();
-    const handleAuthChanged = () => loadUser();
-
-    document.addEventListener("mousedown", handleClickOutside);
-    window.addEventListener("storage", handleStorageEvent);
-    window.addEventListener("authChanged", handleAuthChanged as EventListener);
-
-    return () => {
-      mounted = false;
-      document.removeEventListener("mousedown", handleClickOutside);
-      window.removeEventListener("storage", handleStorageEvent);
-      window.removeEventListener(
-        "authChanged",
-        handleAuthChanged as EventListener
-      );
-    };
+    document.addEventListener("mousedown", onClickOutside);
+    return () => document.removeEventListener("mousedown", onClickOutside);
   }, []);
+
+  useEffect(() => {
+    setMobileMenuOpen(false);
+  }, [pathname]);
 
   const handleLogout = () => {
     try {
-      try {
-        serviceLogout();
-      } catch (e) {
-        console.warn("serviceLogout erro", e);
-      }
-      localStorage.removeItem("token");
-      sessionStorage.removeItem("token");
-    } catch (e) {
-      console.warn("Erro limpando storage no logout", e);
+      serviceLogout();
+    } catch {
+      // fallback: apenas limpar storage
     }
-
+    localStorage.removeItem("token");
+    sessionStorage.removeItem("token");
     setUser(null);
+    setShowUserMenu(false);
     window.dispatchEvent(new Event("authChanged"));
-    router.replace("/home");
+    router.push(withLocale("/community"));
+  };
+
+  const isActive = (href: string) => {
+    if (!pathname) return false;
+    return pathname === withLocale(href) || pathname.startsWith(withLocale(`${href}/`));
   };
 
   return (
-    <nav className={styles.navbar}>
-      <div className={styles.left}>
-        <a href="/home">
-          <Image
-            src="/imgs/favicon.png"
-            alt="avaHelper"
-            width={56}
-            height={21}
-          />
+    <header className={styles.navbarWrapper}>
+      <nav className={styles.navbar}>
+        <div className={styles.leftZone}>
+          <a href={withLocale("/community")} className={styles.brand}>
+            <Image src="/imgs/favicon.png" alt="VavaHelper" width={32} height={32} />
+            <span className={styles.brandText}>VavaHelper</span>
           </a>
-          <h1
-            style={{ color: "#FF5252", fontWeight: "bold", fontSize: "20px" }}
-          >
-            avaHelper
-          </h1>
-      </div>
 
-      <div className={styles.right} ref={dropdownRef}>
-        {/* Componente de idiomas separado */}
-        <LanguageSelector />
+          {/* Sem links desktop */}
+          <ul className={styles.desktopLinks}>
+            {NAV_LINKS.map((link) => (
+              <li key={link.href}>
+                <a
+                  href={withLocale(link.href)}
+                  className={`${styles.navLink} ${isActive(link.href) ? styles.navLinkActive : ""}`}
+                >
+                  {link.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
 
-        {!user && (
-          <button
-            className={styles.loginButton}
-            onClick={() => router.push("/login")}
-            style={{ marginRight: 8 }}
-          >
-            <h1>Login</h1>
-          </button>
-        )}
+        <div className={styles.rightZone} ref={dropdownRef}>
+          <LanguageSelector />
 
-        {user && (
-          <div style={{ display: "inline-flex", alignItems: "center", gap: 8 }}>
+          {!user ? (
             <button
-              onClick={toggleUserMenu}
-              title="Menu do usuário"
-              aria-label="Menu do usuário"
-              style={{
-                background: "transparent",
-                border: "none",
-                cursor: "pointer",
-                display: "inline-flex",
-                alignItems: "center",
-                padding: 6,
-              }}
+              className={styles.loginButton}
+              onClick={() => router.push(withLocale("/auth"))}
             >
-              <FaUserCircle style={{ fontSize: 22, color: "#333" }} />
+              Entrar / Criar conta
             </button>
-
-            <button
-              onClick={handleLogout}
-              title="Logout"
-              aria-label="Logout"
-              style={{
-                background: "transparent",
-                border: "none",
-                cursor: "pointer",
-                display: "inline-flex",
-                alignItems: "center",
-                padding: 6,
-              }}
-            >
-              <FaSignOutAlt style={{ fontSize: 18, color: "#FF5252" }} />
-            </button>
-
-            {showUserMenu && (
-              <ul
-                className={styles.userDropdown}
-                style={{ position: "absolute", right: 16 }}
+          ) : (
+            <div className={styles.userBlock}>
+              <button
+                className={styles.userButton}
+                onClick={() => setShowUserMenu((prev) => !prev)}
+                aria-label="Menu do usuário"
               >
-                <li
-                  onClick={() => {
-                    setShowUserMenu(false);
-                    router.push("/profile");
-                  }}
+                <FaUserCircle size={18} />
+                <span className={styles.userName}>{user.name}</span>
+              </button>
+
+              <button
+                className={styles.iconButton}
+                onClick={handleLogout}
+                title="Sair"
+                aria-label="Sair"
+              >
+                <FaSignOutAlt size={16} />
+              </button>
+
+              {showUserMenu && (
+                <div className={styles.userDropdown}>
+                  <button
+                    onClick={() => {
+                      setShowUserMenu(false);
+                      router.push(withLocale("/community"));
+                    }}
+                  >
+                    Ver comunidade
+                  </button>
+                  <button
+                    onClick={() => {
+                      setShowUserMenu(false);
+                      router.push(withLocale("/auth"));
+                    }}
+                  >
+                    Conta e segurança
+                  </button>
+                </div>
+              )}
+            </div>
+          )}
+
+          <button
+            className={styles.mobileToggle}
+            aria-label="Abrir menu"
+            onClick={() => setMobileMenuOpen((prev) => !prev)}
+          >
+            {mobileMenuOpen ? <HiX size={22} /> : <HiMenu size={22} />}
+          </button>
+        </div>
+      </nav>
+
+      {mobileMenuOpen && (
+        <div className={styles.mobileMenu}>
+          <ul>
+            {/* Sem links mobile também */}
+            {NAV_LINKS.map((link) => (
+              <li key={`mobile-${link.href}`}>
+                <a
+                  href={withLocale(link.href)}
+                  className={`${styles.mobileLink} ${isActive(link.href) ? styles.mobileLinkActive : ""}`}
                 >
-                  Perfil
-                </li>
-                <li
-                  onClick={() => {
-                    setShowUserMenu(false);
-                    router.push("/settings");
-                  }}
+                  {link.label}
+                </a>
+              </li>
+            ))}
+
+            <li>
+              {user ? (
+                <button
+                  className={`${styles.mobileLink} ${styles.mobileAuthButton}`}
+                  onClick={handleLogout}
                 >
-                  Configurações
-                </li>
-              </ul>
-            )}
-          </div>
-        )}
-      </div>
-    </nav>
+                  Sair
+                </button>
+              ) : (
+                <a href={withLocale("/auth")} className={`${styles.mobileLink} ${styles.mobileAuthButton}`}>
+                  Entrar / Criar conta
+                </a>
+              )}
+            </li>
+          </ul>
+        </div>
+      )}
+    </header>
   );
 }

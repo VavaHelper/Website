@@ -1,466 +1,377 @@
-body {
-  padding-top: 0px !important;
+.page {
+  margin-top: 1rem;
 }
 
-/* Main Layout */
-.container {
-  display: flex; /* RECOMENDADO: Usar flexbox no container principal para gerenciar sidebar e main */
-  flex-direction: column;
-  min-height: 100vh;
-  background-color: #000000;
-  color: #ffffff;
-}
-
-.contentWrapper { /* ADICIONADO: Wrapper para sidebar e main content */
+.hero {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 1.2rem;
+  background: linear-gradient(145deg, rgba(20, 22, 30, 0.95), rgba(12, 14, 20, 0.82));
+  padding: clamp(1rem, 3vw, 1.5rem);
   display: flex;
-  flex: 1; /* Ocupa o espaço restante */
-}
-
-
-/* Header Styles */
-:root {
-  --header-height: 56px;
-}
-
-.header {
-  position: sticky;
-  top: 0;
-  z-index: 70;
-  height: var(--header-height);
-  display: flex;
-  align-items: center;
+  flex-wrap: wrap;
   justify-content: space-between;
-  padding: 0.75rem 0.5rem;
-  background-color: #000;
-  border-bottom: 1px solid rgba(55, 65, 81, 0.28);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.45);
+  gap: 1rem;
 }
 
-@media (min-width: 640px) {
-  .header {
-    padding: 0.75rem 1rem;
-  }
+.badge {
+  margin: 0;
+  color: #ff9b9b;
+  font-size: 0.74rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
 }
 
-.headerLeft {
-  display: flex;
-  align-items: center;
+.hero h1 {
+  margin: 0.45rem 0 0;
+  font-size: clamp(1.35rem, 2.8vw, 2.25rem);
+  font-weight: 800;
+  max-width: 780px;
+  line-height: 1.15;
+}
+
+.hero p {
+  margin: 0.7rem 0 0;
+  color: rgba(255, 255, 255, 0.78);
+  max-width: 760px;
+  line-height: 1.55;
+}
+
+.heroActions {
+  display: inline-flex;
+  align-items: flex-end;
   gap: 0.5rem;
 }
 
-@media (min-width: 640px) {
-  .headerLeft {
-    gap: 1rem;
-  }
+.heroActions a {
+  text-decoration: none;
+  border-radius: 0.75rem;
+  padding: 0.58rem 0.82rem;
+  font-size: 0.82rem;
+  font-weight: 700;
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-.logo {
-  display: flex;
-  align-items: center;
+.heroActions a:first-child {
+  background: rgba(255, 255, 255, 0.06);
 }
 
-.logoIcon {
-  width: 1.5rem;
-  height: 1.5rem;
-  border-radius: 0.25rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.heroActions a:last-child {
+  background: linear-gradient(135deg, #ff5e5e, #ff3f3f);
+  border-color: rgba(255, 82, 82, 0.55);
+  color: #111318;
 }
 
-@media (min-width: 640px) {
-  .logoIcon {
-    width: 2rem;
-    height: 2rem;
-  }
+.layout {
+  margin-top: 1rem;
+  display: grid;
+  grid-template-columns: 330px 1fr;
+  gap: 0.95rem;
 }
 
-.logoText {
-  color: #ef4444;
-  font-weight: 600;
-  font-size: 0.875rem;
-  display: none;
-}
-
-@media (min-width: 475px) {
-  .logoText {
-    display: block;
-  }
-}
-
-@media (min-width: 640px) {
-  .logoText {
-    font-size: 1rem;
-  }
-}
-
-/* Button Styles */
-.button {
-  padding: 0.5rem;
-  color: #ffffff;
-  background-color: transparent;
-  border: none;
-  border-radius: 0.375rem;
-  transition: background-color 0.2s;
-  cursor: pointer;
-}
-
-.button:hover {
-  background-color: #37415146;
-}
-
-.buttonRed {
-  background-color: #ef4444;
-}
-
-.buttonRed:hover {
-  background-color: #dc2626;
-}
-
-/* Search Styles */
-.searchContainer {
-  display: none;
-  flex: 1;
-  max-width: 28rem;
-  margin: 0 0.5rem;
-}
-
-@media (min-width: 768px) {
-  .searchContainer {
-    display: flex;
-  }
-}
-
-@media (min-width: 1024px) {
-  .searchContainer {
-    margin: 0 1rem;
-  }
-}
-
-.searchWrapper {
-  position: relative;
-  width: 100%;
-}
-
-.searchInput {
-  width: 100%;
-  background-color: transparent;
-  border: 1px solid #ef4444;
-  color: #ffffff;
-  padding: 0.5rem 2.5rem 0.5rem 0.75rem; /* Ajuste no padding para não sobrepor o botão */
-  border-radius: 0.375rem;
-  outline: none;
-  transition: box-shadow 0.2s;
-}
-
-.searchInput:focus {
-  /* FIX: 'ring' não é uma propriedade CSS. Usando box-shadow para o efeito. */
-  box-shadow: 0 0 0 2px #ef4444;
-}
-
-.searchInput::placeholder {
-  color: #9ca3af;
-}
-
-.searchButton {
-  position: absolute;
-  right: 0;
-  top: 0;
-  height: 100%;
-  background-color: #ef4444;
-  padding: 0 0.75rem;
-  border-radius: 0 0.375rem 0.375rem 0;
-  border: none;
-  cursor: pointer;
-  transition: background-color 0.2s;
-}
-
-.searchButton:hover {
-  background-color: #dc2626;
-}
-
-/* === REFINEMENT: Mobile Search Styles === */
-.mobileSearchForm {
-    display: flex;
-    align-items: center;
-}
-@media (min-width: 768px) { /* Esconde no desktop */
-    .mobileSearchForm {
-        display: none;
-    }
-}
-
-.mobileSearchInputContainer {
-    overflow: hidden;
-    transition: width 0.3s ease-in-out, opacity 0.3s ease-in-out;
-    width: 0;
-    opacity: 0;
-}
-
-.mobileSearchInputContainerOpen {
-    width: 144px; /* Aprox. w-36/w-40 do Tailwind */
-    opacity: 100;
-    margin-right: 0.5rem;
-}
-
-.mobileSearchInput {
-    background-color: #1f2937; /* Cor similar a bg-gray-800 */
-    color: white;
-    font-size: 0.875rem;
-    padding: 0.25rem 0.5rem;
-    border-radius: 0.375rem;
-    width: 100%;
-    border: none;
-    outline: none;
-}
-
-.mobileSearchToggle {
-    padding: 0.5rem;
-    border-radius: 9999px;
-    transition: background-color 0.2s;
-}
-.mobileSearchToggle:hover {
-    background-color: #374151; /* Cor similar a hover:bg-gray-700 */
-}
-
-
-/* === REFINEMENT: Sidebar Styles === */
 .sidebar {
-  background-color: #000000;
-  border-right: 1px solid #222222;
-  position: fixed;
-  top: var(--header-height);
-  left: 0; /* Adicionado para garantir o posicionamento */
-  height: calc(100vh - var(--header-height));
-  z-index: 50;
-  overflow-x: hidden; /* Evita que o conteúdo vaze durante a transição */
-  /* REFINED: Transição mais específica e suave */
-  transition: transform 0.3s ease-in-out, width 0.3s ease-in-out;
-}
-
-/* Em telas maiores, a sidebar empurra o conteúdo */
-@media (min-width: 1024px) {
-  .sidebar {
-    position: sticky; /* Muda de fixed para sticky */
-    top: var(--header-height);
-    height: calc(100vh - var(--header-height)); /* Garante altura correta */
-  }
-}
-
-/* Estado Aberto (Default para Desktop) */
-.sidebarOpen {
-  width: 16rem; /* 256px */
-  transform: translateX(0);
-}
-
-/* Estado Fechado */
-.sidebarClosed {
-  width: 0;
-  /* FIX: Apenas o transform é necessário no mobile para deslizar para fora */
-  transform: translateX(-100%);
-}
-
-@media (min-width: 1024px) {
-  .sidebarOpen {
-      /* No desktop, o transform não é necessário */
-      transform: translateX(0);
-  }
-  .sidebarClosed {
-      width: 0rem; /* No desktop, fechamos alterando a largura */
-      transform: translateX(0); /* Reseta o transform do mobile */
-  }
-}
-
-.sidebarContent {
-  width: 16rem; /* Mantém o conteúdo com largura fixa para evitar que esprema */
-  padding: 0.5rem;
-}
-
-@media (min-width: 640px) {
-  .sidebarContent {
-    padding: 1rem;
-  }
-}
-
-
-.nav {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-
-.navButton {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  padding: 0.5rem 0.75rem;
-  color: #ffffff;
-  background-color: transparent;
-  border: none;
-  border-radius: 0.375rem;
-  transition: background-color 0.2s;
-  cursor: pointer;
-  font-size: 0.875rem;
-  white-space: nowrap; /* Impede a quebra de linha do texto */
-}
-
-.navButton:hover {
-  background-color: #37415146;
-}
-
-.navButtonSecondary {
-  color: #9ca3af;
-}
-
-.navIcon {
-  width: 1rem;
-  height: 1rem;
-  margin-right: 0.75rem;
-  flex-shrink: 0; /* Impede que o ícone encolha */
-}
-
-/* === Main Content === */
-.main {
-  flex: 1; /* Ocupa todo o espaço disponível */
-  padding: 0.75rem;
-  transition: all 0.3s; /* Transição suave quando a sidebar muda de tamanho */
-  min-width: 0; /* Evita que o conteúdo flexível transborde */
-}
-
-@media (min-width: 640px) {
-  .main {
-    padding: 1rem;
-  }
-}
-
-@media (min-width: 1024px) {
-  .main {
-    padding: 1.5rem;
-  }
-}
-
-/* O resto do CSS permanece o mesmo (grid, card, etc.) */
-
-/* Card Styles */
-.card {
-  background-color: #000;
-  border: 1px solid #000;
-  border-radius: 0.5rem;
-  overflow: hidden;
-  transition: background-color 0.2s;
-}
-
-.card:hover {
-  background-color: #ff5252;
-}
-
-.cardContent {
-  padding: 0.75rem;
-}
-
-@media (min-width: 640px) {
-  .cardContent {
-    padding: 1rem;
-  }
-}
-
-.cardHeader {
-  display: flex;
-  align-items: flex-start;
+  display: grid;
+  align-content: start;
   gap: 0.75rem;
 }
 
-.avatar {
-  width: 2rem;
-  height: 2rem;
-  background-color: #4b5563;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
+.panel {
+  border-radius: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.03);
+  padding: 0.8rem;
 }
 
-.cardTitle {
-  font-size: 0.875rem;
-  font-weight: 500;
-  color: #ffffff;
-  margin-bottom: 0.25rem;
+.panel h3,
+.panel h4 {
+  margin: 0;
+  font-size: 0.9rem;
+  font-weight: 800;
+}
+
+.filterButtons {
+  margin-top: 0.6rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.filterButtons button,
+.chips button {
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 999px;
+  padding: 0.35rem 0.7rem;
+  color: rgba(255, 255, 255, 0.86);
+  font-size: 0.75rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.active,
+.chipActive {
+  border-color: rgba(255, 82, 82, 0.5) !important;
+  background: rgba(255, 82, 82, 0.17) !important;
+  color: #fff !important;
+}
+
+.label {
+  display: block;
+  margin-top: 0.8rem;
+  font-size: 0.78rem;
+  color: rgba(255, 255, 255, 0.82);
+}
+
+.search {
+  margin-top: 0.42rem;
+  width: 100%;
+  border-radius: 0.75rem;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: rgba(255, 255, 255, 0.04);
+  color: #fff;
+  padding: 0.6rem 0.72rem;
+  outline: none;
+}
+
+.search:focus {
+  border-color: rgba(255, 82, 82, 0.65);
+  box-shadow: 0 0 0 2px rgba(255, 82, 82, 0.14);
+}
+
+.chips {
+  margin-top: 0.55rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  max-height: 210px;
+  overflow: auto;
+}
+
+.content {
+  min-width: 0;
+}
+
+.metaRow {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.6rem;
+  align-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 0.9rem;
+  padding: 0.65rem 0.8rem;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.metaRow strong {
+  font-size: 1rem;
+}
+
+.routeInfo {
+  font-size: 0.74rem;
+  color: rgba(255, 255, 255, 0.68);
+}
+
+.routeInfo code {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  padding: 0.16rem 0.3rem;
+  border-radius: 0.4rem;
+}
+
+.grid {
+  margin-top: 0.85rem;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.8rem;
+}
+
+.card,
+.adCard {
+  border-radius: 0.95rem;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.card {
+  cursor: pointer;
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(255, 255, 255, 0.24);
+}
+
+.thumb {
+  width: 100%;
+  height: 170px;
+  object-fit: cover;
+  background: #0c0f14;
+}
+
+.cardBody {
+  padding: 0.75rem;
+}
+
+.cardBody h3 {
+  margin: 0;
+  font-size: 0.92rem;
+  line-height: 1.35;
+  font-weight: 800;
+}
+
+.cardBody p {
+  margin: 0.46rem 0 0;
+  color: rgba(255, 255, 255, 0.74);
+  font-size: 0.82rem;
+  line-height: 1.5;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
 
-.cardMeta {
-  font-size: 0.75rem;
-  color: #9ca3af;
+.tags {
+  margin-top: 0.58rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
 }
 
-
-/* Utility Classes */
-.aspectVideo {
-  aspect-ratio: 16 / 9;
-  position: relative; /* Para o iframe preencher corretamente */
-}
-.aspectVideo iframe {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
+.tags span {
+  font-size: 0.69rem;
+  border-radius: 999px;
+  padding: 0.18rem 0.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: rgba(255, 255, 255, 0.84);
 }
 
-.flex1 {
-  flex: 1;
+.status,
+.error {
+  margin-top: 0.95rem;
+  color: rgba(255, 255, 255, 0.74);
 }
 
-.minW0 {
-  min-width: 0;
+.error {
+  color: #fda4af;
 }
 
-.relative {
-  position: relative;
+.adCard {
+  min-height: 160px;
+  display: grid;
+  place-content: center;
+  text-align: center;
+  border-style: dashed;
+  border-color: rgba(255, 255, 255, 0.3);
+  color: rgba(255, 255, 255, 0.66);
+  padding: 0.8rem;
 }
 
-.hidden {
-  display: none;
+.adCard small {
+  margin-top: 0.4rem;
+  font-size: 0.68rem;
 }
 
-@media (min-width: 320px) {
-  .smBlock {
-    display: block;
-  }
-}
-
-.overlay {
+.modalOverlay {
   position: fixed;
   inset: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-  z-index: 40;
+  background: rgba(0, 0, 0, 0.58);
+  display: grid;
+  place-items: center;
+  z-index: 2200;
+  padding: 0.8rem;
 }
 
-@media (min-width: 1024px) {
-  .overlay {
-    display: none;
+.modal {
+  width: min(470px, 100%);
+  border-radius: 1rem;
+  background: #12141b;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  padding: 1rem;
+}
+
+.modal h3 {
+  margin: 0;
+  font-size: 1.18rem;
+}
+
+.modal p {
+  margin: 0.6rem 0 0;
+  color: rgba(255, 255, 255, 0.74);
+  line-height: 1.5;
+}
+
+.modalActions {
+  margin-top: 0.9rem;
+  display: grid;
+  gap: 0.5rem;
+}
+
+.modalActions button {
+  border: none;
+  border-radius: 0.75rem;
+  padding: 0.66rem 0.8rem;
+  font-weight: 700;
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+}
+
+.modalActions button:last-child {
+  background: linear-gradient(135deg, #ff5e5e, #ff3f3f);
+  color: #111318;
+}
+
+.modalClose {
+  margin-top: 0.6rem;
+  width: 100%;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 0.7rem;
+  padding: 0.55rem;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.86);
+  cursor: pointer;
+}
+
+@media (max-width: 1220px) {
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
-.grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1rem;
+@media (max-width: 980px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.6rem;
+  }
+
+  .chips {
+    max-height: 140px;
+  }
 }
 
-.gridExpanded {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1rem;
-}
+@media (max-width: 760px) {
+  .heroActions {
+    width: 100%;
+  }
 
-@media (min-width: 1024px) {
-  .grid, .gridExpanded {
-    grid-template-columns: repeat(2, 1fr); /* exatamente 2 colunas no desktop */
+  .heroActions a {
+    flex: 1;
+    text-align: center;
+  }
+
+  .sidebar {
+    grid-template-columns: 1fr;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
   }
 }

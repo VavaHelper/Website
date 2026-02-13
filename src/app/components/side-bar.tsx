@@ -2,34 +2,44 @@
 
 import styles from './css/sidebar.module.css';
 import { Link } from '@/i18n/navigation';
+import { usePathname } from 'next/navigation';
 import {
   BiHome,
   BiRun,
   BiStar,
-  BiGlasses
+  BiGlasses,
+  BiVideo,
 } from 'react-icons/bi';
 
+const items = [
+  { href: '/community', label: 'Community', icon: BiVideo },
+  { href: '/home', label: 'Home', icon: BiHome },
+  { href: '/agents', label: 'Agents', icon: BiGlasses },
+  { href: '/movi', label: 'Movi', icon: BiRun },
+  { href: '/pixel', label: 'Pixel', icon: BiStar },
+];
+
 export function SideBar() {
-  const items = [
-    { href: '/home', icon: <BiHome size={24} color="#FF5252" /> },
-    { href: '/agents', icon: <BiGlasses size={24} color="#FF5252" /> },
-    { href: '/movi', icon: <BiRun size={24} color="#FF5252" /> },
-    { href: '/pixel', icon: <BiStar size={24} color="#FF5252" /> },
-  ];
+  const pathname = usePathname();
+
+  const isActive = (href: string) => {
+    if (!pathname) return false;
+    const pathWithoutLocale = `/${pathname.split('/').filter(Boolean).slice(1).join('/')}`;
+    return pathWithoutLocale === href || pathWithoutLocale.startsWith(`${href}/`);
+  };
 
   return (
-    <div className={styles.menu}>
+    <aside className={styles.menu} aria-label="Atalhos de navegação">
       <ul>
-        {items.map(({ href, icon }) => (
+        {items.map(({ href, icon: Icon, label }) => (
           <li key={href}>
-            <Link href={href}>
-              <button>
-                {icon}
-              </button>
+            <Link href={href} className={`${styles.item} ${isActive(href) ? styles.itemActive : ''}`}>
+              <Icon size={20} />
+              <span>{label}</span>
             </Link>
           </li>
         ))}
       </ul>
-    </div>
+    </aside>
   );
 }

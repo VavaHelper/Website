@@ -1,148 +1,140 @@
-html {
-    overflow-y: hidden ;
+.headerCard {
+  margin-top: 1.1rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 1.1rem;
+  background: linear-gradient(145deg, rgba(18, 20, 28, 0.95), rgba(13, 14, 20, 0.8));
+  padding: 1.2rem;
 }
 
-html.home {
-  overflow-y: visible !important;
+.headerCard h1 {
+  font-size: clamp(1.6rem, 3vw, 2.3rem);
+  font-weight: 800;
+  margin: 0;
 }
 
-.containersearch {
-    margin-top: 100px;
-    margin-left: 200px;
+.headerCard p {
+  margin: 0.55rem 0 0;
+  color: rgba(255, 255, 255, 0.78);
+  max-width: 760px;
 }
 
-.title {
-    display: inline-block;
-    padding-bottom: 2px;
-    position: relative;
+.filterRow {
+  margin-top: 0.95rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
 }
 
-.line {
-    display: inline-block;
-    position: absolute;
-    width: 40px;
-    height: 1px;
-    background-color: #FF5252;
-    margin-left: 5px;
+.filterBtn {
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.04);
+  color: rgba(255, 255, 255, 0.88);
+  border-radius: 999px;
+  padding: 0.5rem 0.9rem;
+  font-size: 0.84rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.18s ease;
 }
 
-.description{
-    color: white;
+.filterBtn:hover {
+  border-color: rgba(255, 255, 255, 0.3);
 }
 
-.filter{
-    display: inline-flex;
-    gap: 0.5rem;
-    background-color: #2c2c2c;
-    border-radius: 6px;
-    flex-wrap: wrap;
+.filterBtnActive {
+  border-color: rgba(255, 82, 82, 0.5);
+  background: rgba(255, 82, 82, 0.18);
+  color: #fff;
 }
 
-.button{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: white;
-    padding: 0.5rem 1rem;
-    margin: 5px;
-    background-color: black;
-    height: 30px;
-    border-radius: 8px;
-    text-align: center;
+.grid {
+  margin-top: 1rem;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.85rem;
 }
 
-.buttonActive {
-  background-color: #FF5252;     /* estado selecionado */
+.card {
+  border-radius: 1rem;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  background: linear-gradient(170deg, rgba(26, 29, 40, 0.86), rgba(13, 15, 20, 0.82));
+  transition: transform 0.2s ease, border-color 0.2s ease;
+  cursor: pointer;
 }
 
-.boxGrid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, 200px);
-    justify-content: start;
-    gap: 1rem;
-    margin-top: 2rem;
-    margin-right: 50px;
-    max-height: 550px;
-    overflow-y: auto;
-    padding-bottom: 310px;
-    scrollbar-width: thin;
-    scrollbar-color: #ff5252 black;
+.card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(255, 255, 255, 0.22);
 }
 
-/* Chrome, Edge, Safari e outros WebKit-based (Scroolbar) */
-.boxGrid::-webkit-scrollbar {
-    width: 8px;
-    background-color: black;
-}
-.boxGrid::-webkit-scrollbar-track {
-    background-color: black;
-}
-.boxGrid::-webkit-scrollbar-thumb {
-    background-color: #ff5252;
-    border-radius: 9px;
-}
-.boxGrid::-webkit-scrollbar-thumb:hover {
-    background-color: #e04848;
+.imgWrap {
+  height: 220px;
+  display: grid;
+  place-items: center;
+  background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.07), rgba(0, 0, 0, 0));
 }
 
-
-.box {
-    background-color: white;
-    width: 200px;
-    height: 200px;
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.cardImg {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
-.box h1 {
-    margin: 0;
-    font-size: 1.25rem;
-    color: #333;
+.cardBody {
+  padding: 0.7rem 0.8rem 0.85rem;
 }
 
-@media(max-width: 768px) {
-    
-    .containersearch {
-        max-width: 600px;
-        width: 90%;
-        margin: 10px auto 0;
+.cardBody h2 {
+  margin: 0;
+  font-size: 0.97rem;
+  font-weight: 800;
+}
 
-        padding: 0 1rem;
-    }
+.cardBody span {
+  display: inline-block;
+  margin-top: 0.33rem;
+  color: #ff8a8a;
+  font-size: 0.73rem;
+  font-weight: 700;
+}
 
-    .filter {
-        gap: 0.1rem;
-    }
-    
-    .box{
-        width: 90px;
-        height: 90px;
-    }
-    
-    .boxGrid {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, 90px);
-        justify-content: start;
-        gap: 1rem;
-        margin-top: 2rem;
-        margin-right: 0px;
-        max-height: 540px;
-    }
-    
-    .button{
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        color: white;
-        padding: 0.2rem 0.5rem;
-        margin: 2px;
-        background-color: black;
-        height: 30px;
-        border-radius: 8px;
-        text-align: center;
-        font-size: 11px;
-    }
+.emptyState,
+.loading {
+  color: rgba(255, 255, 255, 0.7);
+}
 
+.adSlot {
+  margin: 1rem 0 0.2rem;
+  min-height: 90px;
+  border-radius: 0.95rem;
+  border: 1px dashed rgba(255, 255, 255, 0.24);
+  display: grid;
+  place-items: center;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.62);
+  padding: 0.8rem;
+  font-size: 0.81rem;
+}
+
+@media (max-width: 1250px) {
+  .grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 900px) {
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .imgWrap {
+    height: 190px;
+  }
+}
+
+@media (max-width: 560px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
 }

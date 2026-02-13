@@ -1,74 +1,82 @@
 .menu {
-    position: fixed;
-    top: 50%;
-    left: 0;
-    transform: translateY(-50%);
-    width: 80px;
-    background-color: transparent;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    z-index: 1000;
-    padding: 1rem 0;
+  position: fixed;
+  top: 96px;
+  left: 18px;
+  z-index: 1100;
+  width: 68px;
+  border-radius: 18px;
+  background: rgba(18, 20, 27, 0.86);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.25);
+}
+
+.menu ul {
+  margin: 0;
+  padding: 0.55rem;
+  list-style: none;
+  display: grid;
+  gap: 0.45rem;
+}
+
+.item {
+  width: 100%;
+  height: 52px;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  color: rgba(255, 255, 255, 0.82);
+  text-decoration: none;
+  border: 1px solid transparent;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.item span {
+  display: none;
+}
+
+.item:hover {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.itemActive {
+  color: #ffffff;
+  background: rgba(255, 82, 82, 0.2);
+  border-color: rgba(255, 82, 82, 0.4);
+}
+
+@media (max-width: 980px) {
+  .menu {
+    top: auto;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(96vw, 580px);
+    border-radius: 999px;
+    padding: 0.2rem;
   }
-  
+
   .menu ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 3rem;
-    margin-left: 6rem;
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 0.35rem;
+    padding: 0.3rem;
   }
-  
-  .menu li button {
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    border: none;
-    background-color: #000;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: background 0.3s;
-  }
-  
-  .menu li button:hover {
-    background-color: #8138382e;
-  }
-  
-  .menu li button img {
-    width: 24px;
-    height: 24px;
-  }
-  
-  /* Responsivo: vira uma barra inferior */
-  @media (max-width: 768px) {
-    .menu {
-      top: auto;
-      bottom: 0;
-      left: 0;
-      transform: none;
-      width: 100vw;
-      height: 70px;
-      flex-direction: row;
-      justify-content: center;
-      padding: 0.5rem 0;
-      justify-content: center;
-      padding-bottom: 30px;
 
-    }
-  
-    .menu ul {
-      flex-direction: row;
-      gap: 1rem;
-      margin-left: 0rem;
-      background-color: black;
-      border-radius: 50px;
-      padding: 7px 6px 7px 6px;
-
-    }
+  .item {
+    height: 52px;
+    border-radius: 999px;
+    grid-template-rows: auto auto;
+    gap: 0.15rem;
   }
-  
+
+  .item span {
+    display: block;
+    font-size: 0.58rem;
+    line-height: 1;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+  }
+}

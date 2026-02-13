@@ -1,11 +1,83 @@
-html {
-  overflow-y: visible !important;
+.hero {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: linear-gradient(145deg, rgba(22, 24, 32, 0.9), rgba(13, 15, 22, 0.8));
+  border-radius: 1.25rem;
+  padding: clamp(1rem, 3vw, 1.8rem);
+  margin-top: 1.2rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 1rem;
 }
 
-@media (max-width: 1320px) {
-  .body{
-    padding-top: 90px;
-    padding-bottom: 130px;
-  
+.kicker {
+  font-size: 0.78rem;
+  color: #ff9a9a;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  margin: 0;
+}
+
+.title {
+  margin-top: 0.4rem;
+  font-size: clamp(1.6rem, 3.2vw, 2.5rem);
+  line-height: 1.1;
+  font-weight: 800;
+  max-width: 700px;
+}
+
+.subtitle {
+  color: rgba(255, 255, 255, 0.78);
+  margin-top: 0.65rem;
+  max-width: 760px;
+  line-height: 1.6;
+}
+
+.cta {
+  border-radius: 0.8rem;
+  background: linear-gradient(135deg, #ff5e5e, #ff4040);
+  color: #101318;
+  text-decoration: none;
+  font-weight: 800;
+  font-size: 0.9rem;
+  padding: 0.7rem 0.95rem;
+  white-space: nowrap;
+  box-shadow: 0 10px 20px rgba(255, 82, 82, 0.25);
+}
+
+.gridSection {
+  margin-top: 1.15rem;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.adSlot {
+  margin: 1.15rem 0 0.2rem;
+  border: 1px dashed rgba(255, 255, 255, 0.28);
+  border-radius: 1rem;
+  min-height: 88px;
+  display: grid;
+  place-items: center;
+  color: rgba(255, 255, 255, 0.65);
+  font-size: 0.82rem;
+  text-align: center;
+  padding: 0.8rem;
+}
+
+@media (max-width: 1100px) {
+  .gridSection {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 760px) {
+  .gridSection {
+    grid-template-columns: 1fr;
+  }
+
+  .subtitle {
+    font-size: 0.93rem;
   }
 }

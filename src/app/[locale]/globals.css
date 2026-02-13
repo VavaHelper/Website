@@ -1,25 +1,61 @@
-@import url('https://fonts.googleapis.com/css2?family=Jersey+10&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Jersey+10&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --bg: #090a0d;
+  --surface: #11131a;
+  --surface-2: #171b24;
+  --text: #f6f7fb;
+  --muted: #aeb3c3;
+  --accent: #ff5252;
+}
 
+* {
+  box-sizing: border-box;
+}
+
+html,
 body {
   margin: 0;
   padding: 0;
-  background-color: black;
+  min-height: 100%;
+  background:
+    radial-gradient(1200px 500px at 80% -20%, rgba(255, 82, 82, 0.16), transparent),
+    radial-gradient(900px 420px at 10% -10%, rgba(94, 119, 255, 0.12), transparent),
+    var(--bg);
+  color: var(--text);
+  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
 }
 
-h1,h2 {
-  color: white;
+a {
+  color: inherit;
 }
 
-/* Responsividade*/
-@media (max-width: 1320px) {
-  body{
-    padding-top: 90px;
-    padding-bottom: 130px;
+img,
+video,
+svg {
+  max-width: 100%;
+}
+
+main {
+  min-height: calc(100vh - 72px);
+}
+
+.page-content {
+  width: min(1400px, 96%);
+  margin: 0 auto;
+  padding-top: 1.2rem;
+}
+
+.with-sidebar {
+  padding-left: 90px;
+}
+
+@media (max-width: 980px) {
+  .with-sidebar {
+    padding-left: 0;
+    padding-bottom: 86px;
   }
-
-
 }

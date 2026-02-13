@@ -1,0 +1,141 @@
+.page {
+  margin-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.topBar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.topBar a {
+  text-decoration: none;
+  border-radius: 0.75rem;
+  padding: 0.52rem 0.72rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.04);
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.status,
+.error {
+  margin-top: 0.95rem;
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.error {
+  color: #fda4af;
+}
+
+.videoCard,
+.paywallCard {
+  margin-top: 0.8rem;
+  border-radius: 1.15rem;
+  border: 1px solid rgba(255, 255, 255, 0.11);
+  background: linear-gradient(145deg, rgba(18, 21, 30, 0.95), rgba(12, 14, 20, 0.84));
+  padding: 1rem;
+}
+
+.videoCard h1 {
+  margin: 0;
+  font-size: clamp(1.2rem, 2.6vw, 1.9rem);
+  line-height: 1.18;
+}
+
+.playerWrap {
+  margin-top: 0.8rem;
+  border-radius: 1rem;
+  overflow: hidden;
+  background: #06080b;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.playerWrap iframe,
+.nativeVideo {
+  width: 100%;
+  min-height: 440px;
+}
+
+.description {
+  margin-top: 0.85rem;
+  color: rgba(255, 255, 255, 0.8);
+  line-height: 1.6;
+}
+
+.metaList {
+  margin-top: 0.8rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+.metaList span,
+.metaList a {
+  font-size: 0.75rem;
+  text-decoration: none;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 999px;
+  padding: 0.28rem 0.55rem;
+  background: rgba(255, 255, 255, 0.03);
+  color: rgba(255, 255, 255, 0.86);
+}
+
+.adSlot {
+  margin-top: 0.95rem;
+  min-height: 82px;
+  border-radius: 0.9rem;
+  border: 1px dashed rgba(255, 255, 255, 0.25);
+  display: grid;
+  place-items: center;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.64);
+  font-size: 0.8rem;
+  padding: 0.65rem;
+}
+
+.paywallCard h2 {
+  margin: 0;
+  font-size: 1.25rem;
+}
+
+.paywallCard p {
+  margin: 0.65rem 0 0;
+  color: rgba(255, 255, 255, 0.76);
+  line-height: 1.55;
+}
+
+.paywallActions {
+  margin-top: 0.9rem;
+  display: grid;
+  gap: 0.55rem;
+}
+
+.paywallActions button {
+  border: none;
+  border-radius: 0.8rem;
+  padding: 0.7rem;
+  font-weight: 800;
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+}
+
+.paywallActions button:last-child {
+  background: linear-gradient(135deg, #ff5e5e, #ff3f3f);
+  color: #101216;
+}
+
+.paywallActions button:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+@media (max-width: 900px) {
+  .playerWrap iframe,
+  .nativeVideo {
+    min-height: 280px;
+  }
+}

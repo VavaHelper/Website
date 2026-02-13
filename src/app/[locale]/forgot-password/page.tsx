@@ -1,126 +1,75 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import Image from 'next/image';
-// import Link from 'next/link';
-import { useTranslations } from 'next-intl';
+import { useState } from 'react';
+import styles from './forgot-password.module.css';
 import { forgotPassword } from '../../services/authService';
-import { Nav } from '@/app/components/nav-bg-dividido';
+import { useTranslations } from 'next-intl';
+import { Nav } from '@/app/components/nav';
+import { SideBar } from '@/app/components/side-bar';
+import { Link } from '@/i18n/navigation';
 
+export default function ForgotPasswordPage() {
+  const t = useTranslations('forgot');
 
-export default function RedefinirSenha() {
   const [email, setEmail] = useState('');
-  const [result, setResult] = useState<string | null>(null);
-  const [error, setError] = useState<string | null>(null);
-  const [isMounted, setIsMounted] = useState(false);
+  const [message, setMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
+  const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
-
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (!isMounted) return;
-
-    setResult(null);
-    setError(null);
+    setLoading(true);
+    setMessage('');
+    setErrorMessage('');
 
     try {
       await forgotPassword(email);
-      setResult('Link de redefinição enviado com sucesso. Verifique seu e-mail!');
-    } catch (e: unknown) {
-      if (e instanceof Error) {
-        setError(e.message);
+      setMessage('Se o e-mail estiver cadastrado, enviaremos um link de redefinição.');
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        setErrorMessage(error.message || 'Erro ao enviar solicitação.');
       } else {
-        setError('Erro inesperado');
+        setErrorMessage('Erro ao enviar solicitação.');
       }
+    } finally {
+      setLoading(false);
     }
   };
 
-  const t = useTranslations('forgot');
-
   return (
-    <div className="min-h-screen flex flex-col">
+    <main>
       <Nav />
+      <div className="page-content with-sidebar">
+        <SideBar />
 
-      {/* NAVBAR */}
-      {/* <nav className="absolute top-0 left-0 w-full z-10 p-4">
-        <div className="flex items-center gap-3">
-          <Link href="/home">
-            <Image
-              src="/imgs/favicon.png"
-              alt="avaHelper"
-              width={33}
-              height={21}
-              className="filter brightness-0 invert"
-            />
-          </Link>
-          <Link href="/home">
-            <h1 className="text-white text-2xl font-bold">avaHelper</h1>
-          </Link>
-        </div>
-      </nav> */}
+        <div className={styles.wrapper}>
+          <section className={styles.card}>
+            <h1>{t('title2')}</h1>
+            <p>{t('title1')}</p>
 
-      {/* CONTEÚDO PRINCIPAL */}
-      <div className="flex flex-1">
-        <div className="hidden lg:flex w-1/2 bg-red-500 items-center justify-center p-10 relative">
-            <Image
-            src="/imgs/email.svg"
-            alt="E-mail"
-            width={400}
-            height={400}
-            className="max-w-md w-full drop-shadow-lg"
-            />
-            <h2 className="text-white text-2xl font-bold absolute bottom-10 text-center">
-                {t('title2')}
-            </h2>
+            <form onSubmit={handleSubmit} className={styles.form}>
+              <label htmlFor="email">{t('label')}</label>
+              <input
+                id="email"
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder={t('placeholder-email')}
+                required
+              />
 
-        </div>
-
-        <div className="w-full lg:w-1/2 bg-black flex items-center justify-center p-8">
-          <div className="w-full max-w-md">
-            <h1 className="text-2xl font-bold text-white mb-6 font-[Jersey_10] text-center ">
-              {t('title1')}
-            </h1>
-
-            <form onSubmit={handleSubmit} className="space-y-6 ">
-              <div>
-                <label className="block text-xl text-white mb-1 " htmlFor="email">
-                  {t('label')}
-                </label>
-                <input
-                  id="email"
-                  type="email"
-                  placeholder={t('placeholder-email')}
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  required
-                  className="w-full p-3 rounded bg-gray-900 text-white text-xn border border-gray-600 focus:outline-none focus:ring-2 focus:ring-red-400"
-                />
-              </div>
-
-              <button
-                type="submit"
-                className="w-full bg-red-500 hover:bg-red-600 text-white py-3 rounded font-bold transition duration-300"
-              >
-                {t('text-button')}
+              <button type="submit" disabled={loading || !email}>
+                {loading ? 'Enviando...' : t('text-button')}
               </button>
-
-              {result && (
-                <div className="text-green-400 font-medium text-sm text-center">{result}</div>
-              )}
-              {error && (
-                <div className="text-red-400 font-medium text-sm text-center">{error}</div>
-              )}
             </form>
 
-            <div className="text-center text-sm text-gray-400 mt-6">
-              {t('forgot-password')}{' '}
-              <a href="/login" className="text-red-400 hover:underline">{t('login')}</a>
-            </div>
-          </div>
+            <Link href="/auth" className={styles.backLink}>{t('login')}</Link>
+
+            {message && <p className={styles.success}>{message}</p>}
+            {errorMessage && <p className={styles.error}>{errorMessage}</p>}
+          </section>
         </div>
       </div>
-    </div>
+    </main>
   );
 }

@@ -1,108 +1,297 @@
-.navbar {
-  position: fixed;
+.navbarWrapper {
+  position: sticky;
   top: 0;
-  left: 0;
-  width: 100%;
-  z-index: 1000;
-  background-color: transparent !important;
-  color: white;
-  padding: 1rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  user-select: none;
-  -webkit-user-select: none;
-  -ms-user-select: none;
-
-  text-decoration: none;
+  z-index: 1200;
+  backdrop-filter: blur(12px);
+  background: linear-gradient(180deg, rgba(10, 10, 12, 0.92), rgba(10, 10, 12, 0.72));
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-.navbar a {
-  text-decoration: none !important;
-  color: inherit;
-}
-
+.navbar,
 .navbarNovo {
+  width: min(1400px, 96%);
+  margin: 0 auto;
+  min-height: 72px;
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  padding: 16px 32px;
-  background: transparent;
-  color: white;
-  position: relative;
-  z-index: 10;
+  justify-content: space-between;
+  gap: 1rem;
 }
 
-/* left / right */
+.leftZone,
 .left {
   display: flex;
   align-items: center;
-  padding-left: 2%;
+  gap: 1.25rem;
+  min-width: 0;
 }
 
-.left img {
-  padding-bottom: 7px;
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  text-decoration: none;
 }
 
+.brandText {
+  color: #ffffff;
+  font-weight: 800;
+  font-size: 1.1rem;
+  letter-spacing: 0.02em;
+}
+
+.desktopLinks {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.navLink {
+  color: rgba(255, 255, 255, 0.8);
+  text-decoration: none;
+  font-size: 0.92rem;
+  font-weight: 600;
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.6rem;
+  transition: all 0.2s ease;
+}
+
+.navLink:hover {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.navLinkActive {
+  color: #ffffff;
+  background: rgba(255, 82, 82, 0.2);
+  border: 1px solid rgba(255, 82, 82, 0.35);
+}
+
+.rightZone,
 .right {
   display: flex;
   align-items: center;
-  gap: 1rem;
-  padding-right: 8%;
+  justify-content: flex-end;
+  gap: 0.5rem;
 }
 
-/* Botão login */
 .loginButton {
-  background-color: #FF5252;
-  color: black;
-  padding: 0.38rem 1rem;
+  background: linear-gradient(135deg, #ff5e5e, #ff3a3a);
+  color: #0f1115;
+  font-weight: 800;
   border: none;
-  border-radius: 12px;
+  border-radius: 0.7rem;
+  padding: 0.55rem 0.85rem;
+  font-size: 0.84rem;
   cursor: pointer;
+  box-shadow: 0 10px 18px rgba(255, 82, 82, 0.22);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.loginButton h1 {
-  color: black;
-  font-weight: bold;
-  font-size: 16px;
+.loginButton:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 16px 24px rgba(255, 82, 82, 0.25);
 }
 
-/* LANGUAGES */
+.userBlock {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.userButton,
+.iconButton {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.05);
+  color: #ffffff;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.userButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.42rem 0.65rem;
+}
+
+.iconButton {
+  width: 34px;
+  height: 34px;
+  display: inline-grid;
+  place-items: center;
+  color: #ff7474;
+}
+
+.userButton:hover,
+.iconButton:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.24);
+}
+
+.userName {
+  max-width: 140px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.userDropdown {
+  position: absolute;
+  top: calc(100% + 0.55rem);
+  right: 0;
+  min-width: 190px;
+  display: grid;
+  gap: 0.2rem;
+  padding: 0.35rem;
+  border-radius: 0.8rem;
+  background: #151820;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 18px 28px rgba(0, 0, 0, 0.35);
+}
+
+.userDropdown button,
+.userDropdown li {
+  border: none;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.9);
+  text-align: left;
+  padding: 0.6rem 0.7rem;
+  border-radius: 0.55rem;
+  cursor: pointer;
+  list-style: none;
+}
+
+.userDropdown button:hover,
+.userDropdown li:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
 .languageSelector {
   position: relative;
 }
 
 .languageDropdown {
   position: absolute;
-  top: 35px;
+  top: calc(100% + 0.45rem);
   right: 0;
-  background-color: white;
-  color: black;
-  border-radius: 5px;
-  box-shadow: 0px 4px 8px rgba(0,0,0,0.1);
+  z-index: 1300;
   list-style: none;
-  padding: 0.5rem 0;
-  z-index: 1100;
-  min-width: 140px;
-  max-height: 120px;
-  overflow-y: auto;
+  margin: 0;
+  padding: 0.4rem;
+  max-height: 260px;
+  overflow: auto;
+  background: #151820;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 0.75rem;
+  box-shadow: 0 16px 26px rgba(0, 0, 0, 0.38);
 }
 
 .languageDropdown li {
-  padding: 0.5rem 1rem;
+  color: rgba(255, 255, 255, 0.92);
+  padding: 0.45rem 0.6rem;
+  border-radius: 0.5rem;
   cursor: pointer;
-  transition: background-color 0.2s ease;
+  white-space: nowrap;
 }
 
 .languageDropdown li:hover {
-  background-color: #f0f0f0;
+  background: rgba(255, 255, 255, 0.08);
 }
 
-/* Responsivo: não forçar background escuro em telas pequenas */
-@media (max-width: 1000px) {
-  .navbar {
-    /* deixar transparente também em mobile */
-    background: transparent !important;
+.mobileToggle {
+  display: none;
+  width: 36px;
+  height: 36px;
+  border-radius: 0.65rem;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.04);
+  color: #fff;
+  cursor: pointer;
+}
+
+.mobileMenu {
+  display: none;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(9, 9, 11, 0.96);
+}
+
+.mobileMenu ul {
+  width: min(1400px, 96%);
+  margin: 0 auto;
+  padding: 0.6rem 0 0.9rem;
+  list-style: none;
+  display: grid;
+  gap: 0.35rem;
+}
+
+.mobileLink {
+  display: block;
+  color: rgba(255, 255, 255, 0.82);
+  text-decoration: none;
+  border-radius: 0.65rem;
+  padding: 0.65rem 0.75rem;
+  font-weight: 650;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.mobileLinkActive {
+  color: #fff;
+  border-color: rgba(255, 82, 82, 0.44);
+  background: rgba(255, 82, 82, 0.14);
+}
+
+.mobileAuthButton {
+  width: 100%;
+  text-align: center;
+  cursor: pointer;
+  border-color: rgba(255, 82, 82, 0.5);
+  background: rgba(255, 82, 82, 0.16);
+  color: #fff;
+}
+
+/* Classes legadas para compatibilidade com nav-bg-dividido.tsx */
+.userMenu {
+  position: relative;
+}
+
+@media (max-width: 1024px) {
+  .desktopLinks {
+    display: none;
+  }
+
+  .mobileToggle {
+    display: inline-grid;
+    place-items: center;
+  }
+
+  .mobileMenu {
+    display: block;
+  }
+
+  .loginButton {
+    display: none;
+  }
+
+  .navbar,
+  .navbarNovo {
+    min-height: 66px;
+  }
+}
+
+@media (max-width: 680px) {
+  .brandText {
+    font-size: 1rem;
+  }
+
+  .userName {
+    display: none;
   }
 }

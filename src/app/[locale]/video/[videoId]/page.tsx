@@ -1,240 +1,183 @@
-"use client"
+'use client';
 
-import { useState, useRef, useEffect } from "react"
-import { useParams, useRouter } from "next/navigation"
-import { Menu, Search, User, Home, Star, Bell, ChevronDown, ChevronRight } from "lucide-react"
-import styles from "../../community/community.module.css"
-import { LanguageSelector } from "@/app/components/languageSelector"
-import Image from "next/image"
+import { useEffect, useMemo, useRef, useState } from 'react';
+import { usePathname, useRouter } from 'next/navigation';
+import styles from './video.module.css';
+import { Nav } from '@/app/components/nav';
+import { language } from '../../../../../constants/language';
 
-export default function VideoPage() {
+interface VideoView {
+  title: string;
+  description?: string;
+  embedUrl: string;
+}
+
+function slugify(text?: string) {
+  if (!text) return '';
+  return text
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase()
+    .trim()
+    .replace(/[^a-z0-9\s-]/g, '')
+    .replace(/\s+/g, '-')
+    .replace(/-+/g, '-');
+}
+
+function isValidYoutubeId(id?: string) {
+  if (!id) return false;
+  return /^[a-zA-Z0-9_-]{6,20}$/.test(id);
+}
+
+function toEmbedUrlFromId(id?: string) {
+  if (!isValidYoutubeId(id)) return null;
+  return `https://www.youtube.com/embed/${id}?autoplay=1&rel=0`;
+}
+
+export default function VideoPage({ params }: { params: { videoId: string } }) {
+  const [video, setVideo] = useState<VideoView | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const [canWatch, setCanWatch] = useState(false);
+  const [showPaywall, setShowPaywall] = useState(false);
+  const [unlockingAd, setUnlockingAd] = useState(false);
+
+  const countedRef = useRef(false);
 
   const router = useRouter();
+  const pathname = usePathname();
 
-  const { videoId } = useParams()
+  const currentLocale = useMemo(() => {
+    const first = pathname?.split('/').filter(Boolean)[0];
+    return language.includes(first) ? first : 'pt';
+  }, [pathname]);
 
-  const [agentsExpanded, setAgentsExpanded] = useState(true)
-  const [mapsExpanded, setMapsExpanded] = useState(true)
-  const [sidebarOpen, setSidebarOpen] = useState(true)
-  const [mobileSearchOpen, setMobileSearchOpen] = useState(false)
-  const [agentsShowingAll, setAgentsShowingAll] = useState(false)
-  const [mapsShowingAll, setMapsShowingAll] = useState(false)
-
-  const inputRef = useRef<HTMLInputElement>(null)
+  const withLocale = (path: string) => {
+    const clean = path.startsWith('/') ? path : `/${path}`;
+    return `/${currentLocale}${clean}`;
+  };
 
   useEffect(() => {
-    if (mobileSearchOpen && inputRef.current) {
-      inputRef.current.focus()
-    }
-  }, [mobileSearchOpen])
+    const checkLimitAndLoad = async () => {
+      setLoading(true);
+      setError(null);
+
+      try {
+        const token = localStorage.getItem('token') || sessionStorage.getItem('token');
+
+        if (!token && !countedRef.current) {
+          countedRef.current = true;
+          const watchedCount = Number(localStorage.getItem('watchedVideosCount') || '0');
+          const adUnlocked = localStorage.getItem('adUnlocked') === 'true';
+
+          if (watchedCount >= 5) {
+            if (adUnlocked) {
+              localStorage.setItem('adUnlocked', 'false');
+              setCanWatch(true);
+            } else {
+              setShowPaywall(true);
+              setCanWatch(false);
+              setLoading(false);
+              return;
+            }
+          } else {
+            localStorage.setItem('watchedVideosCount', String(watchedCount + 1));
+            setCanWatch(true);
+          }
+        } else {
+          setCanWatch(true);
+        }
+
+        // O videoId da rota agora é o ID do YouTube (ex: aVXJIbd6lng)
+        const embedUrl = toEmbedUrlFromId(params.videoId);
+        if (!embedUrl) throw new Error('ID do vídeo inválido.');
+
+        setVideo({
+          title: 'Vídeo da comunidade',
+          description: 'Conteúdo enviado pela comunidade.',
+          embedUrl,
+        });
+      } catch (e: unknown) {
+        setError(e instanceof Error ? e.message : 'Erro ao carregar vídeo.');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    checkLimitAndLoad();
+  }, [params.videoId]);
+
+  function handleWatchAd() {
+    setUnlockingAd(true);
+    setTimeout(() => {
+      localStorage.setItem('adUnlocked', 'true');
+      setUnlockingAd(false);
+      router.push(withLocale('/community'));
+    }, 10000);
+  }
 
   return (
-    <div className={styles.container}>
-      {/* 🔹 Header */}
-      <header className={styles.header}>
-        <div className={styles.headerLeft}>
-          <button className={styles.button} onClick={() => setSidebarOpen(!sidebarOpen)}>
-            <Menu className="h-5 w-5" />
-          </button>
-          <div onClick={() => router.push("/community")} className={styles.logo} style={{ cursor: "pointer" }}>
-            <div className={styles.logoIcon}>
-              <Image
-                src="/imgs/favicon.png"
-                alt="login"
-                width={500}
-                height={400}
-                className={styles.backgroundImg}
-              />
+    <main>
+      <Nav />
+
+      <div className={`page-content ${styles.page}`}>
+        <div className={styles.topBar}>
+          <a href={withLocale('/community')}>← Voltar para Community</a>
+          <a href={withLocale('/auth')}>Entrar / Criar conta</a>
+        </div>
+
+        {loading && <p className={styles.status}>Carregando vídeo...</p>}
+        {error && <p className={styles.error}>{error}</p>}
+
+        {!loading && !error && !canWatch && showPaywall && (
+          <section className={styles.paywallCard}>
+            <h2>Limite gratuito atingido</h2>
+            <p>
+              Você já assistiu 5 vídeos sem conta. Crie uma conta para acesso livre
+              ou assista um anúncio para liberar 1 novo vídeo.
+            </p>
+
+            <div className={styles.paywallActions}>
+              <button onClick={() => router.push(withLocale('/auth'))}>Criar conta</button>
+              <button onClick={handleWatchAd} disabled={unlockingAd}>
+                {unlockingAd ? 'Assistindo anúncio...' : 'Assistir anúncio'}
+              </button>
             </div>
-            <span className={styles.logoText}>avaHelper</span>
-          </div>
-        </div>
+          </section>
+        )}
 
-        <div className={styles.searchContainer}>
-          <div className={styles.searchWrapper}>
-            <input placeholder="Search..." className={styles.searchInput} />
-            <button className={styles.searchButton}>
-              <Search className="h-4 w-4" />
-            </button>
-          </div>
-        </div>
+        {!loading && !error && canWatch && video && (
+          <article className={styles.videoCard}>
+            <h1>{video.title}</h1>
 
-        <div className="flex items-center gap-1 sm:gap-2">
-          <form
-            onSubmit={(e) => {
-              e.preventDefault()
-              const formData = new FormData(e.target as HTMLFormElement)
-              console.log("Searching for:", formData.get("search"))
-              setMobileSearchOpen(false)
-            }}
-            className="flex items-center ml-auto md:hidden"
-          >
-            <div
-              className={`flex items-center overflow-hidden transition-all duration-300 ${
-                mobileSearchOpen ? "w-40 opacity-100 mr-2" : "w-0 opacity-0"
-              }`}
-            >
-              <input
-                ref={inputRef}
-                name="search"
-                placeholder="Search..."
-                className="bg-gray-800 text-white text-sm px-2 py-1 rounded-md w-full focus:outline-none focus:ring-0"
-              />
-            </div>
-            <button
-              type="button"
-              onClick={() => setMobileSearchOpen(!mobileSearchOpen)}
-              className="p-2 rounded-full hover:bg-gray-700 transition"
-            >
-              <Search className="h-5 w-5 text-white" />
-            </button>
-          </form>
-
-          <div className={`${styles.relative} ${styles.smBlock} ${styles.hidden}`}>
-            <LanguageSelector />
-          </div>
-          <div className="w-6 h-6 sm:w-8 sm:h-8 bg-red-500 rounded-full flex items-center justify-center">
-            <User className="h-3 w-3 sm:h-4 sm:w-4 text-white" />
-          </div>
-        </div>
-      </header>
-
-      {/* 🔹 Sidebar + Conteúdo */}
-      <div className="flex relative">
-        {sidebarOpen && <div className={styles.overlay} onClick={() => setSidebarOpen(false)} />}
-
-        <aside className={`${styles.sidebar} ${sidebarOpen ? styles.sidebarOpen : styles.sidebarClosed}`}>
-          <div className={styles.sidebarContent}>
-            <nav className={styles.nav}>
-              <button onClick={() => router.push("/community")} className={styles.navButton}>
-                <Home className={styles.navIcon} />
-                Home
-              </button>
-              <button className={styles.navButton}>
-                <Star className={styles.navIcon} />
-                Favorites
-              </button>
-              <button className={`${styles.navButton} ${styles.relative}`}>
-                <Bell className={styles.navIcon} />
-                Notifications
-                <div className="absolute right-3 w-2 h-2 bg-red-500 rounded-full"></div>
-              </button>
-
-              {/* Agents */}
-              <div className="pt-4">
-                <button
-                  className={`${styles.navButton} ${styles.navButtonSecondary} mb-2`}
-                  onClick={() => setAgentsExpanded(!agentsExpanded)}
-                >
-                  {agentsExpanded ? (
-                    <ChevronDown className="h-4 w-4 mr-2" />
-                  ) : (
-                    <ChevronRight className="h-4 w-4 mr-2" />
-                  )}
-                  Agents
-                </button>
-                {agentsExpanded && (
-                  <div className="ml-6 space-y-1">
-                    <button
-                      type="button"
-                      className={`${styles.navButton} ${styles.navButtonSecondary}`}
-                      onClick={() => setAgentsShowingAll(!agentsShowingAll)}
-                    >
-                      <ChevronDown
-                        className="h-3 w-3 mr-3"
-                        style={{
-                          transform: agentsShowingAll ? "rotate(180deg)" : "none",
-                          transition: "transform 0.18s ease",
-                        }}
-                      />
-                      {agentsShowingAll ? "Show less" : "Show all"}
-                    </button>
-                  </div>
-                )}
-              </div>
-
-              {/* Maps */}
-              <div className="pt-4">
-                <button
-                  className={`${styles.navButton} ${styles.navButtonSecondary} mb-2`}
-                  onClick={() => setMapsExpanded(!mapsExpanded)}
-                >
-                  {mapsExpanded ? (
-                    <ChevronDown className="h-4 w-4 mr-2" />
-                  ) : (
-                    <ChevronRight className="h-4 w-4 mr-2" />
-                  )}
-                  Maps
-                </button>
-                {mapsExpanded && (
-                  <div className="ml-6 space-y-1">
-                    <button
-                      type="button"
-                      className={`${styles.navButton} ${styles.navButtonSecondary}`}
-                      onClick={() => setMapsShowingAll(!mapsShowingAll)}
-                    >
-                      <ChevronDown
-                        className="h-3 w-3 mr-3"
-                        style={{
-                          transform: mapsShowingAll ? "rotate(180deg)" : "none",
-                          transition: "transform 0.18s ease",
-                        }}
-                      />
-                      {mapsShowingAll ? "Show less" : "Show all"}
-                    </button>
-                  </div>
-                )}
-              </div>
-            </nav>
-          </div>
-        </aside>
-
-        {/* 🔹 Conteúdo principal (vídeo + comentários) */}
-        <main className={styles.main}>
-          <div className="flex flex-col max-w-4xl mx-auto p-4 space-y-6">
-            {/* Player */}
-            <div className="aspect-video">
+            <div className={styles.playerWrap}>
               <iframe
-                src={`https://www.youtube.com/embed/${videoId}?autoplay=1`}
-                title="YouTube video player"
-                className="w-full h-full rounded-lg"
+                src={video.embedUrl}
+                title={video.title}
                 frameBorder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerPolicy="strict-origin-when-cross-origin"
                 allowFullScreen
               />
             </div>
 
-            {/* Comentários */}
-            <div>
-              <h2 className="text-xl font-bold">Comentários</h2>
-              <form className="flex gap-2 mt-3">
-                <input
-                  type="text"
-                  placeholder="Escreva um comentário..."
-                  className="flex-1 border rounded-lg px-3 py-2"
-                />
-                <button
-                  type="submit"
-                  className="bg-blue-500 text-white px-4 py-2 rounded-lg"
-                >
-                  Enviar
-                </button>
-              </form>
+            <p className={styles.description}>
+              {video.description || 'Sem descrição disponível para este vídeo.'}
+            </p>
 
-              <div className="mt-4 space-y-3">
-                <div className="border-b pb-2">
-                  <p className="font-semibold">Usuário1</p>
-                  <p>Gostei muito desse spot 👌</p>
-                </div>
-                <div className="border-b pb-2">
-                  <p className="font-semibold">Usuário2</p>
-                  <p>Funcionou perfeito em ranked!</p>
-                </div>
-              </div>
+            <div className={styles.metaList}>
+              <a href={withLocale(`/community`)}>Voltar para vídeos da comunidade</a>
+              <a href={withLocale(`/community?agent=${slugify('')}`)} style={{ display: 'none' }}>
+                hidden-link
+              </a>
             </div>
-          </div>
-        </main>
+
+            <div className={styles.adSlot} aria-label="Anúncio">
+              <span>Área de anúncio abaixo do player (não intrusiva).</span>
+            </div>
+          </article>
+        )}
       </div>
-    </div>
-  )
+    </main>
+  );
 }
