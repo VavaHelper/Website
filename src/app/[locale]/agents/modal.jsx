@@ -1,9 +1,6 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
-/**
- * Mesmas expectativas de campo do JSON (skills/agentData) como antes.
- */
 export default function AgentModal({
   name,
   isOpen,
@@ -21,29 +18,52 @@ export default function AgentModal({
   const [isMobile, setIsMobile] = useState(
     typeof window !== "undefined" ? window.innerWidth < mobileBreakpoint : false
   );
-
   const [selectedSkillIndex, setSelectedSkillIndex] = useState(0);
 
-  // para evitar upscale da imagem do personagem
   const imgRef = useRef(null);
-  const [naturalSize, setNaturalSize] = useState(null); // { w, h }
+  const [naturalSize, setNaturalSize] = useState(null);
 
+  // =======================
+  // Responsividade
+  // =======================
   useEffect(() => {
     function onResize() {
       setIsMobile(window.innerWidth < mobileBreakpoint);
     }
+
     if (typeof window !== "undefined") {
       window.addEventListener("resize", onResize);
       onResize();
     }
+
     return () => {
-      if (typeof window !== "undefined")
+      if (typeof window !== "undefined") {
         window.removeEventListener("resize", onResize);
+      }
     };
   }, [mobileBreakpoint]);
 
+  // =======================
+  // Lock scroll body quando modal abre
+  // =======================
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    if (isOpen) {
+      const original = document.body.style.overflow;
+      document.body.style.overflow = "hidden";
+      return () => {
+        document.body.style.overflow = original;
+      };
+    }
+  }, [isOpen]);
+
+  // =======================
+  // Carrega dados do agente
+  // =======================
   useEffect(() => {
     if (!isOpen) return;
+
     let mounted = true;
     setLoading(true);
     setError(null);
@@ -54,8 +74,9 @@ export default function AgentModal({
       try {
         const res = await getAgentWithSkills(name);
         if (!mounted) return;
-        setAgentData(res.agent ?? null);
-        setSkills(res.skills ?? []);
+
+        setAgentData(res?.agent ?? null);
+        setSkills(Array.isArray(res?.skills) ? res.skills : []);
       } catch (err) {
         if (!mounted) return;
         setError(err?.message ?? "Erro ao carregar agente");
@@ -70,98 +91,135 @@ export default function AgentModal({
     };
   }, [isOpen, name, getAgentWithSkills]);
 
-  // reset seleção quando skills mudam
   useEffect(() => {
     setSelectedSkillIndex(0);
   }, [skills]);
 
+  // =======================
+  // Teclado (esc + setas)
+  // =======================
   useEffect(() => {
     function onKey(e) {
       if (e.key === "Escape") onClose?.();
-      if (["ArrowLeft", "ArrowRight"].includes(e.key) && skills.length) {
+
+      if (skills.length && (e.key === "ArrowLeft" || e.key === "ArrowRight")) {
         setSelectedSkillIndex((idx) => {
           if (e.key === "ArrowLeft") return Math.max(0, idx - 1);
           return Math.min(skills.length - 1, idx + 1);
         });
       }
     }
+
     if (isOpen) window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
   }, [isOpen, onClose, skills.length]);
 
-  const containerStyle = {
-    top: headerHeight,
-    left: isMobile ? 0 : sidebarWidth,
-    right: 0,
-    bottom: 0,
-  };
+  // =======================
+  // Layout offset para header/sidebar
+  // =======================
+  const containerStyle = useMemo(
+    () => ({
+      top: headerHeight,
+      left: isMobile ? 0 : sidebarWidth,
+      right: 0,
+      bottom: 0,
+    }),
+    [headerHeight, isMobile, sidebarWidth]
+  );
 
   const selectedSkill = skills[selectedSkillIndex];
 
   function handleImgError(e) {
     e.currentTarget.src =
-      "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='64' height='64'><rect width='100%' height='100%' fill='%23111111'/><text x='50%' y='50%' alignment-baseline='middle' text-anchor='middle' fill='%23fff' font-size='10'>no</text></svg>";
+      "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='128' height='128'><rect width='100%' height='100%' fill='%230d1117'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' fill='%23fff' font-size='12'>sem imagem</text></svg>";
   }
 
   function onAgentImgLoad(e) {
-    try {
-      const img = e.currentTarget;
-      if (img && img.naturalWidth && img.naturalHeight) {
-        setNaturalSize({ w: img.naturalWidth, h: img.naturalHeight });
-      }
-    } catch {
-      // silent
+    const img = e.currentTarget;
+    if (img?.naturalWidth && img?.naturalHeight) {
+      setNaturalSize({ w: img.naturalWidth, h: img.naturalHeight });
     }
   }
 
   const desiredMaxAgentWidth = 520;
   const rightColMaxWidth =
-    !isMobile && naturalSize && naturalSize.w
+    !isMobile && naturalSize?.w
       ? `${Math.min(naturalSize.w, desiredMaxAgentWidth)}px`
       : undefined;
 
   const modalVariants = {
-    hidden: { opacity: 0, scale: 0.95, y: -20 },
-    visible: { opacity: 1, scale: 1, y: 0, transition: { duration: 0.15, ease: "easeOut" } }, // Reduzido
-    exit: { opacity: 0, scale: 0.95, y: -20, transition: { duration: 0.1, ease: "easeIn" } },    // Reduzido
+    hidden: { opacity: 0, y: 10, scale: 0.98 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      transition: { duration: 0.18, ease: "easeOut" },
+    },
+    exit: {
+      opacity: 0,
+      y: 8,
+      scale: 0.98,
+      transition: { duration: 0.12, ease: "easeIn" },
+    },
   };
 
   const skillPreviewVariants = {
     hidden: { opacity: 0 },
-    visible: { opacity: 1 },
-    exit: { opacity: 0 },
+    visible: { opacity: 1, transition: { duration: 0.18 } },
+    exit: { opacity: 0, transition: { duration: 0.1 } },
   };
 
   return (
     <AnimatePresence>
       {isOpen && (
         <div
-          className="fixed z-50 flex items-start justify-center p-3"
           role="dialog"
           aria-modal="true"
+          className="fixed z-[80] flex items-start justify-center p-3 sm:p-4"
           style={containerStyle}
         >
-          <motion.div
-            className="absolute inset-0 bg-black/70 backdrop-blur-sm"
+          {/* Backdrop */}
+          <motion.button
+            type="button"
+            aria-label="Fechar modal"
+            className="absolute inset-0 cursor-default bg-black/70 backdrop-blur-[3px]"
             onClick={onClose}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
+            transition={{ duration: 0.15 }}
           />
 
-          <motion.div
+          {/* Modal */}
+          <motion.section
             variants={modalVariants}
             initial="hidden"
             animate="visible"
             exit="exit"
-            className="relative w-full max-w-xs sm:max-w-sm md:max-w-6xl rounded-2xl bg-[#0b0b0b] text-white shadow-2xl overflow-hidden"
-            style={{ maxHeight: "90vh", paddingBottom: isMobile ? 112 : undefined }}
+            className="
+              relative z-10 w-full max-w-[1120px]
+              rounded-2xl border border-white/10
+              bg-gradient-to-b from-[#0b0f18] to-[#090d14]
+              text-white shadow-[0_20px_60px_rgba(0,0,0,0.45)]
+              overflow-hidden
+            "
+            style={{
+              maxHeight: "calc(100dvh - 110px)",
+            }}
           >
+            {/* Top glow/border accent */}
+            <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-red-400/50 to-transparent" />
+
+            {/* close */}
             <button
               onClick={onClose}
               aria-label="Fechar"
-              className="absolute right-3 top-3 z-20 rounded-full bg-white/5 p-1 hover:bg-white/10"
+              className="
+                absolute right-3 top-3 z-20
+                grid h-8 w-8 place-items-center rounded-full
+                border border-white/10 bg-white/5 text-white/80
+                hover:bg-white/10 hover:text-white transition
+              "
             >
               <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
                 <path
@@ -172,52 +230,73 @@ export default function AgentModal({
               </svg>
             </button>
 
-            <div className="grid grid-cols-1 md:grid-cols-12 gap-6 p-4 sm:p-6 overflow-y-auto" style={{ minHeight: 0 }}>
-              {/* Left column */}
+            {/* Conteúdo com scroll interno */}
+            <div
+              className="
+                grid grid-cols-1 md:grid-cols-12 gap-5
+                p-4 sm:p-6
+                overflow-y-auto
+              "
+              style={{ maxHeight: "calc(100dvh - 110px)" }}
+            >
+              {/* LEFT */}
               <div className="col-span-1 md:col-span-7 flex flex-col gap-4">
                 <div className="flex items-start gap-3">
-                  <h1 className="text-2xl sm:text-3xl md:text-5xl font-extrabold select-none">
+                  <h1 className="text-2xl sm:text-3xl md:text-5xl font-extrabold leading-none tracking-tight">
                     {agentData?.name ?? name}
                   </h1>
-                  <div className="ml-auto flex flex-col items-center gap-1">
-                    <small className="text-[10px] text-white/70">{agentData?.function ?? ""}</small>
-                    <div className="rounded-full bg-white/5 px-2 py-0.5 text-xs">ULT {agentData?.ultPoints ?? "-"}</div>
+
+                  <div className="ml-auto flex flex-col items-end gap-1">
+                    <small className="text-[11px] text-white/65">
+                      {agentData?.function ?? ""}
+                    </small>
+                    <div className="rounded-full border border-white/10 bg-white/5 px-2.5 py-0.5 text-[11px]">
+                      ULT {agentData?.ultPoints ?? "-"}
+                    </div>
                   </div>
                 </div>
 
-                <p className="text-sm text-white/80">{agentData?.description}</p>
+                <p className="text-sm text-white/75 leading-relaxed">
+                  {agentData?.description || "Sem descrição disponível para este agente."}
+                </p>
 
-                {/* BARRA DE ÍCONES INLINE */}
-                <div className="mt-2">
-                  <div className="flex items-center gap-3 overflow-x-auto no-scrollbar py-1">
+                {/* skill pills */}
+                <div>
+                  <div className="flex items-center gap-2 overflow-x-auto py-1 no-scrollbar">
                     {loading ? (
-                      <div className="text-xs text-white/60">Carregando...</div>
+                      <div className="text-xs text-white/60">Carregando habilidades...</div>
                     ) : skills.length === 0 ? (
                       <div className="text-xs text-white/60">Nenhuma habilidade.</div>
                     ) : (
                       skills.map((s, i) => {
                         const active = i === selectedSkillIndex;
                         const key = s.id ?? s.name ?? i;
+
                         return (
-                          // NOVO: motion.button para o efeito de hover
                           <motion.button
                             key={key}
                             onClick={() => setSelectedSkillIndex(i)}
                             aria-pressed={active}
                             aria-label={`Selecionar ${s.name}`}
-                            className={`flex-shrink-0 w-12 h-12 rounded-full grid place-items-center transition-transform ${ // Removido pl-3 pr-2 py-2
-                              active ? "scale-110 bg-white/10 ring-2 ring-white/20" : "bg-white/6 hover:bg-white/10"
-                            }`}
                             title={s.name}
-                            // NOVO: Propriedades de animação para o hover
-                            whileHover={{ y: -5 }} // Move 5px para cima
-                            whileTap={{ scale: 0.95 }} // Pequeno clique
-                            transition={{ type: "spring", stiffness: 300, damping: 20 }} // Transição suave
+                            whileHover={{ y: -2 }}
+                            whileTap={{ scale: 0.97 }}
+                            transition={{ type: "spring", stiffness: 280, damping: 22 }}
+                            className={`
+                              flex-shrink-0 grid place-items-center
+                              w-11 h-11 rounded-full
+                              border transition
+                              ${
+                                active
+                                  ? "bg-red-500/20 border-red-400/40 ring-1 ring-red-300/30"
+                                  : "bg-white/5 border-white/10 hover:bg-white/10"
+                              }
+                            `}
                           >
                             <img
                               src={s.iconSkill ?? ""}
-                              alt={s.name}
-                              className="w-8 h-8 object-contain" // NOVO: Ajustado para w-8 h-8 e object-contain
+                              alt={s.name ?? "Skill"}
+                              className="w-7 h-7 object-contain"
                               onError={handleImgError}
                               decoding="async"
                             />
@@ -228,14 +307,32 @@ export default function AgentModal({
                   </div>
                 </div>
 
-                {/* PREVIEW GRANDE */}
-                <div className="mt-3 rounded-lg bg-[#111] p-3">
-                  <div className="w-full aspect-video rounded-md bg-black/20 flex items-center justify-center overflow-hidden">
+                {/* Preview */}
+                <div className="rounded-xl border border-white/10 bg-[#0f1420] p-3">
+                  <div className="w-full aspect-video rounded-lg bg-black/25 border border-white/5 flex items-center justify-center overflow-hidden">
                     <AnimatePresence mode="wait">
                       {loading ? (
-                        <div className="text-xs">Carregando preview...</div>
+                        <motion.div
+                          key="loading"
+                          variants={skillPreviewVariants}
+                          initial="hidden"
+                          animate="visible"
+                          exit="exit"
+                          className="text-xs text-white/70"
+                        >
+                          Carregando preview...
+                        </motion.div>
                       ) : error ? (
-                        <div className="text-xs">Erro ao carregar</div>
+                        <motion.div
+                          key="error"
+                          variants={skillPreviewVariants}
+                          initial="hidden"
+                          animate="visible"
+                          exit="exit"
+                          className="text-xs text-red-300"
+                        >
+                          Erro ao carregar
+                        </motion.div>
                       ) : selectedSkill ? (
                         <motion.div
                           key={selectedSkillIndex}
@@ -243,24 +340,16 @@ export default function AgentModal({
                           initial="hidden"
                           animate="visible"
                           exit="exit"
-                          transition={{ duration: 0.2 }}
                           className="w-full h-full"
                         >
                           {selectedSkill.gifSkill || selectedSkill.previewGif ? (
-                            <svg
-                              viewBox="0 0 16 9"
-                              preserveAspectRatio="xMidYMid meet"
-                              className="w-full h-full"
-                              xmlns="http://www.w3.org/2000/svg"
-                              role="img"
-                              aria-label={selectedSkill.name}
-                            >
-                              <image
-                                href={selectedSkill.gifSkill ?? selectedSkill.previewGif}
-                                x="0" y="0" width="100%" height="100%"
-                                preserveAspectRatio="xMidYMid slice"
-                              />
-                            </svg>
+                            <img
+                              src={selectedSkill.gifSkill ?? selectedSkill.previewGif}
+                              alt={selectedSkill.name ?? "Preview skill"}
+                              className="h-full w-full object-cover"
+                              onError={handleImgError}
+                              decoding="async"
+                            />
                           ) : selectedSkill.previewVideo ? (
                             <video className="h-full w-full object-contain" autoPlay loop muted playsInline>
                               <source src={selectedSkill.previewVideo} />
@@ -268,7 +357,7 @@ export default function AgentModal({
                           ) : selectedSkill.iconSkill ? (
                             <img
                               src={selectedSkill.iconSkill}
-                              alt={selectedSkill.name}
+                              alt={selectedSkill.name ?? "Skill"}
                               className="h-full w-full object-contain"
                               onError={handleImgError}
                               decoding="async"
@@ -278,36 +367,67 @@ export default function AgentModal({
                           )}
                         </motion.div>
                       ) : (
-                        <div className="text-sm text-white/60">Sem preview</div>
+                        <motion.div
+                          key="empty"
+                          variants={skillPreviewVariants}
+                          initial="hidden"
+                          animate="visible"
+                          exit="exit"
+                          className="text-sm text-white/60"
+                        >
+                          Sem preview
+                        </motion.div>
                       )}
                     </AnimatePresence>
                   </div>
 
-                  <div className="mt-2 flex items-center justify-between gap-3">
+                  <div className="mt-3 flex items-center justify-between gap-3">
                     <div className="min-w-0">
-                      <h3 className="text-sm font-semibold truncate">{selectedSkill?.name ?? "Nome habilidade"}</h3>
-                      <p className="text-[11px] text-white/60 truncate">{selectedSkill?.description ?? "Descrição curta."}</p>
+                      <h3 className="text-sm font-semibold truncate">
+                        {selectedSkill?.name ?? "Nome da habilidade"}
+                      </h3>
+                      <p className="text-[11px] text-white/65 truncate">
+                        {selectedSkill?.description ?? "Descrição curta da habilidade."}
+                      </p>
                     </div>
-                    <button className="ml-2 rounded-md bg-white/5 px-3 py-1 text-xs hover:bg-white/10">Ver</button>
                   </div>
                 </div>
 
-                <div className="mt-4 flex gap-3">
-                  <button className="rounded-full bg-white text-black px-5 py-2 font-semibold">Selecionar</button>
-                  <button onClick={onClose} className="rounded-full border border-white/10 px-4 py-2 text-sm">Cancelar</button>
+                <div className="mt-1 flex flex-wrap gap-2">
+                  <button
+                    className="
+                      rounded-full px-5 py-2 text-sm font-semibold
+                      bg-gradient-to-r from-red-500 to-red-400 text-white
+                      shadow-[0_0_18px_rgba(239,68,68,0.35)]
+                      hover:brightness-110 transition
+                    "
+                  >
+                    Selecionar
+                  </button>
+
+                  <button
+                    onClick={onClose}
+                    className="
+                      rounded-full px-4 py-2 text-sm
+                      border border-white/15 bg-white/5
+                      hover:bg-white/10 transition
+                    "
+                  >
+                    Cancelar
+                  </button>
                 </div>
               </div>
 
-              {/* Right column (PERSONAGEM) */}
+              {/* RIGHT */}
               <div
                 className="hidden md:col-span-5 md:flex md:items-center md:justify-center"
                 style={{ maxWidth: rightColMaxWidth }}
               >
                 <motion.div
                   className="relative z-10 w-full flex justify-center"
-                  initial={{ opacity: 0, x: 20 }}
+                  initial={{ opacity: 0, x: 18 }}
                   animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.5, delay: 0.2 }}
+                  transition={{ duration: 0.22, ease: "easeOut", delay: 0.03 }}
                 >
                   {agentData?.imgAgent ? (
                     agentData.imgAgentVideo ? (
@@ -323,7 +443,7 @@ export default function AgentModal({
                             ? `${agentData.imgAgent} 1x, ${agentData.imgAgent2x} 2x`
                             : undefined
                         }
-                        alt={`${agentData.name} portrait`}
+                        alt={`${agentData?.name ?? name} portrait`}
                         className="pointer-events-none w-full select-none object-contain"
                         onLoad={onAgentImgLoad}
                         onError={handleImgError}
@@ -331,12 +451,14 @@ export default function AgentModal({
                       />
                     )
                   ) : (
-                    <div className="flex h-96 w-full items-center justify-center rounded-lg bg-white/3">Imagem do agente</div>
+                    <div className="flex h-96 w-full items-center justify-center rounded-xl border border-white/10 bg-white/5 text-white/60">
+                      Imagem do agente
+                    </div>
                   )}
                 </motion.div>
               </div>
             </div>
-          </motion.div>
+          </motion.section>
         </div>
       )}
     </AnimatePresence>

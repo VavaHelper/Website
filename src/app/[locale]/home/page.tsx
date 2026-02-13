@@ -57,10 +57,6 @@ export default function Home() {
           <div>
             <p className={styles.kicker}>Guia completo de Valorant</p>
             <h1 className={styles.title}>Aprenda, aplique e evolua sua gameplay.</h1>
-            <p className={styles.subtitle}>
-              Explore agentes, movimentação e pixels com uma experiência pensada
-              para o cliente final — rápida, limpa e totalmente responsiva.
-            </p>
           </div>
           <Link className={styles.cta} href="/community">Ir para a Community</Link>
         </section>

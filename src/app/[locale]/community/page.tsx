@@ -407,11 +407,7 @@ export default function CommunityPage() {
           <section className={styles.hero}>
             <div>
               <p className={styles.badge}>Community aberta</p>
-              <h1>Vídeos da comunidade com filtros por agente e mapa.</h1>
-              <p>
-                Rota pública com limite inteligente: após 5 vídeos, o usuário escolhe
-                entre criar conta ou assistir anúncio para continuar.
-              </p>
+              <h1>Vídeos da comunidade.</h1>
             </div>
             <div className={styles.heroActions}>
               <a href={withLocale('/home')}>Conhecer o produto</a>

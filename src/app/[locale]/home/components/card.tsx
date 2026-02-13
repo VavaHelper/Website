@@ -28,7 +28,7 @@ export function Card({
   return (
     <Link
       href={href}
-      className="group block w-full max-w-sm overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03] shadow-lg transition-transform duration-300 hover:-translate-y-1 hover:border-white/25"
+      className="group block w-full max-w-sm overflow-hidden rounded-2xl border-white/20 bg-white/[0.03] shadow-lg transition-transform duration-300 hover:-translate-y-1 hover:border-white/25"
     >
       <div className="relative h-44 w-full overflow-hidden">
         <img
@@ -47,7 +47,7 @@ export function Card({
           <p className="text-sm text-white/80 leading-relaxed">{informationText}</p>
         )}
 
-        <p className="mt-3 text-xs text-white/70">
+        <p className="mt-4 text-xs text-white/70">
           {t('sejabem')} <span className="font-semibold text-[#ff6b6b]">VavaHelper</span>
         </p>
       </div>
